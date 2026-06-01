@@ -1,6 +1,9 @@
 package itens;
 
+import personagens.Personagem;
+
 public abstract class Item {
+
     protected String nome;
 
     public Item(String nome){
@@ -11,5 +14,5 @@ public abstract class Item {
         return nome;
     }
 
-    public abstract void usar();
+    public abstract void usar(Personagem jogador);
 }
