@@ -2,7 +2,7 @@ package personagens;
 
 public class Curandeiro extends Personagem{
 
-    public Curandeiro(String nome, int vida, int dano) {
+    public Curandeiro() {
         super("Curandeiro", 95, 10);
     }
 

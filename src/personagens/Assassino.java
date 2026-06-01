@@ -6,7 +6,7 @@ public class Assassino extends Personagem{
 
     private Random random = new Random();
 
-    public Assassino(String nome, int vida, int dano) {
+    public Assassino() {
         super("Paladino", 80, 18);
     }
 

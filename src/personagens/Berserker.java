@@ -2,7 +2,7 @@ package personagens;
 
 public class Berserker extends Personagem{
 
-    public Berserker(String nome, int vida, int dano) {
+    public Berserker() {
         super("Berserker", 110, 16);
     }
 

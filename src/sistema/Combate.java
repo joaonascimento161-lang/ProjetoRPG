@@ -1,8 +1,10 @@
 package sistema;
 
+import inimigos.BossFinal;
 import inimigos.Inimigo;
 import itens.Item;
 import personagens.Personagem;
+import save.SaveManager;
 
 import java.util.Scanner;
 
@@ -42,6 +44,12 @@ public class Combate {
 
             System.out.println("+" + inimigo.getRecompensaOuro() + " ouro");
 
+            if(inimigo instanceof BossFinal){
+                GameData.desbloquearDeus();
+
+                SaveManager.salvar(jogador, true);
+            }
+            
             return true;
         }
 

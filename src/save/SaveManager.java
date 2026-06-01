@@ -59,4 +59,11 @@ public class SaveManager {
             System.out.println("Nenhum save encontrado");
         }
     }
+
+    public static boolean existeSave(){
+
+        java.io.File arquivo = new java.io.File("save.txt");
+
+        return arquivo.exists();
+    }
 }

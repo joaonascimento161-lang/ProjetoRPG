@@ -2,7 +2,7 @@ package personagens;
 
 public class Mago extends Personagem{
 
-    public Mago(String nome, int vida, int dano) {
+    public Mago() {
         super("Mago", 90, 12);
     }
 
