@@ -3,11 +3,11 @@ package sistema;
 public class Area {
 
     private String nome;
-    private int nivelMinimo;
+    private int nivelRecomendado;
 
-    public Area(String nome, int nivelMinimo){
+    public Area(String nome, int nivelRecomendado){
         this.nome = nome;
-        this.nivelMinimo = nivelMinimo;
+        this.nivelRecomendado = nivelRecomendado;
     }
 
     public String getNome(){
@@ -15,7 +15,6 @@ public class Area {
     }
 
     public int getNivelMinimo(){
-        return nivelMinimo;
+        return nivelRecomendado;
     }
-    
 }

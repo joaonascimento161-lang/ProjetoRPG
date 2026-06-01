@@ -9,14 +9,17 @@ public class GameData {
     }
 
     public static void desbloquearDeus(){
+        
+        if(!deusDesbloqueado){
 
-        deusDesbloqueado = true;
+            deusDesbloqueado = true;
 
-        System.out.println("\n--------------------");
-        System.out.println("CLASSE DEUS DESBLOQUEADA");
-        System.out.println("--------------------");
+            System.out.println("\n--------------------");
+            System.out.println("CLASSE DEUS DESBLOQUEADA");
+            System.out.println("--------------------");
+        }
     }
-    
+
     public static void setDeusDesbloqueado(boolean valor){
         deusDesbloqueado = valor;
     }

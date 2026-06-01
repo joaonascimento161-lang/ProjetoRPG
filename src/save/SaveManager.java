@@ -1,12 +1,12 @@
 package save;
 
-import java.beans.PersistenceDelegate;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import personagens.Personagem;
+import sistema.Progressao;
 
 public class SaveManager {
     private static final String ARQUIVO_SAVE = "save.txt";
@@ -24,6 +24,8 @@ public class SaveManager {
             writer.write("Xp = " + jogador.getXp() + "\n");
 
             writer.write("Ouro = " + jogador.getOuro() + "\n");
+
+            writer.write("Area liberada = " + Progressao.getAreaLiberada() + "\n");
 
             writer.write("DeusDesbloqueado = " + deusDesbloqueado + "\n");
 

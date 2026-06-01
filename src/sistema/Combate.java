@@ -49,7 +49,7 @@ public class Combate {
 
                 SaveManager.salvar(jogador, true);
             }
-            
+
             return true;
         }
 

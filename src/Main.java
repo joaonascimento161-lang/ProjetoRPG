@@ -46,11 +46,7 @@ public class Main {
 
         Personagem jogador = escolherClasse();
 
-        Goblin goblin = new Goblin();
-
-        Combate combate = new Combate(sc);
-
-        combate.iniciar(jogador, goblin);
+        menuAreas(jogador);
 
         SaveManager.salvar(jogador, GameData.isDeusDesbloqueado());
     }
@@ -109,6 +105,121 @@ public class Main {
 
                 System.out.println("Classe inválida.");
                 return new Guerreiro();
+        }
+    }
+
+    private static void menuAreas(Personagem jogador){
+
+        while (jogador.estaVivo()) {
+
+            System.out.println("\n----- ÁREAS -----");
+
+            for(int cont = 1; cont <= 5; cont++){
+
+                if(cont <= Progressao.getAreaLiberada()){
+
+                    switch (cont) {
+                        case 1:
+                            System.out.println("1 - Floresta");
+                            break;
+                        case 2:
+                            System.out.println("2 - Caverna");
+                            break;
+                        case 3:
+                            System.out.println("3 - Ruínas");
+                            break;
+                        case 4:
+                            System.out.println("4 - Castelo sombrio");
+                            break;
+                        case 5:
+                            System.out.println("5 - Covil do Dragão");
+                            break;
+
+                    }
+                }else{
+
+                    System.out.println(cont + " - Bloqueado");
+                }
+            }
+            
+            System.out.println("Escolha: ");
+            int escolha = sc.nextInt();
+            
+            iniciarArea(jogador, escolha);
+        }
+    }
+
+    private static void iniciarArea(Personagem jogador, int Area){
+
+        if(Area > Progressao.getAreaLiberada()){
+            System.out.println("Área bloqueada");
+
+            return;
+        }
+
+        int nivelNecessario = 1;
+
+        switch (Area) {
+            case 1:
+                nivelNecessario = 1;
+                break;
+            case 2:
+                nivelNecessario = 3;
+                break;
+            case 3:
+                nivelNecessario = 5;
+                break;
+            case 4:
+                nivelNecessario = 8;
+                break;
+            case 5:
+                nivelNecessario = 10;
+                break;
+        }
+
+        if(jogador.getNivel() < nivelNecessario){
+
+            System.out.println("Você precisa estar no nivel " + nivelNecessario + " para entrar nesta área");
+            return;
+        }
+
+        Inimigo inimigo = null;
+
+        switch (Area) {
+            case 1:
+                inimigo = new Goblin();
+                break;
+            case 2:
+                inimigo = new Orc();
+                break;
+            case 3:
+                inimigo = new Esqueleto();
+                break;
+            case 4:
+                inimigo = new MagoSombrio();
+                break;
+            case 5:
+                inimigo = new BossFinal();
+                break;
+                
+            default:
+                System.out.println("Área inválida");
+                return;
+        }
+
+        Combate combate = new Combate(sc);
+
+        boolean venceu = combate.iniciar(jogador, inimigo);
+
+        if(venceu){
+            Progressao.desbloquearProximaArea();
+
+            if(inimigo instanceof BossFinal){
+
+                GameData.desbloquearDeus();
+
+                SaveManager.salvar(jogador, true);
+            }
         }
     }
 }
