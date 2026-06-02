@@ -1,5 +1,9 @@
 package inimigos;
 
+import java.util.Random;
+
+import itens.Armadura;
+import itens.Item;
 import personagens.Personagem;
 
 public class Orc extends Inimigo{
@@ -23,5 +27,15 @@ public class Orc extends Inimigo{
         }else{
             atacar(jogador);
         }
+    }
+
+    @Override
+    public Item gerarDrop() {
+        Random random = new Random();
+
+        if(random.nextInt(100) < 20) {
+            return new Armadura("Armadura de Couro",15);
+        }
+        return null;
     }
 }

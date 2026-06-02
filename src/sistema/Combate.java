@@ -42,6 +42,14 @@ public class Combate {
 
             jogador.adicionarOuro(inimigo.getRecompensaOuro());
 
+            Item drop = inimigo.gerarDrop();
+
+            if(drop != null){
+
+                jogador.getInventario().adicionarItem(drop);
+
+                System.out.println("Item encontrado: " + drop.getNome());
+            }
             System.out.println("+" + inimigo.getRecompensaOuro() + " ouro");
 
             if(inimigo instanceof BossFinal){

@@ -2,6 +2,7 @@ package inimigos;
 
 import java.util.Random;
 import personagens.Personagem;
+import itens.*;
 
 public class Goblin extends Inimigo{
     private Random random = new Random();
@@ -25,5 +26,15 @@ public class Goblin extends Inimigo{
         }else{
             usarHab(jogador);
         }
+    }
+
+    @Override
+    public Item gerarDrop(){
+        Random random = new Random();
+
+        if(random.nextInt(100) < 20){
+            return new Arma("Espada enferrujada", 5);
+        }
+        return null;
     }
 }

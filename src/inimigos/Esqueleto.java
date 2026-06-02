@@ -2,6 +2,7 @@ package inimigos;
 
 import java.util.Random;
 import personagens.Personagem;
+import itens.*;
 
 public class Esqueleto extends Inimigo{
     private Random random = new Random();
@@ -27,5 +28,15 @@ public class Esqueleto extends Inimigo{
         }else{
             atacar(jogador);
         }
+    }
+
+    @Override
+    public Item gerarDrop(){
+        Random random = new Random();
+
+        if(random.nextInt(100)< 10){
+            return new Arma("Espada de osso", 20);
+        }
+        return null;
     }
 }

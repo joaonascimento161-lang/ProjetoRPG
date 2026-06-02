@@ -141,11 +141,24 @@ public class Main {
                     System.out.println(cont + " - Bloqueado");
                 }
             }
+
+            System.out.println("6 - Loja");
+            System.out.println("0 - Salvar e Sair");
             
             System.out.println("Escolha: ");
             int escolha = sc.nextInt();
             
-            iniciarArea(jogador, escolha);
+            if(escolha == 6){
+                Loja loja = new Loja();
+                loja.abrir(jogador, sc);
+            }else if(escolha == 0){
+                SaveManager.salvar(jogador, GameData.isDeusDesbloqueado());
+
+                System.out.println("Jogo salvo");
+                break;
+            }else{
+                iniciarArea(jogador, escolha);
+            }
         }
     }
 

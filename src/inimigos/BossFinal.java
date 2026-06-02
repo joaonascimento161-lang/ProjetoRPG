@@ -1,6 +1,7 @@
 package inimigos;
 import java.util.Random;
 import personagens.Personagem;
+import itens.*;
 
 public class BossFinal extends Inimigo{
 
@@ -59,5 +60,15 @@ public class BossFinal extends Inimigo{
                         "Golpe Furioso! Dano: 35");
             }
         }
+    }
+
+    @Override 
+    public Item gerarDrop(){
+        Random random = new Random();
+
+        if(random.nextInt(100) < 2){
+            return new Arma("Matadora de dragões", 55);
+        }
+        return null;
     }
 }

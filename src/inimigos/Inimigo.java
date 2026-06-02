@@ -1,6 +1,7 @@
 package inimigos;
 
 import personagens.Personagem;
+import itens.Item;
 
 public class Inimigo extends Personagem{
     
@@ -29,6 +30,10 @@ public class Inimigo extends Personagem{
 
     public int getRecompensaOuro(){
         return recompensaOuro;
+    }
+
+    public Item gerarDrop(){
+        return null;
     }
 
 }

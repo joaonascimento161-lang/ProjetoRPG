@@ -2,6 +2,7 @@ package inimigos;
 
 import java.util.Random;
 import personagens.Personagem;
+import itens.*;
 
 public class MagoSombrio extends Inimigo{
     private Random random = new Random();
@@ -25,5 +26,15 @@ public class MagoSombrio extends Inimigo{
         }else{
             atacar(jogador);
         }
+    }
+
+    @Override
+    public Item gerarDrop(){
+        Random random = new Random();
+
+        if(random.nextInt(100) < 10){
+            return new Armadura("Armadura encantada", 50);
+        }
+        return null;
     }
 }
