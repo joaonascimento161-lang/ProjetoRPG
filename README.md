@@ -193,17 +193,16 @@ Ao derrotar o Dragão Ancestral, a classe Deus é desbloqueada.
 
 ## Funcionalidades Planejadas
 
-* Inventário completo
-* Loja
-* Equipamentos
-* Sistema de drops
+* ~~Inventário completo~~
+* ~~Loja~~
+* ~~Equipamentos~~
+* ~~Sistema de drops~~
 * Status negativos
-
   * Veneno
   * Sangramento
   * Queimadura
 * Sistema de salvamento
-* Múltiplas áreas
+* ~~Múltiplas áreas~~
 * Chefes secundários
 * Conquistas
 * Sistema de raridade de itens
