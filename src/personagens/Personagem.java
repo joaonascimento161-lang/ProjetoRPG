@@ -111,7 +111,7 @@ public abstract class Personagem {
     }
 
     public void setXp(int xp){
-        this.nivel = xp;
+        this.xp = xp;
     }
 
     public void setNivel(int nivel){
@@ -146,6 +146,14 @@ public abstract class Personagem {
     
     public int getXp(){
         return xp;
+    }
+
+    public Arma getArmaEquipada(){
+        return armaEquipada;
+    }
+
+    public Armadura getArmaduraEquipada(){
+        return armaduraEquipada;
     }
 
     public int getOuro(){

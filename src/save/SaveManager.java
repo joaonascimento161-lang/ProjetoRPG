@@ -5,8 +5,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import itens.Arma;
+import itens.Armadura;
+import personagens.Arqueiro;
+import personagens.Assassino;
+import personagens.Berserker;
+import personagens.Curandeiro;
+import personagens.Deus;
+import personagens.Guerreiro;
+import personagens.Mago;
+import personagens.Paladino;
 import personagens.Personagem;
-import sistema.Progressao;
 
 public class SaveManager {
     private static final String ARQUIVO_SAVE = "save.txt";
@@ -25,9 +34,25 @@ public class SaveManager {
 
             writer.write("Ouro = " + jogador.getOuro() + "\n");
 
-            writer.write("Area liberada = " + Progressao.getAreaLiberada() + "\n");
+            writer.write("Arma = ");
+
+            if(jogador.getArmaEquipada() != null){
+                writer.write(jogador.getArmaEquipada().getNome());
+            }
+
+            writer.write("\n");
+
+            writer.write("Armadura = ");
+
+            if(jogador.getArmaduraEquipada() != null){
+                writer.write(jogador.getArmaduraEquipada().getNome());
+            }
+
+            writer.write("\n");
 
             writer.write("DeusDesbloqueado = " + deusDesbloqueado + "\n");
+
+            
 
             writer.close();
 
@@ -37,28 +62,126 @@ public class SaveManager {
             System.out.println("Erro ao salvar o jogo!");
 
             e.printStackTrace();
+
         }
     }
 
-    public static void carregar(){
+    public static Personagem carregar(){
 
         try{
 
             BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO_SAVE));
 
+            String classe = "";
+            int nivel = 1;
+            int xp = 0;
+            int ouro = 0;
+
+            String arma = "";
+            String armadura = "";
+
             String linha;
 
-            System.out.println("\n----- DADOS SALVOS -----");
-
-            while ((linha = reader.readLine()) != null) {
+            while ((linha = reader.readLine()) !=  null) {
                 
-                System.out.println(linha);
+                if(linha.startsWith("Classe = ")){
+                    classe = linha.split(" = ")[1];
+                }else if(linha.startsWith("Nivel = ")){
+                    nivel = Integer.parseInt(linha.split(" = ")[1]);
+                }else if(linha.startsWith("Xp = ")){
+                    xp = Integer.parseInt(linha.split(" = ")[1]);
+                }else if(linha.startsWith("Ouro = ")){
+                    ouro = Integer.parseInt(linha.split(" = ")[1]);
+                }else if(linha.startsWith("Arma = ")){
+                    arma = linha.split(" = ")[1];
+                }else if(linha.startsWith("Armadura = ")){
+                    armadura = linha.split(" = ")[1];
+                }
             }
 
             reader.close();
-        }catch(IOException e){
 
+            Personagem jogador = null;
+
+            switch (classe) {
+                case "Guerreiro":
+                    jogador = new Guerreiro();
+                    break;
+
+                case "Mago":
+                    jogador = new Mago();
+                    break;
+
+                case "Arqueiro":
+                    jogador = new Arqueiro();
+                    break;
+
+                case "Paladino":
+                    jogador = new Paladino();
+                    break;
+
+                case "Assassino":
+                    jogador = new Assassino();
+                    break;
+
+                case "Berserker":
+                    jogador = new Berserker();
+                    break;
+
+                case "Curandeiro":
+                    jogador = new Curandeiro();
+                    break;
+
+                case "Deus":
+                    jogador = new Deus();
+                    break;
+            }
+
+            if(jogador != null){
+
+                jogador.setNivel(nivel);
+                jogador.setXp(xp);
+                jogador.adicionarOuro(ouro);
+
+                if(arma.equals("Espada de ferro")){
+                    jogador.equiparArma(new Arma("Espada de ferro", 10));
+                }
+
+                if(arma.equals("Espada de aço")){
+                    jogador.equiparArma(new Arma("Espada de aço", 15));
+                }
+
+                if(arma.equals("Espada de enferrujada")){
+                    jogador.equiparArma(new Arma("Espada enferrujada", 5));
+                }
+
+                if(arma.equals("Espada de osso")){
+                    jogador.equiparArma(new Arma("Espada de osso", 20));
+                }
+
+                if(arma.equals("Matadora de dragões")){
+                    jogador.equiparArma(new Arma("Matadora de dragões", 55));
+                }
+
+                if(armadura.equals("Armadura de couro")){
+                    jogador.equiparArmadura(new Armadura("Armadura de couro", 15));
+                }
+
+                if(armadura.equals("Armadura encantada")){
+                    jogador.equiparArmadura(new Armadura("Armadura encantada", 50));
+                }
+
+                if(armadura.equals("Armadura de ferro")){
+                    jogador.equiparArmadura(new Armadura("Armadura de ferro", 30));
+                }
+                
+                System.out.println("Jogo carregado com sucesso");
+            }
+
+            return jogador;
+        }catch(IOException e){
             System.out.println("Nenhum save encontrado");
+            return null;
         }
     }
 
@@ -68,4 +191,6 @@ public class SaveManager {
 
         return arquivo.exists();
     }
+
+    
 }

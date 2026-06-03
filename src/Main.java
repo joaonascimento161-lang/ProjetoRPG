@@ -61,7 +61,11 @@ public class Main {
             return;
         }
 
-        SaveManager.carregar();
+        Personagem jogador = SaveManager.carregar();
+
+        if(jogador != null){
+            menuAreas(jogador);
+        }
     }
 
     private static Personagem escolherClasse(){
@@ -227,7 +231,7 @@ public class Main {
         boolean venceu = combate.iniciar(jogador, inimigo);
 
         if(venceu){
-            
+
             if(inimigo instanceof BossFinal){
 
                 GameData.desbloquearDeus();
