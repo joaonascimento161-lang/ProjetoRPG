@@ -14,9 +14,13 @@ public class Arma extends Equipamento{
     @Override
     public void usar(Personagem jogador){
 
-        jogador.aumentarDano(bonusDano);
+        jogador.equiparArma(this);
 
         System.out.println(nome + " equipada");
         System.out.println("+" + bonusDano + " de dano");
+    }
+
+    public int getBonusDano(){
+        return bonusDano;
     }
 }

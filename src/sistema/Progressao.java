@@ -13,14 +13,8 @@ public class Progressao {
     }
 
     public static void desbloquearProximaArea(){
-
-        if(AreaLiberada < 5){
-
-            AreaLiberada++;
-
             System.out.println("\n----------");
             System.out.println("NOVA ÁREA LIBERADA");
             System.out.println("----------");
-        }
-    }
+   }
 }

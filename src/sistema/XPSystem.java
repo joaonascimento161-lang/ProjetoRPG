@@ -18,19 +18,8 @@ public class XPSystem {
         int xpNecessario = nivel * 100;
 
         while (xp >= xpNecessario) {
-            
-            jogador.setNivel(nivel + 1);
-
-            jogador.aumentarVidaMax(10);
-
-            jogador.aumentarDano(2);
-
-            System.out.println("\n------------------");
-            System.out.println("LEVEL UP!");
-            System.out.println("Nível: " + jogador.getNivel());
-            System.out.println("Vida máxima +10");
-            System.out.println("Dano +2");
-            System.out.println("------------------");
+         
+            jogador.subirNivel();
 
             nivel = jogador.getNivel();
             xpNecessario = nivel * 100;

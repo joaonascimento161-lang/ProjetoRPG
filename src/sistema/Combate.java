@@ -116,6 +116,7 @@ public class Combate {
         Item item = jogador.getInventario().getItem(escolha);
 
         if(item != null){
+            
             item.usar(jogador);
 
             jogador.getInventario().removerItem(escolha);

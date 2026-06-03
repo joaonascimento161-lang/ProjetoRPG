@@ -1,6 +1,7 @@
 package personagens;
 
 import itens.Inventario;
+import itens.*;
 
 public abstract class Personagem {
     protected Inventario inventario;
@@ -12,6 +13,8 @@ public abstract class Personagem {
     protected int nivel;
     protected int xp;
     protected int ouro;
+    protected Arma armaEquipada;
+    protected Armadura armaduraEquipada;
 
     
     public Inventario getInventario(){
@@ -69,6 +72,20 @@ public abstract class Personagem {
         System.out.println("Nivel: " + nivel);
         System.out.println("XP: " + xp);
         System.out.println("Ouro: " + ouro);
+
+        System.out.println("\n---- EQUIPAMENTOS ----");
+
+        if(armaEquipada != null){
+            System.out.println("Arma: " + armaEquipada.getNome());
+        }else{
+            System.out.println("Arma: Nenhuma");
+        }
+
+        if(armaduraEquipada != null){
+            System.out.println("Armadura: " + armaduraEquipada.getNome());
+        }else{
+            System.out.println("Armadura: Nenhuma");
+        }
     }
     
     public abstract void usarHab(Personagem alvo);
@@ -149,5 +166,66 @@ public abstract class Personagem {
         System.out.println("Vida máxima: " + vidaMax);
         System.out.println("Dano: " + dano);
         System.out.println("----------------");
+
+        switch (nivel) {
+            case 3:
+                System.out.println("\n>>> Caverna desbloqueada");
+                break;
+
+            case 5:
+                System.out.println("\n>>> Ruínas desbloqueada");
+                break;
+            case 8:
+                System.out.println("\n>>> Castelo sombrio desbloqueada");
+                break;
+            case 10:
+                System.out.println("\n>>> Covil do Dragão desbloqueada");
+        }
+    }
+
+    public void equiparArma(Arma arma){
+        
+        if(armaEquipada != null){
+            dano -= armaEquipada.getBonusDano();
+        }
+
+        armaEquipada = arma;
+
+        dano += arma.getBonusDano();
+
+        System.out.println(arma.getNome() + " equipada");
+    }
+
+    public void equiparArmadura(Armadura armadura){
+
+        if(armaduraEquipada != null){
+            vidaMax -= armaduraEquipada.getBonusVida();
+        }
+
+        armaduraEquipada = armadura;
+
+        vidaMax += armadura.getBonusVida();
+
+        System.out.println(armadura.getNome() + " equipada");
+    }
+
+    public void mostrarEquipamentos(){
+
+        System.out.println("\n----- EQUIPAMENTOS -----");
+
+        if(armaEquipada != null){
+
+            System.out.println("Arma: " + armaEquipada.getNome());
+        }else{
+
+            System.out.println("Arma: Nenhuma");
+        }
+
+        if(armaduraEquipada != null){
+            
+            System.out.println("Armadura: " + armaduraEquipada.getNome());
+        }else{
+            System.out.println("Armadura: Nenhuma");
+        }
     }
 }

@@ -14,9 +14,13 @@ public class Armadura extends Equipamento{
     @Override
     public void usar(Personagem jogador){
 
-        jogador.aumentarVidaMax(bonusVida);
+        jogador.equiparArmadura(this);
 
         System.out.println(nome + " equipada");
         System.out.println("+" + bonusVida + " de vida máxima");
+    }
+
+    public int getBonusVida() {
+        return bonusVida;
     }
 }

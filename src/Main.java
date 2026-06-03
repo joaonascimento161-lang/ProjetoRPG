@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import personagens.*;
 import inimigos.*;
+import itens.Item;
 import save.*;
 import sistema.*;
 
@@ -116,7 +117,7 @@ public class Main {
 
             for(int cont = 1; cont <= 5; cont++){
 
-                if(cont <= Progressao.getAreaLiberada()){
+                if(areaLiberada(jogador, cont)){
 
                     switch (cont) {
                         case 1:
@@ -142,8 +143,10 @@ public class Main {
                 }
             }
 
-            System.out.println("6 - Loja");
-            System.out.println("0 - Salvar e Sair");
+            System.out.println("\n6 - Loja");
+            System.out.println("7 - Status");
+            System.out.println("8 - Inventario");
+            System.out.println("\n0 - Salvar e Sair");
             
             System.out.println("Escolha: ");
             int escolha = sc.nextInt();
@@ -151,6 +154,12 @@ public class Main {
             if(escolha == 6){
                 Loja loja = new Loja();
                 loja.abrir(jogador, sc);
+            }else if(escolha == 7){
+                jogador.mostrarStatus();
+        
+            }else if(escolha == 8){
+                abrirInventario(jogador);
+                
             }else if(escolha == 0){
                 SaveManager.salvar(jogador, GameData.isDeusDesbloqueado());
 
@@ -163,13 +172,6 @@ public class Main {
     }
 
     private static void iniciarArea(Personagem jogador, int Area){
-
-        if(Area > Progressao.getAreaLiberada()){
-            System.out.println("Área bloqueada");
-
-            return;
-        }
-
         int nivelNecessario = 1;
 
         switch (Area) {
@@ -225,14 +227,51 @@ public class Main {
         boolean venceu = combate.iniciar(jogador, inimigo);
 
         if(venceu){
-            Progressao.desbloquearProximaArea();
-
+            
             if(inimigo instanceof BossFinal){
 
                 GameData.desbloquearDeus();
 
                 SaveManager.salvar(jogador, true);
             }
+        }
+    }
+
+    private static void abrirInventario(Personagem jogador){
+
+        if(jogador.getInventario().estaVazio()){
+            System.out.println("Inventario vazio");
+            return;
+        }
+
+        jogador.getInventario().listarItens();
+
+        System.out.println("Escolha um item:");
+        int escolha = sc.nextInt() - 1;
+
+        Item item = jogador.getInventario().getItem(escolha);
+
+        if(item != null){
+            item.usar(jogador);
+
+            jogador.getInventario().removerItem(escolha);
+        }
+    }
+
+    private static boolean areaLiberada(Personagem jogador, int area){
+        switch (area) {
+            case 1:
+                return jogador.getNivel() >= 1;
+            case 2:
+                return jogador.getNivel() >= 3;
+            case 3:
+                return jogador.getNivel() >= 5;
+            case 4:
+                return jogador.getNivel() >= 8;
+            case 5:
+                return jogador.getNivel() >= 10;
+            default:
+                return false;
         }
     }
 }

@@ -96,7 +96,7 @@ public class Loja {
                     break;
                 case 6:
                     if(jogador.gastarOuro(PRECO_ARMADURA_FERRO)){
-                        jogador.getInventario().adicionarItem(new Arma("Armadura de ferro", 30));
+                        jogador.getInventario().adicionarItem(new Armadura("Armadura de ferro", 30));
 
                         System.out.println("Armadura comprada");
                     }else{
