@@ -2,6 +2,7 @@ package personagens;
 
 import itens.Inventario;
 import itens.*;
+import sistema.Missao;
 
 public abstract class Personagem {
     protected Inventario inventario;
@@ -15,6 +16,7 @@ public abstract class Personagem {
     protected int ouro;
     protected Arma armaEquipada;
     protected Armadura armaduraEquipada;
+    protected Missao missaoAtual;
 
     
     public Inventario getInventario(){
@@ -146,6 +148,18 @@ public abstract class Personagem {
     
     public int getXp(){
         return xp;
+    }
+
+    public Missao getMissaoAtual(){
+        return missaoAtual;
+    }
+
+    public void aceitarMissao(Missao missao){
+        missaoAtual = missao;
+
+        if(missao != null){
+            System.out.println("Nova missão: " + missao.getNome());
+        }
     }
 
     public Arma getArmaEquipada(){

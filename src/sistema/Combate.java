@@ -42,6 +42,24 @@ public class Combate {
 
             jogador.adicionarOuro(inimigo.getRecompensaOuro());
 
+            if(jogador.getMissaoAtual() != null){
+
+                jogador.getMissaoAtual().registrarAbate(inimigo.getNome());
+
+                if(jogador.getMissaoAtual().isConcluida()){
+
+                    System.out.println("RECOMPENSA DA MISSÃO");
+
+                    XPSystem.ganharXP(jogador, jogador.getMissaoAtual().getRecompensaXP());
+
+                    jogador.adicionarOuro(jogador.getMissaoAtual().getRecompensaOuro());
+
+                    System.out.println("+" + jogador.getMissaoAtual().getRecompensaOuro() + " ouro");
+
+                    jogador.aceitarMissao(null);
+                }
+            }
+
             Item drop = inimigo.gerarDrop();
 
             if(drop != null){

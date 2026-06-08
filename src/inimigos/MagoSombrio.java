@@ -33,7 +33,7 @@ public class MagoSombrio extends Inimigo{
         Random random = new Random();
 
         if(random.nextInt(100) < 10){
-            return new Armadura("Armadura encantada", 50);
+            return new Armadura("Armadura encantada", 25);
         }
         return null;
     }
