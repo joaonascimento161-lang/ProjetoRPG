@@ -99,6 +99,10 @@ public abstract class Personagem {
     public int getVida(){
         return vida;
     }
+
+    public int getVidaMax(){
+        return vidaMax;
+    }
     
     public int getMana(){
         return mana;

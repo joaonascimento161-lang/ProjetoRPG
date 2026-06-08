@@ -15,6 +15,7 @@ public class TelaCombate extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel painel = new JPanel();
+        painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
 
         JLabel lblJogador =
                 new JLabel(jogador.getNome()
@@ -24,15 +25,36 @@ public class TelaCombate extends JFrame {
                 new JLabel(inimigo.getNome()
                 + " HP: " + inimigo.getVida());
 
+        JTextArea historico = new JTextArea(10, 30);
+
+        historico.setEditable(false);
+
+        historico.append("Combate iniciado!\n");
+
         JButton btnAtacar =
                 new JButton("Atacar");
 
                 btnAtacar.addActionListener(e -> {
 
                     jogador.atacar(inimigo);
+
+                    historico.append(
+                        jogador.getNome()
+                        + " atacou "
+                        + inimigo.getNome()
+                        + "\n"
+                    );
                 
                     if(inimigo.estaVivo()){
+
                         inimigo.atacar(jogador);
+                    
+                        historico.append(
+                            inimigo.getNome()
+                            + " atacou "
+                            + jogador.getNome()
+                            + "\n"
+                        );
                     }
                 
                     lblJogador.setText(
@@ -82,9 +104,16 @@ public class TelaCombate extends JFrame {
                     }
                 });
 
-        painel.add(lblJogador);
-        painel.add(lblInimigo);
-        painel.add(btnAtacar);
+                painel.add(lblJogador);
+                painel.add(lblInimigo);
+                
+                painel.add(Box.createVerticalStrut(10));
+                
+                painel.add(btnAtacar);
+                
+                painel.add(Box.createVerticalStrut(15));
+                
+                painel.add(new JScrollPane(historico));
 
         add(painel);
 
