@@ -1,7 +1,5 @@
 package inimigos;
 
-import java.util.Random;
-
 import itens.Arma;
 import itens.Item;
 import personagens.Personagem;
