@@ -1,7 +1,9 @@
+import java.util.Random;
 import java.util.Scanner;
 
 import personagens.*;
 import inimigos.*;
+import inimigos.ReiGoblin;
 import itens.Item;
 import save.*;
 import sistema.*;
@@ -206,16 +208,35 @@ public class Main {
 
         switch (Area) {
             case 1:
-                inimigo = new Goblin();
+                Random random = new Random();
+
+                if(random.nextInt(100) < 15){
+
+                    inimigo = new ReiGoblin();
+
+                }else{
+
+                    inimigo = new Goblin();
+                }
                 break;
             case 2:
                 inimigo = new Orc();
                 break;
             case 3:
-                inimigo = new Esqueleto();
+                Random random2 = new Random();
+                if(random2.nextInt(100) < 15){
+                    inimigo = new EsqueletoGigante();
+                }else{
+                    inimigo = new Esqueleto();
+                }
                 break;
             case 4:
-                inimigo = new MagoSombrio();
+                Random random3 = new Random();
+                if(random3.nextInt(100) < 15){
+                    inimigo = new MagoSupremo();
+                }else{
+                    inimigo = new MagoSombrio();
+                }
                 break;
             case 5:
                 inimigo = new BossFinal();

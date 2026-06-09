@@ -1,8 +1,7 @@
-package ui;
+package uinaousar;
 
 import javax.swing.*;
-import personagens.Personagem;
-import personagens.Guerreiro;
+import personagens.*;
 
 public class MenuPrincipal extends JFrame {
 
@@ -37,14 +36,46 @@ public class MenuPrincipal extends JFrame {
             JButton guerreiro = new JButton("Guerreiro");
             JButton mago = new JButton("Mago");
             JButton arqueiro = new JButton("Arqueiro");
+            JButton assasino = new JButton("Assasino");
         
             painelClasse.add(guerreiro);
             painelClasse.add(mago);
             painelClasse.add(arqueiro);
+            painelClasse.add(assasino);
 
             guerreiro.addActionListener(e2 -> {
 
                 Personagem jogador = new Guerreiro();
+            
+                new TelaPrincipal(jogador);
+            
+                telaClasse.dispose();
+                dispose();
+            });
+
+            mago.addActionListener(e2 -> {
+
+                Personagem jogador = new Mago();
+            
+                new TelaPrincipal(jogador);
+            
+                telaClasse.dispose();
+                dispose();
+            });
+
+            arqueiro.addActionListener(e2 -> {
+
+                Personagem jogador = new Arqueiro();
+            
+                new TelaPrincipal(jogador);
+            
+                telaClasse.dispose();
+                dispose();
+            });
+
+            arqueiro.addActionListener(e2 -> {
+
+                Personagem jogador = new Assassino();
             
                 new TelaPrincipal(jogador);
             

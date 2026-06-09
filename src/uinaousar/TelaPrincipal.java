@@ -1,4 +1,4 @@
-package ui;
+package uinaousar;
 
 import javax.swing.*;
 

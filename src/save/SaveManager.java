@@ -149,6 +149,10 @@ public class SaveManager {
                     jogador.equiparArma(new Arma("Espada de ferro", 10));
                 }
 
+                if(arma.equals("Machado osseo")){
+                    jogador.equiparArma(new Arma("Machado osseo", 35));
+                }
+
                 if(arma.equals("Espada de aço")){
                     jogador.equiparArma(new Arma("Espada de aço", 15));
                 }
@@ -162,11 +166,15 @@ public class SaveManager {
                 }
 
                 if(arma.equals("Matadora de dragões")){
-                    jogador.equiparArma(new Arma("Matadora de dragões", 55));
+                    jogador.equiparArma(new Arma("Matadora de dragões", 75));
                 }
 
                 if(armadura.equals("Armadura de couro")){
                     jogador.equiparArmadura(new Armadura("Armadura de couro", 15));
+                }
+
+                if(armadura.equals("Armadura do Rei Goblin")){
+                    jogador.equiparArmadura(new Armadura("Armadura do Rei Goblin", 35));
                 }
 
                 if(armadura.equals("Armadura encantada")){
