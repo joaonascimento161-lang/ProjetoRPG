@@ -38,7 +38,8 @@ public class SaveManager {
 
             if(jogador.getArmaEquipada() != null){
                 writer.write(jogador.getArmaEquipada().getNome());
-            }
+            }else{
+                writer.write("Nenhuma");}
 
             writer.write("\n");
 
@@ -46,7 +47,8 @@ public class SaveManager {
 
             if(jogador.getArmaduraEquipada() != null){
                 writer.write(jogador.getArmaduraEquipada().getNome());
-            }
+            }else{
+                writer.write("Nenhuma");}
 
             writer.write("\n");
 
@@ -151,7 +153,7 @@ public class SaveManager {
                     jogador.equiparArma(new Arma("Espada de aço", 15));
                 }
 
-                if(arma.equals("Espada de enferrujada")){
+                if(arma.equals("Espada enferrujada")){
                     jogador.equiparArma(new Arma("Espada enferrujada", 5));
                 }
 
