@@ -2,6 +2,7 @@ package uinaousar;
 
 import javax.swing.*;
 import personagens.*;
+import save.SaveManager;
 
 public class MenuPrincipal extends JFrame {
 
@@ -89,7 +90,20 @@ public class MenuPrincipal extends JFrame {
         });
     
         btnContinuar.addActionListener(e -> {
-            System.out.println("Continuar clicado");
+            
+            if(!SaveManager.existeSave()){
+
+                JOptionPane.showMessageDialog(this, "Nenhum save encontrado");
+                return;
+            }
+
+            Personagem jogador = SaveManager.carregar();
+
+            if(jogador != null){
+                 new TelaPrincipal(jogador);
+
+                 dispose();
+            }
         });
     
         btnSair.addActionListener(e -> {

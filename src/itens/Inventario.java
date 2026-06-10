@@ -8,6 +8,10 @@ public class Inventario {
     public Inventario(){
         itens = new ArrayList<>();
     }
+    
+    public ArrayList<Item> getItens(){
+        return itens;
+    }
 
     public void adicionarItem(Item item){
         itens.add(item);
