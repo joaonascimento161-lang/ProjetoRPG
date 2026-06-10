@@ -5,6 +5,7 @@ import javax.swing.*;
 import personagens.Personagem;
 import sistema.XPSystem;
 import inimigos.Inimigo;
+import itens.Item;
 
 public class TelaCombate extends JFrame {
 
@@ -18,12 +19,31 @@ public class TelaCombate extends JFrame {
         painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
 
         JLabel lblJogador =
-                new JLabel(jogador.getNome()
-                + " HP: " + jogador.getVida());
+        new JLabel(jogador.getNome());
+
+        JProgressBar barraVidaJogador =
+        new JProgressBar(0, jogador.getVidaMax());
+
+        barraVidaJogador.setValue(jogador.getVida());
+        barraVidaJogador.setStringPainted(true);
+
+        JLabel lblMana =
+        new JLabel("Mana");
+
+        JProgressBar barraMana =
+        new JProgressBar(0, 100);
+
+        barraMana.setValue(jogador.getMana());
+        barraMana.setStringPainted(true);
 
         JLabel lblInimigo =
-                new JLabel(inimigo.getNome()
-                + " HP: " + inimigo.getVida());
+        new JLabel(inimigo.getNome());
+
+        JProgressBar barraVidaInimigo =
+            new JProgressBar(0, inimigo.getVida());
+
+        barraVidaInimigo.setValue(inimigo.getVida());
+        barraVidaInimigo.setStringPainted(true);
 
         JTextArea historico = new JTextArea(10, 30);
 
@@ -57,9 +77,11 @@ public class TelaCombate extends JFrame {
                         );
                     }
                 
-                    lblJogador.setText(
-                        jogador.getNome() + " HP: " + jogador.getVida()
-                    );
+                    barraVidaJogador.setValue(jogador.getVida());
+
+                    barraVidaInimigo.setValue(inimigo.getVida());
+
+                    barraMana.setValue(jogador.getMana());
                 
                     lblInimigo.setText(
                         inimigo.getNome() + " HP: " + inimigo.getVida()
@@ -88,9 +110,21 @@ public class TelaCombate extends JFrame {
                         "\nOuro: " + inimigo.getRecompensaOuro()
                     );
 
+                    Item drop = inimigo.gerarDrop();
+
+                    if(drop != null){
+
+                        jogador.getInventario().adicionarItem(drop);
+
+                        JOptionPane.showMessageDialog(
+                            this,
+                            "Item encontrado: " + drop.getNome()
+                        );
+                    }
+
                     dispose();
                 
-                        btnAtacar.setEnabled(false);
+                        new TelaPrincipal(jogador);
                     }
                 
                     if(!jogador.estaVivo()){
@@ -99,20 +133,28 @@ public class TelaCombate extends JFrame {
                             this,
                             "Você foi derrotado!"
                         );
-                
-                        btnAtacar.setEnabled(false);
+                        
+                        dispose();
                     }
                 });
 
                 painel.add(lblJogador);
-                painel.add(lblInimigo);
-                
-                painel.add(Box.createVerticalStrut(10));
-                
-                painel.add(btnAtacar);
-                
+                painel.add(barraVidaJogador);
+
+                painel.add(lblMana);
+                painel.add(barraMana);
+
                 painel.add(Box.createVerticalStrut(15));
-                
+
+                painel.add(lblInimigo);
+                painel.add(barraVidaInimigo);
+
+                painel.add(Box.createVerticalStrut(15));
+
+                painel.add(btnAtacar);
+
+                painel.add(Box.createVerticalStrut(15));
+
                 painel.add(new JScrollPane(historico));
 
         add(painel);
