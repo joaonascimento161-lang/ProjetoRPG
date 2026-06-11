@@ -1,6 +1,7 @@
 import java.util.Scanner;
+
+import main.MainTerminal;
 import uinaousar.MenuPrincipal;
-import Main.MainTerminal;
 
 public class Main {
 

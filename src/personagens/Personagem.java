@@ -126,6 +126,15 @@ public abstract class Personagem {
         return nivel;
     }
 
+    public void carregarNivel(int nivel){
+        this.nivel = nivel;
+
+        vidaMax += (nivel - 1) * 10;
+        dano +=(nivel - 1) * 2;
+
+        vida = vidaMax;
+    }
+
     public void setXp(int xp){
         this.xp = xp;
     }

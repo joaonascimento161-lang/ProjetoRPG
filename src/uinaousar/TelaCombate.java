@@ -15,6 +15,7 @@ public class TelaCombate extends JFrame {
         setSize(500,400);
         setLocationRelativeTo(null);
 
+
         JPanel painel = new JPanel();
         painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
 
@@ -24,7 +25,9 @@ public class TelaCombate extends JFrame {
         JProgressBar barraVidaJogador =
         new JProgressBar(0, jogador.getVidaMax());
 
-        barraVidaJogador.setValue(jogador.getVida());
+        lblJogador.setAlignmentX(CENTER_ALIGNMENT);
+
+        barraVidaJogador.setString(jogador.getVida() + "/" + jogador.getVidaMax());
         barraVidaJogador.setStringPainted(true);
 
         JLabel lblMana =
@@ -33,7 +36,7 @@ public class TelaCombate extends JFrame {
         JProgressBar barraMana =
         new JProgressBar(0, 100);
 
-        barraMana.setValue(jogador.getMana());
+        barraMana.setString(jogador.getMana() + "/" + jogador.getManaMax());
         barraMana.setStringPainted(true);
 
         JLabel lblInimigo =
@@ -42,7 +45,9 @@ public class TelaCombate extends JFrame {
         JProgressBar barraVidaInimigo =
             new JProgressBar(0, inimigo.getVida());
 
-        barraVidaInimigo.setValue(inimigo.getVida());
+            lblInimigo.setAlignmentX(CENTER_ALIGNMENT);
+
+        barraVidaInimigo.setString(inimigo.getVida() + "/" + inimigo.getVidaMax());
         barraVidaInimigo.setStringPainted(true);
 
         JTextArea historico = new JTextArea(10, 30);

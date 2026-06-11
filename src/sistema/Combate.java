@@ -93,6 +93,8 @@ public class Combate {
 
             System.out.println("====================");
 
+            turnoJogador(jogador, inimigo);
+
             if(!inimigo.estaVivo()){
                 break;
             }

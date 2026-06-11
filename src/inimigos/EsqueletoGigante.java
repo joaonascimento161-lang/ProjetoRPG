@@ -24,6 +24,6 @@ public class EsqueletoGigante extends Inimigo{
 
     @Override
     public Item gerarDrop() {
-            return new Arma("Machado osseo",35);
+        return new Arma("Machado osseo",35);
     }
 }

@@ -11,7 +11,7 @@ public class Berserker extends Personagem{
         int danoFinal = dano;
 
         if(vida <= vidaMax /2){
-            danoFinal += 5;
+            danoFinal += 15;
         }
 
         alvo.receberDano(danoFinal);

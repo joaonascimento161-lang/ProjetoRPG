@@ -154,7 +154,7 @@ public class SaveManager {
 
             if(jogador != null){
 
-                jogador.setNivel(nivel);
+                jogador.carregarNivel(nivel);
                 jogador.setXp(xp);
                 jogador.adicionarOuro(ouro);
 
@@ -195,8 +195,4 @@ public class SaveManager {
 
         return arquivo.exists();
     }
-
-    
-
-    
 }

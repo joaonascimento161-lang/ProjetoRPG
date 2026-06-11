@@ -1,4 +1,4 @@
-    package Main;
+    package main;
 
     import java.util.Random;
     import java.util.Scanner;
@@ -172,7 +172,6 @@
             }else if(escolha == 0){
                 SaveManager.salvar(jogador, GameData.isDeusDesbloqueado());
 
-                System.out.println("Jogo salvo");
                 break;
             }else{
                 iniciarArea(jogador, escolha);
