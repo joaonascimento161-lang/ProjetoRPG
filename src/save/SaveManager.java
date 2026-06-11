@@ -24,6 +24,10 @@ public class SaveManager {
 
             writer.write("Xp = " + jogador.getXp() + "\n");
 
+            writer.write("Vida = " + jogador.getVida() + "\n");
+
+            writer.write("Mana = " + jogador.getMana() + "\n");
+
             writer.write("Ouro = " + jogador.getOuro() + "\n");
 
             writer.write("Inventario;");
@@ -61,8 +65,6 @@ public class SaveManager {
 
             writer.write("DeusDesbloqueado = " + deusDesbloqueado + "\n");
 
-            
-
             writer.close();
 
             System.out.println("Jogo salvo com sucesso!");
@@ -84,6 +86,8 @@ public class SaveManager {
             int nivel = 1;
             int xp = 0;
             int ouro = 0;
+            int vida = 0;
+            int mana = 0;
 
             ArrayList<String> inventario = new ArrayList<>();
 
@@ -100,6 +104,10 @@ public class SaveManager {
                     nivel = Integer.parseInt(linha.split(" = ")[1]);
                 }else if(linha.startsWith("Xp = ")){
                     xp = Integer.parseInt(linha.split(" = ")[1]);
+                }else if(linha.startsWith("Vida = ")){
+                    vida = Integer.parseInt(linha.split(" = ")[1]);
+                }else if(linha.startsWith("Mana = ")){
+                    mana = Integer.parseInt(linha.split(" = ")[1]);
                 }else if(linha.startsWith("Ouro = ")){
                     ouro = Integer.parseInt(linha.split(" = ")[1]);
                 }else if(linha.startsWith("Arma = ")){
@@ -107,9 +115,14 @@ public class SaveManager {
                 }else if(linha.startsWith("Armadura = ")){
                     armadura = linha.split(" = ")[1];
                 }else if(linha.startsWith("Inventario;")){
+
                     String[] pegarTamanho = linha.split(";");
+                
                     for(int i = 1; i < pegarTamanho.length; i++){
-                        inventario.add(pegarTamanho[i]);
+                
+                        if(!pegarTamanho[i].equals("Vazio")){
+                            inventario.add(pegarTamanho[i]);
+                        }
                     }
                 }
             }
@@ -155,12 +168,17 @@ public class SaveManager {
             if(jogador != null){
 
                 jogador.carregarNivel(nivel);
+
                 jogador.setXp(xp);
+
                 jogador.adicionarOuro(ouro);
 
-                for(String itemNome : inventario){
-                    Item item = ItemFactory.criar(itemNome);
+                
 
+                for(String itemNome : inventario){
+
+                    Item item = ItemFactory.criar(itemNome);
+                
                     if(item != null){
                         jogador.getInventario().adicionarItem(item);
                     }
@@ -178,6 +196,10 @@ public class SaveManager {
                 if(armaduraObj != null){
                     jogador.equiparArmadura(armaduraObj);
                 }
+
+                jogador.setVida(vida);
+
+                jogador.setMana(mana);
                                 
                 System.out.println("Jogo carregado com sucesso");
             }

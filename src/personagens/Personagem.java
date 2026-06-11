@@ -173,6 +173,30 @@ public abstract class Personagem {
         return xp;
     }
 
+    public void setVida(int vida){
+        this.vida = vida;
+    
+        if(this.vida > vidaMax){
+            this.vida = vidaMax;
+        }
+    
+        if(this.vida < 0){
+            this.vida = 0;
+        }
+    }
+    
+    public void setMana(int mana){
+        this.mana = mana;
+    
+        if(this.mana > manaMax){
+            this.mana = manaMax;
+        }
+    
+        if(this.mana < 0){
+            this.mana = 0;
+        }
+    }
+
     public Missao getMissaoAtual(){
         return missaoAtual;
     }
