@@ -8,7 +8,7 @@ public class PocaoVida extends Item {
 
     public PocaoVida() {
         super("Poção de Vida");
-        this.cura = 25;
+        this.cura = 35;
     }
 
     @Override

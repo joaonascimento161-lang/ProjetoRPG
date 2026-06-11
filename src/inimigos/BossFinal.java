@@ -8,7 +8,7 @@ public class BossFinal extends Inimigo{
     private Random random = new Random();
 
     public BossFinal() {
-        super("Dragão Ancestral", 400, 25,500,300);
+        super("Dragão Ancestral", 400, 30,500,300);
     }
 
     @Override
@@ -64,11 +64,7 @@ public class BossFinal extends Inimigo{
 
     @Override 
     public Item gerarDrop(){
-        Random random = new Random();
 
-        if(random.nextInt(100) < 2){
-            return new Arma("Matadora de dragões", 55);
-        }
-        return null;
+        return new Arma("Matadora de dragões", 75);
     }
 }

@@ -1,10 +1,11 @@
-package ui;
+package uinaousar;
 
 import javax.swing.*;
 
 import inimigos.Goblin;
 import inimigos.Inimigo;
 import personagens.Personagem;
+import save.SaveManager;
 
 public class TelaPrincipal extends JFrame {
 
@@ -42,13 +43,36 @@ public class TelaPrincipal extends JFrame {
 
         barraVida.setStringPainted(true);
 
+        JProgressBar barraMana =
+        new JProgressBar(
+            0,
+            jogador.getManaMax()
+        );
+
+        barraMana.setValue(
+            jogador.getMana()
+        );
+
+        barraMana.setStringPainted(true);
+
+        barraMana.setString(
+            jogador.getMana()
+            + "/"
+            + jogador.getManaMax()
+        );
+
         barraVida.setString(
             jogador.getVida()
             + "/"
             + jogador.getVidaMax()
         );
 
-        JLabel mana = new JLabel("Mana: " + jogador.getMana());
+        JLabel mana = new JLabel(
+            "Mana: "
+            + jogador.getMana()
+            + "/"
+            + jogador.getManaMax()
+        );
 
         JLabel ouro = new JLabel("Ouro: " + jogador.getOuro());
 
@@ -70,17 +94,49 @@ public class TelaPrincipal extends JFrame {
 
         JButton btnLoja = new JButton("Loja");
 
+        btnLoja.addActionListener(e ->{
+            new TelaLoja(jogador);
+        });
+
         JButton btnInventario = new JButton("Inventário");
+
+        btnInventario.addActionListener(e -> {
+            new TelaInventario(jogador);
+        });
 
         JButton btnStatus = new JButton("Status");
 
+        btnStatus.addActionListener(e ->{
+            JOptionPane.showMessageDialog(
+                this,
+                "Classe: " + jogador.getNome()
+                + "\nNível: " + jogador.getNivel()
+                + "\nVida: " + jogador.getVida()
+                + "/" + jogador.getVidaMax()
+                + "\nMana: " + jogador.getMana()
+                + "/" + jogador.getManaMax()
+                + "\nOuro: " + jogador.getOuro()
+            );
+        });
+
         JButton btnSalvar = new JButton("Salvar");
+
+        btnSalvar.addActionListener(e ->{
+            SaveManager.salvar(jogador, false);
+            dispose();
+
+            new MenuPrincipal();
+        });
 
         btnFloresta.setAlignmentX(CENTER_ALIGNMENT);
         btnLoja.setAlignmentX(CENTER_ALIGNMENT);
         btnInventario.setAlignmentX(CENTER_ALIGNMENT);
         btnStatus.setAlignmentX(CENTER_ALIGNMENT);
         btnSalvar.setAlignmentX(CENTER_ALIGNMENT);
+        barraVida.setAlignmentX(CENTER_ALIGNMENT);
+        barraMana.setAlignmentX(CENTER_ALIGNMENT);
+
+        
 
         painel.add(Box.createVerticalStrut(20));
 
@@ -91,6 +147,8 @@ public class TelaPrincipal extends JFrame {
         painel.add(barraVida);
 
         painel.add(mana);
+        painel.add(barraMana);
+
         painel.add(ouro);
 
         painel.add(Box.createVerticalStrut(20));

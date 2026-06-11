@@ -9,11 +9,33 @@ import save.SaveManager;
 import java.util.Scanner;
 
 public class Combate {
-    
-    private Scanner sc;
 
+        private Scanner sc;
+    
     public Combate(Scanner sc){
         this.sc = sc;
+    }
+
+    public static String criarBarra(int atual, int maximo){
+
+        int tamanho = 20;
+
+        int preenchido = (atual * tamanho) / maximo;
+
+        String barra = "[";
+
+        for(int i = 0; i < tamanho; i++){
+
+            if(i < preenchido){
+                barra += "█";
+            }else{
+                barra += "-";
+            }
+        }
+
+        barra += "]";
+
+        return barra;
     }
 
     public boolean iniciar(Personagem jogador, Inimigo inimigo){
@@ -24,7 +46,52 @@ public class Combate {
         System.out.println("------------------");
 
         while (jogador.estaVivo() && inimigo.estaVivo()) {
-            mostrarStatus(jogador, inimigo);
+
+            System.out.println("\n====================");
+
+            System.out.println(jogador.getNome());
+
+            System.out.println(
+                "HP   "
+                + criarBarra(
+                    jogador.getVida(),
+                    jogador.getVidaMax()
+                )
+                + " "
+                + jogador.getVida()
+                + "/"
+                + jogador.getVidaMax()
+            );
+
+            System.out.println(
+                "Mana "
+                + criarBarra(
+                    jogador.getMana(),
+                    jogador.getManaMax()
+                )
+                + " "
+                + jogador.getMana()
+                + "/"
+                + jogador.getManaMax()
+            );
+
+            System.out.println();
+
+            System.out.println(inimigo.getNome());
+
+            System.out.println(
+                "HP   "
+                + criarBarra(
+                    inimigo.getVida(),
+                    inimigo.getVidaMax()
+                )
+                + " "
+                + inimigo.getVida()
+                + "/"
+                + inimigo.getVidaMax()
+            );
+
+            System.out.println("====================");
 
             turnoJogador(jogador, inimigo);
 

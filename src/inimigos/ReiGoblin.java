@@ -1,7 +1,5 @@
 package inimigos;
 
-import java.util.Random;
-
 import itens.Armadura;
 import itens.Item;
 import personagens.Personagem;
@@ -26,11 +24,6 @@ public class ReiGoblin extends Inimigo{
 
     @Override
     public Item gerarDrop() {
-        Random random = new Random();
-
-        if(random.nextInt(100) < 20) {
-            return new Armadura("Armadura do Rei Goblin",35);
-        }
-        return null;
+        return new Armadura("Armadura do Rei Goblin",35);
     }
 }

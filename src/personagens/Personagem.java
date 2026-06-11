@@ -1,6 +1,5 @@
 package personagens;
 
-import itens.Inventario;
 import itens.*;
 import sistema.Missao;
 
@@ -11,6 +10,7 @@ public abstract class Personagem {
     protected int vidaMax;
     protected int dano;
     protected int mana;
+    protected int manaMax;
     protected int nivel;
     protected int xp;
     protected int ouro;
@@ -32,6 +32,8 @@ public abstract class Personagem {
         this.nivel = 1;
         this.xp = 0;
         this.ouro = 0;
+        this.mana = 0;
+        this.manaMax = 100;
         
         inventario = new Inventario();
     }
@@ -61,6 +63,10 @@ public abstract class Personagem {
     
     public void ganharMana(int valor){
         mana += valor;
+
+        if(mana > manaMax){
+            mana = manaMax;
+        }
     }
     
     public boolean estaVivo(){
@@ -103,6 +109,10 @@ public abstract class Personagem {
     public int getVidaMax(){
         return vidaMax;
     }
+
+    public int getManaMax(){
+        return manaMax;
+    }
     
     public int getMana(){
         return mana;
@@ -114,6 +124,15 @@ public abstract class Personagem {
     
     public int getNivel(){
         return nivel;
+    }
+
+    public void carregarNivel(int nivel){
+        this.nivel = nivel;
+
+        vidaMax += (nivel - 1) * 10;
+        dano +=(nivel - 1) * 2;
+
+        vida = vidaMax;
     }
 
     public void setXp(int xp){
@@ -152,6 +171,30 @@ public abstract class Personagem {
     
     public int getXp(){
         return xp;
+    }
+
+    public void setVida(int vida){
+        this.vida = vida;
+    
+        if(this.vida > vidaMax){
+            this.vida = vidaMax;
+        }
+    
+        if(this.vida < 0){
+            this.vida = 0;
+        }
+    }
+    
+    public void setMana(int mana){
+        this.mana = mana;
+    
+        if(this.mana > manaMax){
+            this.mana = manaMax;
+        }
+    
+        if(this.mana < 0){
+            this.mana = 0;
+        }
     }
 
     public Missao getMissaoAtual(){

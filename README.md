@@ -1,20 +1,22 @@
-# RPG Java - Projeto POO
+# 🛡️ Projeto RPG em Java
 
-## Descrição
-
-Este é um RPG de terminal desenvolvido em Java utilizando Programação Orientada a Objetos (POO).
-
-O projeto foi criado com o objetivo de praticar conceitos de orientação a objetos, herança, polimorfismo, encapsulamento e organização em múltiplas classes e pacotes.
-
-O jogo possui combate por turnos, sistema de classes, inimigos com inteligência artificial, progressão por experiência, inventário, itens e uma classe secreta desbloqueável.
+Um RPG desenvolvido em Java utilizando Programação Orientada a Objetos (POO) e Java Swing, contendo sistema de combate, habilidades, inventário, equipamentos, loja, progressão de níveis e salvamento de progresso.
 
 ---
 
-## Funcionalidades Implementadas
+# 📖 Sobre o Projeto
 
-### Sistema de Personagens
+Este projeto foi desenvolvido com o objetivo de praticar conceitos fundamentais e intermediários de Programação Orientada a Objetos em Java.
 
-Classes disponíveis:
+O jogador escolhe uma classe, enfrenta inimigos, evolui seu personagem, coleta itens, compra equipamentos e pode salvar/carregar seu progresso.
+
+---
+
+# ⚔️ Funcionalidades
+
+## Classes Jogáveis
+
+O jogo possui as seguintes classes:
 
 * Guerreiro
 * Mago
@@ -23,200 +25,253 @@ Classes disponíveis:
 * Assassino
 * Berserker
 * Curandeiro
+* Deus (classe secreta)
 
-Classe secreta:
-
-* Deus (desbloqueada após derrotar o Boss Final)
-
----
-
-### Sistema de Combate
-
-* Combate por turnos
-* Ataques básicos
-* Habilidades especiais
-* Sistema de mana
-* Ganho de mana ao causar dano
-* Cura através de habilidades e poções
+Cada classe possui atributos próprios e uma habilidade especial.
 
 ---
 
-### Sistema de Mana
+## Sistema de Combate
 
-Todos os personagens ganham:
+Durante o combate o jogador pode:
 
-* +10 mana ao causar dano
+* Atacar
+* Utilizar habilidade especial
+* Utilizar itens do inventário
 
-Classe Deus:
+O sistema conta com:
 
-* +15 mana ao causar dano
-
----
-
-### Sistema de Inimigos
-
-Inimigos atuais:
-
-* Goblin
-* Orc
-* Esqueleto
-* Mago Sombrio
-* Dragão Ancestral (Boss Final)
-
-Cada inimigo possui comportamento próprio através de IA simples.
+* Barra de Vida (HP)
+* Barra de Mana (MP)
+* Histórico das ações do combate
+* Sistema de vitória e derrota
 
 ---
 
-### Sistema de IA
+## Sistema de Experiência (XP)
 
-Os inimigos tomam decisões automaticamente.
+Ao derrotar inimigos o jogador recebe:
 
-Exemplos:
+* XP
+* Ouro
 
-* Goblin: agressivo
-* Orc: tenta finalizar o jogador
-* Mago Sombrio: prioriza magia
-* Dragão Ancestral: possui múltiplas fases de combate
+Ao subir de nível:
 
----
-
-### Sistema de Progressão
-
-* XP por inimigo derrotado
-* Ouro por inimigo derrotado
-* Sistema de níveis
-* Aumento de atributos ao subir de nível
+* A Vida Máxima aumenta
+* O Dano aumenta
 
 ---
 
-## Estrutura do Projeto
+## Sistema de Inventário
 
-src/
+O inventário permite:
 
-├── personagens/
+* Armazenar itens
+* Utilizar consumíveis
+* Equipar equipamentos
+* Remover itens utilizados
 
-├── inimigos/
+Itens disponíveis:
 
-├── itens/
+### Consumíveis
 
-├── sistema/
+* Poção de Vida
+* Poção de Mana
 
-└── Main.java
+### Equipamentos
 
----
-
-## Classes Jogáveis
-
-### Guerreiro
-
-* Vida: 120
-* Dano: 15
-* Habilidade: Golpe Devastador
-
-### Mago
-
-* Vida: 90
-* Dano: 12
-* Habilidade: Bola de Fogo
-
-### Arqueiro
-
-* Vida: 100
-* Dano: 14
-* Habilidade: Chuva de Flechas
-
-### Paladino
-
-* Vida: 130
-* Dano: 12
-* Habilidade: Luz Sagrada
-
-### Assassino
-
-* Vida: 80
-* Dano: 18
-* Passiva: Crítico
-* Habilidade: Ataque Sombrio
-
-### Berserker
-
-* Vida: 110
-* Dano: 16
-* Passiva: Fúria
-* Habilidade: Fúria Selvagem
-
-### Curandeiro
-
-* Vida: 95
-* Dano: 10
-* Habilidade: Grande Cura
-
-### Deus
-
-* Vida: 150
-* Dano: 20
-
-Habilidades:
-
-* Julgamento Divino
-* Milagre
-* Apocalipse
+* Armas
+* Armaduras
 
 ---
 
-## Boss Final
+## Sistema de Equipamentos
 
-### Dragão Ancestral
+### Armas
 
-Recompensa:
+Aumentam o dano do personagem.
 
-* 500 XP
-* 300 Ouro
+Exemplo:
 
-Fases:
+* Espada de Ferro (+5 dano)
 
-### Fase 1
+### Armaduras
 
-* Ataques normais
+Aumentam a vida máxima.
 
-### Fase 2
+Exemplo:
 
-* Uso frequente da Chama Infernal
-
-### Fase 3
-
-* Modo Fúria
-
-Ao derrotar o Dragão Ancestral, a classe Deus é desbloqueada.
+* Armadura de Couro (+20 vida máxima)
 
 ---
 
-## Funcionalidades Planejadas
+## Sistema de Loja
 
-* ~~Inventário completo~~
-* ~~Loja~~
-* ~~Equipamentos~~
-* ~~Sistema de drops~~
-* Status negativos
-  * Veneno
-  * Sangramento
-  * Queimadura
-* Sistema de salvamento
-* ~~Múltiplas áreas~~
-* Chefes secundários
-* Conquistas
-* Sistema de raridade de itens
+A loja permite comprar:
+
+### Consumíveis
+
+* Poção de Vida (30 ouro)
+* Poção de Mana (25 ouro)
+
+### Equipamentos
+
+* Espada de Ferro (100 ouro)
+* Armadura de Couro (150 ouro)
+
+As compras são realizadas utilizando ouro obtido em combate.
 
 ---
 
-## Tecnologias Utilizadas
+## Sistema de Drops
+
+Ao derrotar inimigos existe a possibilidade de obter:
+
+* Poções
+* Equipamentos
+* Outros itens futuramente
+
+---
+
+## Sistema de Save e Load
+
+O progresso do jogador é armazenado em arquivo de texto.
+
+Informações salvas:
+
+* Classe
+* Nível
+* XP
+* Vida Atual
+* Mana Atual
+* Ouro
+* Inventário
+* Arma Equipada
+* Armadura Equipada
+* Estado de desbloqueio da classe Deus
+
+Ao carregar o jogo, todas essas informações são restauradas automaticamente.
+
+---
+
+# 📂 Estrutura do Projeto
+
+```text
+src
+│
+├── areas
+│
+├── inimigos
+│
+├── interfaces
+│   ├── TelaPrincipal
+│   ├── TelaCombate
+│   ├── TelaInventario
+│   └── TelaLoja
+│
+├── itens
+│   ├── Item
+│   ├── PocaoVida
+│   ├── PocaoMana
+│   ├── Equipamento
+│   ├── Arma
+│   ├── Armadura
+│   ├── ItemFactory
+│   └── EquipamentoFactory
+│
+├── main
+│
+├── personagens
+│   ├── Personagem
+│   ├── Guerreiro
+│   ├── Mago
+│   ├── Arqueiro
+│   ├── Paladino
+│   ├── Assassino
+│   ├── Berserker
+│   ├── Curandeiro
+│   └── Deus
+│
+├── save
+│   └── SaveManager
+│
+└── sistema
+    └── XPSystem
+```
+
+---
+
+# 🖥️ Interface Gráfica
+
+O projeto utiliza Java Swing para criação das telas.
+
+Telas implementadas:
+
+* Tela Principal
+* Tela de Combate
+* Tela de Inventário
+* Tela da Loja
+
+---
+
+# 🛠️ Tecnologias Utilizadas
 
 * Java
+* Java Swing
 * Programação Orientada a Objetos (POO)
-* VS Code
+* Manipulação de Arquivos (Save/Load)
+* ArrayList
+* Organização em Pacotes
 
 ---
 
-## Autor
+# 📚 Conceitos Aplicados
 
-Projeto criado por João Victor Fortes do Nascimento.
+* Encapsulamento
+* Herança
+* Polimorfismo
+* Classes Abstratas
+* Sobrescrita de Métodos
+* Manipulação de Arquivos
+* Interfaces Gráficas
+* Estruturas de Dados
+
+---
+
+# 🚀 Como Executar
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/seu-usuario/projeto-rpg.git
+```
+
+2. Abra o projeto em sua IDE Java.
+
+3. Execute a classe:
+
+```text
+Main.java
+```
+
+---
+
+# 🔮 Melhorias Futuras
+
+* Novos inimigos
+* Novas áreas
+* Sistema de missões
+* Boss Final
+* Equipamentos raros
+* Loja avançada
+* Sistema de conquistas
+* Melhorias visuais
+* Efeitos sonoros
+
+---
+
+# 👨‍💻 Autor
+
+João Victor Fortes do Nascimento
+
+Projeto desenvolvido para praticar Programação Orientada a Objetos em Java através da criação de um RPG completo com interface gráfica.

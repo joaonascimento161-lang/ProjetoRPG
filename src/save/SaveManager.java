@@ -4,18 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
-import itens.Arma;
-import itens.Armadura;
-import personagens.Arqueiro;
-import personagens.Assassino;
-import personagens.Berserker;
-import personagens.Curandeiro;
-import personagens.Deus;
-import personagens.Guerreiro;
-import personagens.Mago;
-import personagens.Paladino;
-import personagens.Personagem;
+import personagens.*;
+import itens.*;
 
 public class SaveManager {
     private static final String ARQUIVO_SAVE = "save.txt";
@@ -32,7 +24,26 @@ public class SaveManager {
 
             writer.write("Xp = " + jogador.getXp() + "\n");
 
+            writer.write("Vida = " + jogador.getVida() + "\n");
+
+            writer.write("Mana = " + jogador.getMana() + "\n");
+
             writer.write("Ouro = " + jogador.getOuro() + "\n");
+
+            writer.write("Inventario;");
+
+            if(jogador.getInventario().tamanho() == 0){
+                writer.write("Vazio");
+            }
+
+            for(int i = 0; i < jogador.getInventario().tamanho(); i++){
+
+                Item item = jogador.getInventario().getItem(i);
+            
+                writer.write(item.getNome() + ";");
+            }
+
+            writer.write("\n");
 
             writer.write("Arma = ");
 
@@ -56,8 +67,6 @@ public class SaveManager {
 
             writer.write("DeusDesbloqueado = " + deusDesbloqueado + "\n");
 
-            
-
             writer.close();
 
             System.out.println("Jogo salvo com sucesso!****");
@@ -69,7 +78,6 @@ public class SaveManager {
 
         }
     }
-
     public static Personagem carregar(){
 
         try{
@@ -80,6 +88,10 @@ public class SaveManager {
             int nivel = 1;
             int xp = 0;
             int ouro = 0;
+            int vida = 0;
+            int mana = 0;
+
+            ArrayList<String> inventario = new ArrayList<>();
 
             String arma = "";
             String armadura = "";
@@ -94,12 +106,26 @@ public class SaveManager {
                     nivel = Integer.parseInt(linha.split(" = ")[1]);
                 }else if(linha.startsWith("Xp = ")){
                     xp = Integer.parseInt(linha.split(" = ")[1]);
+                }else if(linha.startsWith("Vida = ")){
+                    vida = Integer.parseInt(linha.split(" = ")[1]);
+                }else if(linha.startsWith("Mana = ")){
+                    mana = Integer.parseInt(linha.split(" = ")[1]);
                 }else if(linha.startsWith("Ouro = ")){
                     ouro = Integer.parseInt(linha.split(" = ")[1]);
                 }else if(linha.startsWith("Arma = ")){
                     arma = linha.split(" = ")[1];
                 }else if(linha.startsWith("Armadura = ")){
                     armadura = linha.split(" = ")[1];
+                }else if(linha.startsWith("Inventario;")){
+
+                    String[] pegarTamanho = linha.split(";");
+                
+                    for(int i = 1; i < pegarTamanho.length; i++){
+                
+                        if(!pegarTamanho[i].equals("Vazio")){
+                            inventario.add(pegarTamanho[i]);
+                        }
+                    }
                 }
             }
 
@@ -143,8 +169,10 @@ public class SaveManager {
 
             if(jogador != null){
 
-                jogador.setNivel(nivel);
+                jogador.carregarNivel(nivel);
+
                 jogador.setXp(xp);
+
                 jogador.adicionarOuro(ouro);
 
                 if(arma.equals("Espada de ferro")){
@@ -189,6 +217,4 @@ public class SaveManager {
 
         return arquivo.exists();
     }
-
-    
 }

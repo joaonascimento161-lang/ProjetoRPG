@@ -1,7 +1,5 @@
 package inimigos;
 
-import java.util.Random;
-
 import itens.Arma;
 import itens.Item;
 import personagens.Personagem;
@@ -16,7 +14,7 @@ public class EsqueletoGigante extends Inimigo{
 
         if(vida < 50){
 
-            System.out.println("Rei Goblin entrou em fúria");
+            System.out.println("Esqueleto Gigante entrou em fúria");
 
             jogador.receberDano(dano + 5);
         }else{
@@ -26,11 +24,6 @@ public class EsqueletoGigante extends Inimigo{
 
     @Override
     public Item gerarDrop() {
-        Random random = new Random();
-
-        if(random.nextInt(100) < 20) {
-            return new Arma("Machado osseo",35);
-        }
-        return null;
+        return new Arma("Machado osseo",35);
     }
 }
