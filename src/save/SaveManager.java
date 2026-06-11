@@ -38,6 +38,8 @@ public class SaveManager {
 
             if(jogador.getArmaEquipada() != null){
                 writer.write(jogador.getArmaEquipada().getNome());
+            }else{
+                writer.write("Nenhuma");
             }
 
             writer.write("\n");
@@ -46,6 +48,8 @@ public class SaveManager {
 
             if(jogador.getArmaduraEquipada() != null){
                 writer.write(jogador.getArmaduraEquipada().getNome());
+            }else{
+                writer.write("Nenhuma");
             }
 
             writer.write("\n");
@@ -56,7 +60,7 @@ public class SaveManager {
 
             writer.close();
 
-            System.out.println("Jogo salvo com sucesso!");
+            System.out.println("Jogo salvo com sucesso!****");
         }catch(IOException e){
 
             System.out.println("Erro ao salvar o jogo!");
@@ -145,37 +149,31 @@ public class SaveManager {
 
                 if(arma.equals("Espada de ferro")){
                     jogador.equiparArma(new Arma("Espada de ferro", 10));
-                }
-
-                if(arma.equals("Espada de aço")){
+                }else if(arma.equals("Espada de aço")){
                     jogador.equiparArma(new Arma("Espada de aço", 15));
-                }
-
-                if(arma.equals("Espada de enferrujada")){
+                }else if(arma.equals("Espada de enferrujada")){
                     jogador.equiparArma(new Arma("Espada enferrujada", 5));
-                }
-
-                if(arma.equals("Espada de osso")){
+                }else if(arma.equals("Espada de osso")){
                     jogador.equiparArma(new Arma("Espada de osso", 20));
-                }
-
-                if(arma.equals("Matadora de dragões")){
+                }else if(arma.equals("Matadora de dragões")){
                     jogador.equiparArma(new Arma("Matadora de dragões", 55));
+                }else if(!arma.equals("Nenhuma")){
+                    System.out.println("Arma equipada corrompida");
                 }
 
                 if(armadura.equals("Armadura de couro")){
                     jogador.equiparArmadura(new Armadura("Armadura de couro", 15));
-                }
-
-                if(armadura.equals("Armadura encantada")){
+                }else if(armadura.equals("Armadura encantada")){
                     jogador.equiparArmadura(new Armadura("Armadura encantada", 50));
-                }
-
-                if(armadura.equals("Armadura de ferro")){
+                }else if(armadura.equals("Armadura de ferro")){
                     jogador.equiparArmadura(new Armadura("Armadura de ferro", 30));
+                }else if(!armadura.equals("Nenhuma")){
+                    System.out.println("Armadura equipada corrompida");
                 }
                 
                 System.out.println("Jogo carregado com sucesso");
+            }else{
+                System.out.println("Classe corrompida. Impossível iniciar");
             }
 
             return jogador;
@@ -187,7 +185,7 @@ public class SaveManager {
 
     public static boolean existeSave(){
 
-        java.io.File arquivo = new java.io.File("save.txt");
+        java.io.File arquivo = new java.io.File(ARQUIVO_SAVE);
 
         return arquivo.exists();
     }
