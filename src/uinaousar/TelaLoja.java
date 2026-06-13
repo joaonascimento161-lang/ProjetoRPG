@@ -51,6 +51,8 @@ public class TelaLoja extends JFrame {
                 lblOuro.setText(
                     "Ouro: " + jogador.getOuro()
                 );
+
+                JOptionPane.showMessageDialog(this, "Poção de vida comprada");
             
             }else{
                 JOptionPane.showMessageDialog(
@@ -64,17 +66,18 @@ public class TelaLoja extends JFrame {
 
         btnPocaoMana.addActionListener(e -> {
 
-                if(jogador.gastarOuro(25)){
+            if(jogador.gastarOuro(30)){
 
                 jogador.getInventario().adicionarItem(
                     new PocaoMana()
                 );
-
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Poção de Mana comprada!"
+            
+                lblOuro.setText(
+                    "Ouro: " + jogador.getOuro()
                 );
 
+                JOptionPane.showMessageDialog(this, "Poção de mana comprada!");
+            
             }else{
                 JOptionPane.showMessageDialog(
                     this,

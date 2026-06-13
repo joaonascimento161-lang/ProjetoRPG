@@ -14,6 +14,7 @@ public class Combate {
     
     public Combate(Scanner sc){
         this.sc = sc;
+
     }
 
     public static String criarBarra(int atual, int maximo){
@@ -35,7 +36,7 @@ public class Combate {
 
         barra += "]";
 
-        return barra;
+        return "\u001B[32m" + barra + "\u001B[0m";
     }
 
     public boolean iniciar(Personagem jogador, Inimigo inimigo){
@@ -151,6 +152,11 @@ public class Combate {
     }
 
     private void turnoJogador(Personagem jogador, Inimigo inimigo){
+
+        for(int cont = 0; cont < 20; cont++){
+            System.out.println("\n\n");
+        }
+
         System.out.println("\n---- SEU TURNO ----");
 
         System.out.println("1 - Atk");
@@ -186,6 +192,10 @@ public class Combate {
 
     private void abrirInventario(Personagem jogador){
 
+        for(int cont = 0; cont < 20; cont++){
+            System.out.println("\n\n");
+        }
+
         if(jogador.getInventario().estaVazio()){
             System.out.println("Inventário vazio");
 
@@ -209,6 +219,10 @@ public class Combate {
     }
 
     private void mostrarStatus(Personagem jogador, Inimigo inimigo){
+
+        for(int cont = 0; cont < 20; cont++){
+            System.out.println("\n\n");
+        }
 
         System.out.println("\n---- STATUS ----");
 

@@ -74,6 +74,10 @@
     }
 
     private static Personagem escolherClasse(){
+        
+        for(int cont = 0; cont < 20; cont++){
+            System.out.println("\n\n");
+        }
 
         System.out.println("\nEscolha sua classe:");
 
@@ -121,6 +125,10 @@
     private static void menuAreas(Personagem jogador){
 
         while (jogador.estaVivo()) {
+
+            for(int cont = 0; cont < 20; cont++){
+                System.out.println("\n\n");
+            }
 
             System.out.println("\n----- ÁREAS -----");
 

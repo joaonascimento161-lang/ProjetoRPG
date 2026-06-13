@@ -1,11 +1,15 @@
 package uinaousar;
 
+
 import javax.swing.*;
 
+import inimigos.Esqueleto;
 import inimigos.Goblin;
 import inimigos.Inimigo;
+import inimigos.Orc;
 import personagens.Personagem;
 import save.SaveManager;
+import java.awt.Color;
 
 public class TelaPrincipal extends JFrame {
 
@@ -82,13 +86,39 @@ public class TelaPrincipal extends JFrame {
         mana.setAlignmentX(CENTER_ALIGNMENT);
         ouro.setAlignmentX(CENTER_ALIGNMENT);
 
+        
+
+        JPanel painelAreas = new JPanel();
+
         JButton btnFloresta = new JButton("Floresta");
+        JButton btnCaverna = new JButton("Caverna");
+        JButton btnRuinas = new JButton("Ruínas");
+
+        painelAreas.add(btnFloresta);
+        painelAreas.add(btnCaverna);
+        painelAreas.add(btnRuinas);
 
         btnFloresta.addActionListener(e -> {
             System.out.println("Entrou na Floresta");
         
             Inimigo goblin = new Goblin();
             new TelaCombate(jogador, goblin);
+            dispose();
+        });
+
+        btnRuinas.addActionListener(e ->{
+            System.out.println("Entrou nas Ruinas");
+
+            Inimigo esqueleto = new Esqueleto();
+            new TelaCombate(jogador,esqueleto);
+            dispose();
+        });
+
+        btnCaverna.addActionListener(e ->{
+            System.out.println("Entrou na Caverna");
+
+            Inimigo orc = new Orc();
+            new TelaCombate(jogador,orc);
             dispose();
         });
 
@@ -127,6 +157,7 @@ public class TelaPrincipal extends JFrame {
 
             new MenuPrincipal();
         });
+        
 
         btnFloresta.setAlignmentX(CENTER_ALIGNMENT);
         btnLoja.setAlignmentX(CENTER_ALIGNMENT);
@@ -136,6 +167,21 @@ public class TelaPrincipal extends JFrame {
         barraVida.setAlignmentX(CENTER_ALIGNMENT);
         barraMana.setAlignmentX(CENTER_ALIGNMENT);
 
+        btnFloresta.setBackground(new Color(34, 139, 34));
+        btnFloresta.setForeground(Color.BLACK);
+
+        btnCaverna.setBackground(new Color(105, 105, 105));
+        btnCaverna.setForeground(Color.WHITE);
+
+        btnRuinas.setBackground(new Color(238, 118, 33));
+        btnRuinas.setForeground(Color.BLACK);
+
+        barraVida.setForeground(new Color(102,205,0));
+
+        barraVida.setBackground(new Color(105,105,105));
+        barraVida.setForeground(new Color(102,255,0));
+        barraMana.setBackground(new Color(105,105,105));
+        barraMana.setForeground(new Color(0,255,255));
         
 
         painel.add(Box.createVerticalStrut(20));
@@ -153,16 +199,15 @@ public class TelaPrincipal extends JFrame {
 
         painel.add(Box.createVerticalStrut(20));
 
-        painel.add(btnFloresta);
-        painel.add(Box.createVerticalStrut(5));
-
-        painel.add(btnLoja);
-        painel.add(Box.createVerticalStrut(5));
+        painel.add(painelAreas);
 
         painel.add(btnInventario);
         painel.add(Box.createVerticalStrut(5));
 
         painel.add(btnStatus);
+        painel.add(Box.createVerticalStrut(5));
+
+        painel.add(btnLoja);
         painel.add(Box.createVerticalStrut(5));
 
         painel.add(btnSalvar);

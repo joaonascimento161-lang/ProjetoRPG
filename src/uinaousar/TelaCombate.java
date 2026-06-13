@@ -6,6 +6,7 @@ import personagens.Personagem;
 import sistema.XPSystem;
 import inimigos.Inimigo;
 import itens.Item;
+import java.awt.Color;
 
 public class TelaCombate extends JFrame {
 
@@ -289,6 +290,12 @@ public class TelaCombate extends JFrame {
                     }
                 });
 
+                barraVidaJogador.setBackground(new Color(105,105,105));
+                barraVidaJogador.setForeground(new Color(102,205,0));
+                barraVidaInimigo.setBackground(new Color(105,105,105));
+                barraVidaInimigo.setForeground(new Color(102,205,0));
+                barraMana.setForeground(new Color(0,255,255));
+                barraMana.setBackground(new Color(105,105,105));
 
                 painel.add(lblJogador);
                 painel.add(barraVidaJogador);
