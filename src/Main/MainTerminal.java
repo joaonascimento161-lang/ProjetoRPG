@@ -5,8 +5,9 @@
 
     import personagens.*;
     import inimigos.*;
-    import inimigos.ReiGoblin;
-    import itens.Item;
+    import Areas.*;
+import Areas.Area;
+import itens.*;
     import save.*;
     import sistema.*;
 
@@ -14,6 +15,7 @@
     public class MainTerminal {
 
     private static Scanner sc = new Scanner(System.in);
+    private static Area areas[] = {new Floresta(), new Caverna(), new Ruinas(), new CasteloSombrio(), new CovilDragao()};
 
     public static void iniciar(){
 
@@ -167,6 +169,10 @@
             
             System.out.println("Escolha: ");
             int escolha = sc.nextInt();
+
+            for(int cont = 0; cont < 20; cont++){
+                System.out.println("\n\n");
+            }
             
             if(escolha == 6){
                 Loja loja = new Loja();
@@ -182,80 +188,31 @@
 
                 break;
             }else{
-                iniciarArea(jogador, escolha);
+
+            if(escolha < 1 || escolha > areas.length){
+
+                System.out.println("Área inválida.");
+                continue;
             }
+
+            iniciarArea(jogador, areas[escolha - 1]);
+            }
+            
         }
+        
     }
 
-    private static void iniciarArea(Personagem jogador, int Area){
-        int nivelNecessario = 1;
+    private static void iniciarArea(Personagem jogador, Area area){
+        //area.getIcone()
 
-        switch (Area) {
-            case 1:
-                nivelNecessario = 1;
-                break;
-            case 2:
-                nivelNecessario = 3;
-                break;
-            case 3:
-                nivelNecessario = 5;
-                break;
-            case 4:
-                nivelNecessario = 8;
-                break;
-            case 5:
-                nivelNecessario = 10;
-                break;
-        }
+        if(jogador.getNivel() < area.getNivelMinimo()){
 
-        if(jogador.getNivel() < nivelNecessario){
-
-            System.out.println("Você precisa estar no nivel " + nivelNecessario + " para entrar nesta área");
+            System.out.println("Você precisa estar no nivel " + area.getNivelMinimo() + " para entrar nesta aera");
+            
             return;
         }
 
-        Inimigo inimigo = null;
-
-        switch (Area) {
-            case 1:
-                Random random = new Random();
-
-                if(random.nextInt(100) < 15){
-
-                    inimigo = new ReiGoblin();
-
-                }else{
-
-                    inimigo = new Goblin();
-                }
-                break;
-            case 2:
-                inimigo = new Orc();
-                break;
-            case 3:
-                Random random2 = new Random();
-                if(random2.nextInt(100) < 15){
-                    inimigo = new EsqueletoGigante();
-                }else{
-                    inimigo = new Esqueleto();
-                }
-                break;
-            case 4:
-                Random random3 = new Random();
-                if(random3.nextInt(100) < 15){
-                    inimigo = new MagoSupremo();
-                }else{
-                    inimigo = new MagoSombrio();
-                }
-                break;
-            case 5:
-                inimigo = new BossFinal();
-                break;
-                
-            default:
-                System.out.println("Área inválida");
-                return;
-        }
+        Inimigo inimigo = area.generateEnemie();
 
         Combate combate = new Combate(sc);
 
@@ -267,12 +224,14 @@
 
                 GameData.desbloquearDeus();
 
-                SaveManager.salvar(jogador, true);
+                System.out.println("CLASSE DEUS DESBLOQUEADA");
+
+                SaveManager.salvar(jogador, venceu);
             }
         }
     }
 
-    private static void abrirInventario(Personagem jogador){
+   private static void abrirInventario(Personagem jogador){
 
         if(jogador.getInventario().estaVazio()){
             System.out.println("Inventario vazio");

@@ -1,6 +1,8 @@
-package sistema;
+package Areas;
 
-public class Area {
+import inimigos.Inimigo;
+
+public abstract class Area {
 
     private String nome;
     private int nivelRecomendado;
@@ -17,4 +19,6 @@ public class Area {
     public int getNivelMinimo(){
         return nivelRecomendado;
     }
+
+    public abstract Inimigo generateEnemie();
 }

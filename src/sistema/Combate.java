@@ -104,6 +104,7 @@ public class Combate {
         }
 
         if(jogador.estaVivo()){
+           
             System.out.println("\nVITÓRIA!");
 
             XPSystem.ganharXP(jogador, inimigo.getRecompensaXP());
@@ -146,16 +147,12 @@ public class Combate {
 
             return true;
         }
-
+        
         System.out.println("\nDERROTA!");
         return false;
     }
 
     private void turnoJogador(Personagem jogador, Inimigo inimigo){
-
-        for(int cont = 0; cont < 20; cont++){
-            System.out.println("\n\n");
-        }
 
         System.out.println("\n---- SEU TURNO ----");
 
@@ -185,6 +182,10 @@ public class Combate {
     }
 
     private void turnoInimigo(Personagem jogador, Inimigo inimigo){
+        for(int cont = 0; cont < 20; cont++){
+            System.out.println("\n\n");
+        }
+        
         System.out.println("\n---- TURNO DO INIMIGO ----");
 
         inimigo.realizarTurno(jogador);
