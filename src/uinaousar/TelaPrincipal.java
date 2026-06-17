@@ -9,23 +9,68 @@ import save.SaveManager;
 
 public class TelaPrincipal extends JFrame {
 
-    public TelaPrincipal(Personagem jogador) {
+    private final Personagem jogador;
+    private JPanel painelAreas;
+    private JPanel painelAcoes;
 
+    public TelaPrincipal(Personagem jogador) {
+        this.jogador = jogador;
+        
+        // Configurações básicas da janela
         setTitle("Projeto RPG - Menu do Herói");
         setSize(600, 550);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
+        inicializarComponentes();
+
+        setVisible(true);
+    }
+
+    private void inicializarComponentes() {
         PainelComFundo painelPrincipal = new PainelComFundo("src/image/map.jpg");
         painelPrincipal.setLayout(new BorderLayout(15, 15));
         painelPrincipal.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JPanel cardStatus = new JPanel();
-        cardStatus.setLayout(new BoxLayout(cardStatus, BoxLayout.Y_AXIS));
-        cardStatus.setOpaque(true);
-        cardStatus.setBackground(new Color(45, 30, 20, 220));
-        cardStatus.setBorder(BorderFactory.createCompoundBorder(
+        // 1. Card de Status do Jogador (Topo)
+        JPanel cardStatus = criarCardStatus();
+        painelPrincipal.add(cardStatus, BorderLayout.NORTH);
+
+        // 2. Painel Central (Áreas de Caça + Ações)
+        JPanel painelCentral = new JPanel(new GridLayout(2, 1, 0, 15));
+        painelCentral.setOpaque(false);
+
+        criarPainelAreas();
+        criarPainelAcoes();
+
+        painelCentral.add(painelAreas);
+        painelCentral.add(painelAcoes);
+        painelPrincipal.add(painelCentral, BorderLayout.CENTER);
+
+        // 3. Painel Inferior (Botão Salvar)
+        JPanel painelInferior = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        painelInferior.setOpaque(false);
+        
+        JButton btnSalvar = criarBotaoMenu("💾 SALVAR E SAIR", new Color(139, 0, 0), Color.WHITE);
+        btnSalvar.addActionListener(e -> {
+            SaveManager.salvar(jogador, false);
+            dispose();
+            new MenuPrincipal();
+        });
+        
+        painelInferior.add(btnSalvar);
+        painelPrincipal.add(painelInferior, BorderLayout.SOUTH);
+
+        add(painelPrincipal);
+    }
+
+    private JPanel criarCardStatus() {
+        JPanel card = new JPanel();
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setOpaque(true);
+        card.setBackground(new Color(45, 30, 20, 220));
+        card.setBorder(BorderFactory.createCompoundBorder(
             new LineBorder(new Color(139, 69, 19), 2),
             BorderFactory.createEmptyBorder(15, 20, 15, 20)
         ));
@@ -63,85 +108,86 @@ public class TelaPrincipal extends JFrame {
         ouro.setForeground(new Color(218, 165, 32));
         ouro.setAlignmentX(CENTER_ALIGNMENT);
 
-        cardStatus.add(nome);
-        cardStatus.add(Box.createVerticalStrut(4));
-        cardStatus.add(nivel);
-        cardStatus.add(Box.createVerticalStrut(15));
-        cardStatus.add(barraVida);
-        cardStatus.add(Box.createVerticalStrut(8));
-        cardStatus.add(barraMana);
-        cardStatus.add(Box.createVerticalStrut(12));
-        cardStatus.add(ouro);
+        card.add(nome);
+        card.add(Box.createVerticalStrut(4));
+        card.add(nivel);
+        card.add(Box.createVerticalStrut(15));
+        card.add(barraVida);
+        card.add(Box.createVerticalStrut(8));
+        card.add(barraMana);
+        card.add(Box.createVerticalStrut(12));
+        card.add(ouro);
 
-        JPanel painelCentral = new JPanel(new GridLayout(2, 1, 0, 15));
-        painelCentral.setOpaque(false);
+        return card;
+    }
 
-        JPanel painelAreas = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
+    private void criarPainelAreas() {
+        painelAreas = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
         painelAreas.setOpaque(true);
         painelAreas.setBackground(new Color(30, 20, 15, 180));
         painelAreas.setBorder(new LineBorder(new Color(100, 55, 20), 1));
 
+        // Áreas Iniciais
         JButton btnFloresta = criarBotaoMenu("Floresta", new Color(34, 139, 34), Color.WHITE);
+        btnFloresta.addActionListener(e -> iniciarCombate(new Goblin(), "src/image/FundoFloresta.jpg"));
+        
         JButton btnRuinas = criarBotaoMenu("Ruínas", new Color(210, 105, 30), Color.WHITE);
+        btnRuinas.addActionListener(e -> iniciarCombate(new Esqueleto(), "src/image/FundoRuinas.jpg"));
+        
         JButton btnCaverna = criarBotaoMenu("Caverna", new Color(105, 105, 105), Color.WHITE);
+        btnCaverna.addActionListener(e -> iniciarCombate(new Orc(), "src/image/FundoCaverna.jpg"));
 
         painelAreas.add(btnFloresta);
         painelAreas.add(btnRuinas);
         painelAreas.add(btnCaverna);
 
-        JPanel painelAcoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        // Desbloqueios por Nível (Ordenados do menor nível para o maior)
+        if (jogador.getNivel() >= 10) {
+            JButton btnVulcao = criarBotaoMenu("Vulcão", new Color(205, 0, 0), Color.WHITE);
+            btnVulcao.addActionListener(e -> iniciarCombate(new Phoenix(), "src/image/FundoVulcao.jpg"));
+            painelAreas.add(btnVulcao);
+        }
+
+        if (jogador.getNivel() >= 15) {
+            JButton btnAlpes = criarBotaoMenu("Alpes Suíços", new Color(70, 130, 180), Color.WHITE);
+            btnAlpes.addActionListener(e -> iniciarCombate(new PedroNeves(), "src/image/FundoAlpes.jpg"));
+            painelAreas.add(btnAlpes);
+        }
+
+        if (jogador.getNivel() >= 20) {
+            JButton btnMansao = criarBotaoMenu("Mansão Mafia", new Color(102, 51, 0), Color.WHITE);
+            btnMansao.addActionListener(e -> iniciarCombate(new GodFather(), "src/image/FundoMafia.jpg"));
+            painelAreas.add(btnMansao);
+        }
+
+        if (jogador.getNivel() >= 35) {
+            JButton btnEletrico = criarBotaoMenu("Mar elétrico", new Color(255, 255, 0), Color.DARK_GRAY);
+            btnEletrico.addActionListener(e -> iniciarCombate(new Kjoule(), "src/image/Gemini_Generated_Image_w0uvyow0uvyow0uv.png"));
+            painelAreas.add(btnEletrico);
+        }
+    }
+
+    private void criarPainelAcoes() {
+        painelAcoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
         painelAcoes.setOpaque(false);
 
         JButton btnInventario = criarBotaoMenu("Inventário", new Color(100, 55, 20), Color.WHITE);
+        btnInventario.addActionListener(e -> new TelaInventario(jogador));
+
         JButton btnStatus = criarBotaoMenu("Status", new Color(100, 55, 20), Color.WHITE);
+        btnStatus.addActionListener(e -> new TelaStatus(jogador));
+
         JButton btnLoja = criarBotaoMenu("Loja", new Color(100, 55, 20), Color.WHITE);
+        btnLoja.addActionListener(e -> new TelaLoja(jogador));
 
         painelAcoes.add(btnInventario);
         painelAcoes.add(btnStatus);
         painelAcoes.add(btnLoja);
+    }
 
-        painelCentral.add(painelAreas);
-        painelCentral.add(painelAcoes);
-
-        JPanel painelInferior = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        painelInferior.setOpaque(false);
-        JButton btnSalvar = criarBotaoMenu("💾 SALVAR E SAIR", new Color(139, 0, 0), Color.WHITE);
-        painelInferior.add(btnSalvar);
-
-        painelPrincipal.add(cardStatus, BorderLayout.NORTH);
-        painelPrincipal.add(painelCentral, BorderLayout.CENTER);
-        painelPrincipal.add(painelInferior, BorderLayout.SOUTH);
-        add(painelPrincipal);
-
-        btnFloresta.addActionListener(e -> {
-            Inimigo goblin = new Goblin();
-            new TelaCombate(jogador, goblin, "src/image/FundoFloresta.jpg");
-            dispose();
-        });
-
-        btnRuinas.addActionListener(e -> {
-            Inimigo esqueleto = new Esqueleto();
-            new TelaCombate(jogador, esqueleto, "src/image/FundoRuinas.jpg");
-            dispose();
-        });
-
-        btnCaverna.addActionListener(e -> {
-            Inimigo orc = new Orc();
-            new TelaCombate(jogador, orc,"src/image/FundoCaverna.jpg");
-            dispose();
-        });
-
-        btnLoja.addActionListener(e -> new TelaLoja(jogador));
-        btnInventario.addActionListener(e -> new TelaInventario(jogador));
-        btnStatus.addActionListener(e -> new TelaStatus(jogador));
-
-        btnSalvar.addActionListener(e -> {
-            SaveManager.salvar(jogador, false);
-            dispose();
-            new MenuPrincipal();
-        });
-
-        setVisible(true);
+    private void iniciarCombate(Inimigo inimigo, String caminhoCenario) {
+        new TelaCombate(jogador, inimigo, caminhoCenario);
+        dispose();
     }
 
     private JButton criarBotaoMenu(String texto, Color fundo, Color textoCor) {

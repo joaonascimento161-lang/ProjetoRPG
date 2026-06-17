@@ -7,7 +7,7 @@ public class Assassino extends Personagem{
     private Random random = new Random();
 
     public Assassino() {
-        super("Paladino", 80, 18);
+        super("Assassino", 80, 18);
     }
 
     @Override

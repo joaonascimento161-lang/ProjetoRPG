@@ -10,7 +10,7 @@ public class Guerreiro extends Personagem{
     public void usarHab(Personagem alvo){
 
         if(mana >= 30){
-            int danoEspecial = 35;
+            int danoEspecial = 350000000;
 
             alvo.receberDano(danoEspecial);
             mana -= 30;
