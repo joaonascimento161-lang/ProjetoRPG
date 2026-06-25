@@ -9,51 +9,61 @@ public class Missao {
     private int recompensaXP;
     private int recompensaOuro;
     private boolean concluida;
-    
+
     public Missao(String nome, String inimigoAlvo, int objetivo, int recompensaXP, int recompensaOuro) {
         this.nome = nome;
         this.inimigoAlvo = inimigoAlvo;
         this.objetivo = objetivo;
         this.recompensaXP = recompensaXP;
         this.recompensaOuro = recompensaOuro;
-
-        progresso = 0;
-        concluida = false;
+        this.progresso = 0;
+        this.concluida = false;
     }
 
-    public void registrarAbate(String inimigo){
+    public void registrarAbate(String inimigo) {
+        if (concluida) return;
 
-        if(concluida){
-            return;
-        }
-
-        if(inimigo.equals(inimigoAlvo)){
-
+        if (inimigo.equals(inimigoAlvo)) {
             progresso++;
 
-            System.out.println("Missao: " + progresso + "/" + objetivo);
+            System.out.println("📋 Missão [" + nome + "]: " + progresso + "/" + objetivo
+                    + " " + criarBarraProgresso());
 
-            if(progresso >= objetivo){
+            if (progresso >= objetivo) {
                 concluida = true;
-
-                System.out.println("MISSÃO CONCLUIDA");
+                System.out.println("🎯 MISSÃO CONCLUÍDA: " + nome + "!");
             }
         }
     }
 
-    public boolean isConcluida(){
-        return concluida;
+    private String criarBarraProgresso() {
+        int tamanho = 10;
+        int preenchido = (progresso * tamanho) / objetivo;
+
+        StringBuilder barra = new StringBuilder("[");
+        for (int i = 0; i < tamanho; i++) {
+            barra.append(i < preenchido ? "█" : "-");
+        }
+        barra.append("]");
+        return barra.toString();
     }
 
-    public int getRecompensaXP(){
-        return recompensaXP;
+    @Override
+    public String toString() {
+        if (concluida) {
+            return "✅ [CONCLUÍDA] " + nome;
+        }
+        return "📋 " + nome + " — Derrotar " + inimigoAlvo
+                + " (" + progresso + "/" + objetivo + ") "
+                + criarBarraProgresso()
+                + " | Recompensa: " + recompensaXP + " XP, " + recompensaOuro + " ouro";
     }
 
-    public int getRecompensaOuro(){
-        return recompensaOuro;
-    }
-
-    public String getNome(){
-        return nome;
-    }
+    public boolean isConcluida()   { return concluida; }
+    public int getRecompensaXP()   { return recompensaXP; }
+    public int getRecompensaOuro() { return recompensaOuro; }
+    public String getNome()        { return nome; }
+    public int getProgresso()      { return progresso; }
+    public int getObjetivo()       { return objetivo; }
+    public String getInimigoAlvo() { return inimigoAlvo; }
 }

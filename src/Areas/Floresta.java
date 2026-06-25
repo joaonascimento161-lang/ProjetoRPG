@@ -1,26 +1,23 @@
 package Areas;
 
 import java.util.Random;
-
 import inimigos.*;
 
-public class Floresta extends Area{
-    
-    public Floresta(){
+public class Floresta extends Area {
+
+    private static final int CHANCE_REI_GOBLIN = 15; // %
+
+    private Random random = new Random();
+
+    public Floresta() {
         super("Floresta", 1);
     }
 
     @Override
     public Inimigo generateEnemie() {
-        Random random = new Random();
-
-        if(random.nextInt(100) < 15){
-
+        if (random.nextInt(100) < CHANCE_REI_GOBLIN) {
             return new ReiGoblin();
-
-        }else{
-
-            return new Goblin();
         }
+        return new Goblin();
     }
 }

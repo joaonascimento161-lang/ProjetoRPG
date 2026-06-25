@@ -1,54 +1,52 @@
 package itens;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Inventario {
+
     private ArrayList<Item> itens;
-    
-    public Inventario(){
+
+    public Inventario() {
         itens = new ArrayList<>();
     }
-    
-    public ArrayList<Item> getItens(){
-        return itens;
-    }
 
-    public void adicionarItem(Item item){
+    public void adicionarItem(Item item) {
         itens.add(item);
-
-        System.out.println(item.getNome() + " adicionado ao inventario");
+        System.out.println("🎒 " + item.getNome() + " adicionado ao inventário!");
     }
 
-    public void removerItem(int indice){
-        if(indice >= 0 && indice < itens.size()){
+    public void removerItem(int indice) {
+        if (indice >= 0 && indice < itens.size()) {
             itens.remove(indice);
         }
     }
 
-    public Item getItem(int indice){
-        if(indice >= 0 && indice < itens.size()){
+    public Item getItem(int indice) {
+        if (indice >= 0 && indice < itens.size()) {
             return itens.get(indice);
         }
         return null;
     }
 
-    public void listarItens(){
-        System.out.println("---- INVENTÁRIO ----");
-
-        if(itens.isEmpty()){
-            System.out.println("Inventário vazio");
+    public void listarItens() {
+        System.out.println("\n🎒 ---- INVENTÁRIO ----");
+        if (itens.isEmpty()) {
+            System.out.println("  Inventário vazio.");
             return;
         }
-        for(int cont = 0; cont < itens.size(); cont++){
-            System.out.println((cont + 1) + " - " + itens.get(cont).getNome());
+        for (int i = 0; i < itens.size(); i++) {
+            System.out.println("  " + (i + 1) + " - " + itens.get(i).getNome());
         }
+        System.out.println("----------------------");
     }
 
-    public boolean estaVazio(){
-        return itens.isEmpty();
-    }
+    public boolean estaVazio()  { return itens.isEmpty(); }
+    public int tamanho()        { return itens.size(); }
 
-    public int tamanho(){
-        return itens.size();
+    // Retorna lista imutável — evita modificação externa acidental
+    public List<Item> getItens() {
+        return Collections.unmodifiableList(itens);
     }
 }

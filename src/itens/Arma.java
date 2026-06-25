@@ -2,25 +2,22 @@ package itens;
 
 import personagens.Personagem;
 
-public class Arma extends Equipamento{
-    
+public class Arma extends Equipamento {
+
     private int bonusDano;
 
-    public Arma(String nome, int bonusDano){
+    public Arma(String nome, int bonusDano) {
         super(nome);
         this.bonusDano = bonusDano;
     }
 
     @Override
-    public void usar(Personagem jogador){
-
+    public void usar(Personagem jogador) {
         jogador.equiparArma(this);
-
-        System.out.println(nome + " equipada");
-        System.out.println("+" + bonusDano + " de dano");
+        // mensagem já é exibida dentro de equiparArma()
     }
 
-    public int getBonusDano(){
+    public int getBonusDano() {
         return bonusDano;
     }
 }

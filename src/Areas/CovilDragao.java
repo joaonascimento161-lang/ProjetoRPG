@@ -2,7 +2,7 @@ package Areas;
 
 import inimigos.*;
 
-public class CovilDragao extends Area{
+public class CovilDragao extends Area {
 
     public CovilDragao() {
         super("Covil do Dragão", 8);
@@ -10,7 +10,6 @@ public class CovilDragao extends Area{
 
     @Override
     public Inimigo generateEnemie() {
-
         return new BossFinal();
     }
 }

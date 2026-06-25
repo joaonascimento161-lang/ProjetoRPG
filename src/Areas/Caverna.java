@@ -2,9 +2,9 @@ package Areas;
 
 import inimigos.*;
 
-public class Caverna extends Area{
-    
-    public Caverna(){
+public class Caverna extends Area {
+
+    public Caverna() {
         super("Caverna", 2);
     }
 

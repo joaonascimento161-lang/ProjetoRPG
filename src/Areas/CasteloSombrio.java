@@ -1,10 +1,13 @@
 package Areas;
 
 import java.util.Random;
-
 import inimigos.*;
 
-public class CasteloSombrio extends Area{
+public class CasteloSombrio extends Area {
+
+    private static final int CHANCE_MAGO_SUPREMO = 15; // %
+
+    private Random random = new Random();
 
     public CasteloSombrio() {
         super("Castelo Sombrio", 5);
@@ -12,12 +15,9 @@ public class CasteloSombrio extends Area{
 
     @Override
     public Inimigo generateEnemie() {
-        Random random = new Random();
-
-        if(random.nextInt(100) < 15){
+        if (random.nextInt(100) < CHANCE_MAGO_SUPREMO) {
             return new MagoSupremo();
-        }else{
-            return new MagoSombrio();
         }
+        return new MagoSombrio();
     }
 }

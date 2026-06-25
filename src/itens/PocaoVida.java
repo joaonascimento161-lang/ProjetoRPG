@@ -4,18 +4,15 @@ import personagens.Personagem;
 
 public class PocaoVida extends Item {
 
-    private int cura;
+    private static final int CURA = 35;
 
     public PocaoVida() {
         super("Poção de Vida");
-        this.cura = 35;
     }
 
     @Override
     public void usar(Personagem jogador) {
-
-        jogador.curar(cura);
-
-        System.out.println("Você recuperou " + cura + " de vida!");
+        jogador.curar(CURA);
+        // mensagem já é exibida dentro de curar()
     }
 }

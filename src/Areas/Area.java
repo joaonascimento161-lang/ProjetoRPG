@@ -1,24 +1,19 @@
 package Areas;
 
-import inimigos.Inimigo;
+import inimigos.*;
 
 public abstract class Area {
 
     private String nome;
-    private int nivelRecomendado;
+    private int nivelMinimo;
 
-    public Area(String nome, int nivelRecomendado){
+    public Area(String nome, int nivelMinimo) {
         this.nome = nome;
-        this.nivelRecomendado = nivelRecomendado;
+        this.nivelMinimo = nivelMinimo;
     }
 
-    public String getNome(){
-        return nome;
-    }
-
-    public int getNivelMinimo(){
-        return nivelRecomendado;
-    }
+    public String getNome()      { return nome; }
+    public int getNivelMinimo()  { return nivelMinimo; }
 
     public abstract Inimigo generateEnemie();
 }

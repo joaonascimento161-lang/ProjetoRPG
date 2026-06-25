@@ -1,52 +1,42 @@
 package itens;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class EquipamentoFactory {
 
-    public static Arma criarArma(String nome){
+    // LinkedHashMap mantém a ordem de inserção (útil para listar na loja)
+    private static final Map<String, Arma> ARMAS = new LinkedHashMap<>();
+    private static final Map<String, Armadura> ARMADURAS = new LinkedHashMap<>();
 
-        switch(nome){
+    static {
+        ARMAS.put("Espada de Ferro",      new Arma("Espada de Ferro", 10));
+        ARMAS.put("Espada de Aço",        new Arma("Espada de Aço", 15));
+        ARMAS.put("Espada de Osso",       new Arma("Espada de Osso", 20));
+        ARMAS.put("Machado Ósseo",        new Arma("Machado Ósseo", 35));
+        ARMAS.put("Matadora de Dragões",  new Arma("Matadora de Dragões", 75));
 
-            case "Espada de ferro":
-                return new Arma("Espada de ferro", 10);
-
-            case "Machado osseo":
-                return new Arma("Machado osseo", 35);
-
-            case "Espada de aço":
-                return new Arma("Espada de aço", 15);
-
-            case "Espada de osso":
-                return new Arma("Espada de osso", 20);
-
-            case "Matadora de dragões":
-                return new Arma("Matadora de dragões", 75);
-
-            default:
-                return null;
-        }
+        ARMADURAS.put("Armadura de Couro",      new Armadura("Armadura de Couro", 15));
+        ARMADURAS.put("Armadura de Ferro",      new Armadura("Armadura de Ferro", 30));
+        ARMADURAS.put("Armadura Encantada",     new Armadura("Armadura Encantada", 25));
+        ARMADURAS.put("Armadura do Rei Goblin", new Armadura("Armadura do Rei Goblin", 35));
+        ARMADURAS.put("Armadura Suprema",       new Armadura("Armadura Suprema", 50));
     }
 
-    public static Armadura criarArmadura(String nome){
+    public static Arma criarArma(String nome) {
+        return ARMAS.get(nome);
+    }
 
-        switch(nome){
+    public static Armadura criarArmadura(String nome) {
+        return ARMADURAS.get(nome);
+    }
 
-            case "Armadura de couro":
-                return new Armadura("Armadura de couro", 15);
+    public static Map<String, Arma> listarArmas() {
+        return Collections.unmodifiableMap(ARMAS);
+    }
 
-            case "Armadura de ferro":
-                return new Armadura("Armadura de ferro", 30);
-
-            case "Armadura encantada":
-                return new Armadura("Armadura encantada", 25);
-
-            case "Armadura do Rei Goblin":
-                return new Armadura("Armadura do Rei Goblin", 35);
-
-            case "Armadura suprema":
-                return new Armadura("Armadura suprema", 50);
-
-            default:
-                return null;
-        }
+    public static Map<String, Armadura> listarArmaduras() {
+        return Collections.unmodifiableMap(ARMADURAS);
     }
 }
