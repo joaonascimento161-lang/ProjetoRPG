@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-import main.MainTerminal;
-import uinaousar.MenuPrincipal;
+import Main.MainTerminal;
+import interfaces.MenuPrincipal;
 
 public class Main {
 
@@ -9,8 +9,8 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("1 - Terminal");
-        System.out.println("2 - Interface");
+        System.out.println("1 - ⌨️Terminal");
+        System.out.println("2 - 🖥️Interface");
 
         int escolha = sc.nextInt();
 

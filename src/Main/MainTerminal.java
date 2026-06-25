@@ -1,13 +1,12 @@
-    package main;
+    package Main;
 
-    import java.util.Random;
     import java.util.Scanner;
 
     import personagens.*;
     import inimigos.*;
     import Areas.*;
-import Areas.Area;
-import itens.*;
+    import Areas.Area;
+    import itens.*;
     import save.*;
     import sistema.*;
 
@@ -162,7 +161,7 @@ import itens.*;
                 }
             }
 
-            System.out.println("\n6 - Loja");
+            System.out.println("\n6 - 🏪Loja");
             System.out.println("7 - Status");
             System.out.println("8 - Inventario");
             System.out.println("\n0 - Salvar e Sair");
@@ -251,7 +250,7 @@ import itens.*;
             jogador.getInventario().removerItem(escolha);
         }
     }
-
+            
     private static boolean areaLiberada(Personagem jogador, int area){
         switch (area) {
             case 1:
