@@ -107,6 +107,7 @@ public class MainTerminal {
             System.out.println("8 - ✨ Deus (desbloqueado!)");
         }
 
+        System.out.println("0 - [RESTRITO]");
         System.out.print("Escolha: ");
         int escolha = lerInt();
 
@@ -120,10 +121,54 @@ public class MainTerminal {
             case 7: return new Curandeiro();
             case 8:
                 if (GameData.isDeusDesbloqueado()) return new Deus();
+                System.out.println("Classe não disponível.");
+                return new Guerreiro();
+            case 0:
+                return tentarLoginAdm();
             default:
                 System.out.println("Classe inválida. Iniciando como Guerreiro.");
                 return new Guerreiro();
         }
+    }
+
+    private static Personagem tentarLoginAdm() {
+        limparTela();
+        System.out.println("╔══════════════════════╗");
+        System.out.println("║   ACESSO RESTRITO    ║");
+        System.out.println("╚══════════════════════╝");
+
+        String senha;
+        java.io.Console console = System.console();
+        if (console != null) {
+            char[] senhaChar = console.readPassword("🔑 Senha: ");
+            senha = new String(senhaChar);
+            java.util.Arrays.fill(senhaChar, ' '); // limpa da memória após uso
+        } else {
+            System.out.print("🔑 Senha: ");
+            senha = sc.nextLine();
+        }
+
+        Personagem adm = Adm.tentarCriar(senha);
+
+        if (adm != null) {
+            limparTela();
+            System.out.println("╔══════════════════════════════╗");
+            System.out.println("║  ✅ ACESSO CONCEDIDO         ║");
+            System.out.println("║  Bem-vindo, Administrador.   ║");
+            System.out.println("╚══════════════════════════════╝");
+            System.out.println("\nPressione Enter para continuar...");
+            sc.nextLine();
+            return adm;
+        }
+
+        limparTela();
+        System.out.println("╔══════════════════════════════╗");
+        System.out.println("║  ❌ ACESSO NEGADO             ║");
+        System.out.println("╚══════════════════════════════╝");
+        System.out.println("Iniciando como Guerreiro.");
+        System.out.println("\nPressione Enter para continuar...");
+        sc.nextLine();
+        return new Guerreiro();
     }
 
     private static void menuAreas(Personagem jogador) {

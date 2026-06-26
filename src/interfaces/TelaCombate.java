@@ -3,6 +3,7 @@ package interfaces;
 import javax.swing.*;
 import javax.swing.border.*;
 import personagens.Personagem;
+import personagens.Adm;
 import sistema.XPSystem;
 import inimigos.Inimigo;
 import itens.Item;
@@ -98,9 +99,10 @@ public class TelaCombate extends JFrame {
         lblNome.setAlignmentX(CENTER_ALIGNMENT);
 
         // Barra de vida
-        JProgressBar bVida = criarBarra(vida, vidaMax,
-                isJogador ? COR_VIDA : COR_VIDA_INIMIGO);
-        bVida.setString("HP  " + vida + " / " + vidaMax);
+        JProgressBar bVida = (isJogador && entidade instanceof Adm)
+                ? criarBarraInfinita(new Color(200, 50, 50))
+                : criarBarra(vida, vidaMax, isJogador ? COR_VIDA : COR_VIDA_INIMIGO);
+        bVida.setString((isJogador && entidade instanceof Adm) ? null : "HP  " + vida + " / " + vidaMax);
 
         // Label de vida com valor grande
         JLabel lblVida = new JLabel("❤  " + vida + " / " + vidaMax);
@@ -115,8 +117,10 @@ public class TelaCombate extends JFrame {
         card.add(lblVida);
 
         if (isJogador) {
-            JProgressBar bMana = criarBarra(mana, manaMax, COR_MANA);
-            bMana.setString("MP  " + mana + " / " + manaMax);
+            JProgressBar bMana = (entidade instanceof Adm)
+                    ? criarBarraInfinita(new Color(150, 0, 200))
+                    : criarBarra(mana, manaMax, COR_MANA);
+            bMana.setString((entidade instanceof Adm) ? null : "MP  " + mana + " / " + manaMax);
 
             JLabel lblMana = new JLabel("✦  " + mana + " / " + manaMax);
             lblMana.setFont(new Font("Serif", Font.PLAIN, 12));
@@ -263,6 +267,23 @@ public class TelaCombate extends JFrame {
         barra.setValue(valor);
         barra.setStringPainted(true);
         barra.setFont(FONTE_BARRA);
+        barra.setForeground(cor);
+        barra.setBackground(new Color(30, 20, 15));
+        barra.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+        barra.setBorder(BorderFactory.createLineBorder(new Color(80, 50, 20), 1));
+        return barra;
+    }
+
+    private JProgressBar criarBarraInfinita(Color cor) {
+        JProgressBar barra = new JProgressBar(0, 1) {
+            @Override
+            public String getString() {
+                return "∞";
+            }
+        };
+        barra.setValue(1);
+        barra.setStringPainted(true);
+        barra.setFont(new Font("Serif", Font.BOLD, 16));
         barra.setForeground(cor);
         barra.setBackground(new Color(30, 20, 15));
         barra.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));

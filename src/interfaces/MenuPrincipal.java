@@ -5,19 +5,19 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import personagens.*;
+import personagens.Adm;
 import save.SaveManager;
 
 public class MenuPrincipal extends JFrame {
 
-    // ── Paleta ────────────────────────────────────────────────────────────
-    private static final Color COR_FUNDO_PAINEL    = new Color(20, 12, 8, 220);
-    private static final Color COR_BORDA           = new Color(120, 70, 20);
-    private static final Color COR_TITULO          = new Color(244, 228, 188);
-    private static final Color COR_SUBTITULO       = new Color(180, 150, 100);
-    private static final Color COR_BTN_FUNDO       = new Color(100, 55, 20);
-    private static final Color COR_BTN_SAIR        = new Color(100, 20, 20);
-    private static final Font  FONTE_TITULO        = new Font("Serif", Font.BOLD, 20);
-    private static final Font  FONTE_BOTAO         = new Font("Serif", Font.BOLD, 16);
+    private static final Color COR_FUNDO_PAINEL = new Color(20, 12, 8, 220);
+    private static final Color COR_BORDA        = new Color(120, 70, 20);
+    private static final Color COR_TITULO       = new Color(244, 228, 188);
+    private static final Color COR_SUBTITULO    = new Color(180, 150, 100);
+    private static final Color COR_BTN_FUNDO    = new Color(100, 55, 20);
+    private static final Color COR_BTN_SAIR     = new Color(100, 20, 20);
+    private static final Font  FONTE_TITULO     = new Font("Serif", Font.BOLD, 20);
+    private static final Font  FONTE_BOTAO      = new Font("Serif", Font.BOLD, 16);
 
     public MenuPrincipal() {
         setTitle("Projeto RPG");
@@ -29,14 +29,12 @@ public class MenuPrincipal extends JFrame {
         PainelComFundo painel = new PainelComFundo("src/image/madeira.jpg");
         painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
 
-        // Logo
         JLabel logo = carregarLogo("src/image/image.png", 400, 250);
         logo.setAlignmentX(CENTER_ALIGNMENT);
 
-        // Botões
-        JButton btnNovo      = criarBotao("⚔  NOVO JOGO",   COR_BTN_FUNDO);
-        JButton btnContinuar = criarBotao("▶  CONTINUAR",   COR_BTN_FUNDO);
-        JButton btnSair      = criarBotao("✕  SAIR",         COR_BTN_SAIR);
+        JButton btnNovo      = criarBotao("⚔  NOVO JOGO", COR_BTN_FUNDO);
+        JButton btnContinuar = criarBotao("▶  CONTINUAR", COR_BTN_FUNDO);
+        JButton btnSair      = criarBotao("✕  SAIR",      COR_BTN_SAIR);
 
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         painelBotoes.setOpaque(false);
@@ -60,7 +58,6 @@ public class MenuPrincipal extends JFrame {
 
         add(painel);
 
-        // ── Ações ──
         btnNovo.addActionListener(e -> abrirSelecaoDeClasse());
 
         btnContinuar.addActionListener(e -> {
@@ -92,7 +89,6 @@ public class MenuPrincipal extends JFrame {
         fundo.setBackground(new Color(15, 10, 6));
         fundo.setBorder(new LineBorder(COR_BORDA, 2));
 
-        // Cabeçalho
         JPanel header = new JPanel(new BorderLayout());
         header.setBackground(new Color(30, 18, 10));
         header.setBorder(BorderFactory.createEmptyBorder(18, 24, 18, 24));
@@ -115,50 +111,127 @@ public class MenuPrincipal extends JFrame {
         header.add(textos, BorderLayout.WEST);
         fundo.add(header, BorderLayout.NORTH);
 
-        // Grid de classes
         JPanel grid = new JPanel(new GridLayout(2, 4, 12, 12));
         grid.setBackground(new Color(15, 10, 6));
         grid.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         ClasseInfo[] classes = {
-                new ClasseInfo("Guerreiro",  "⚔",  "Alto HP e dano físico",          new Color(160, 50,  20),  () -> new Guerreiro()),
-                new ClasseInfo("Mago",       "✦",  "Mana elevada, magia poderosa",   new Color(60,  40,  140), () -> new Mago()),
-                new ClasseInfo("Arqueiro",   "🏹", "Velocidade e precisão",          new Color(40,  100, 40),  () -> new Arqueiro()),
-                new ClasseInfo("Assassino",  "🗡", "Críticos e furtividade",         new Color(60,  60,  60),  () -> new Assassino()),
-                new ClasseInfo("Paladino",   "🛡", "Defesa e cura divina",           new Color(150, 130, 40),  () -> new Paladino()),
-                new ClasseInfo("Berserker",  "💢", "Dano extremo, baixa defesa",     new Color(160, 30,  30),  () -> new Berserker()),
-                new ClasseInfo("Curandeiro", "💚", "Cura e suporte em combate",      new Color(30,  120, 80),  () -> new Curandeiro()),
+                new ClasseInfo("Guerreiro",  "⚔",  "Alto HP e dano físico",        new Color(160, 50,  20),  () -> new Guerreiro()),
+                new ClasseInfo("Mago",       "✦",  "Mana elevada, magia poderosa", new Color(60,  40,  140), () -> new Mago()),
+                new ClasseInfo("Arqueiro",   "🏹", "Velocidade e precisão",        new Color(40,  100, 40),  () -> new Arqueiro()),
+                new ClasseInfo("Assassino",  "🗡", "Críticos e furtividade",       new Color(60,  60,  60),  () -> new Assassino()),
+                new ClasseInfo("Paladino",   "🛡", "Defesa e cura divina",         new Color(150, 130, 40),  () -> new Paladino()),
+                new ClasseInfo("Berserker",  "💢", "Dano extremo, baixa defesa",   new Color(160, 30,  30),  () -> new Berserker()),
+                new ClasseInfo("Curandeiro", "💚", "Cura e suporte em combate",    new Color(30,  120, 80),  () -> new Curandeiro()),
         };
 
         for (ClasseInfo c : classes) {
             grid.add(criarCardClasse(c, dialogo));
         }
 
-        // Placeholder para a 8ª posição (classe secreta)
-        JPanel secreto = new JPanel();
-        secreto.setBackground(new Color(25, 15, 10));
-        secreto.setBorder(new LineBorder(new Color(60, 40, 20), 1));
-        secreto.setLayout(new BoxLayout(secreto, BoxLayout.Y_AXIS));
-        JLabel lblSecreta = new JLabel("???");
-        lblSecreta.setFont(new Font("Serif", Font.BOLD, 22));
-        lblSecreta.setForeground(new Color(80, 60, 30));
-        lblSecreta.setAlignmentX(CENTER_ALIGNMENT);
-        JLabel lblSecretaSub = new JLabel("Classe secreta");
-        lblSecretaSub.setFont(new Font("Serif", Font.ITALIC, 11));
-        lblSecretaSub.setForeground(new Color(70, 55, 30));
-        lblSecretaSub.setAlignmentX(CENTER_ALIGNMENT);
-        secreto.add(Box.createVerticalGlue());
-        secreto.add(lblSecreta);
-        secreto.add(Box.createVerticalStrut(4));
-        secreto.add(lblSecretaSub);
-        secreto.add(Box.createVerticalGlue());
-        grid.add(secreto);
+        grid.add(criarCardAdm(dialogo));
 
         fundo.add(grid, BorderLayout.CENTER);
         dialogo.setContentPane(fundo);
         dialogo.setVisible(true);
     }
 
+    // ── Card ADM com campo de senha ───────────────────────────────────────
+    private JPanel criarCardAdm(JDialog dialogo) {
+        JPanel card = new JPanel();
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setBackground(new Color(18, 12, 8));
+        card.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(50, 35, 15), 1),
+                BorderFactory.createEmptyBorder(14, 12, 14, 12)
+        ));
+        card.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        JLabel icone = new JLabel("🔒");
+        icone.setFont(new Font("Serif", Font.PLAIN, 26));
+        icone.setAlignmentX(CENTER_ALIGNMENT);
+
+        JLabel lblSenha = new JLabel("Acesso restrito");
+        lblSenha.setFont(new Font("Serif", Font.ITALIC, 11));
+        lblSenha.setForeground(new Color(70, 55, 30));
+        lblSenha.setAlignmentX(CENTER_ALIGNMENT);
+
+        JPasswordField campoSenha = new JPasswordField(12);
+        campoSenha.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+        campoSenha.setFont(new Font("Monospaced", Font.PLAIN, 13));
+        campoSenha.setBackground(new Color(30, 20, 10));
+        campoSenha.setForeground(new Color(200, 180, 120));
+        campoSenha.setCaretColor(new Color(200, 180, 120));
+        campoSenha.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(90, 60, 20), 1),
+                BorderFactory.createEmptyBorder(4, 6, 4, 6)
+        ));
+        campoSenha.setVisible(false);
+
+        JLabel lblErro = new JLabel(" ");
+        lblErro.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        lblErro.setForeground(new Color(200, 60, 60));
+        lblErro.setAlignmentX(CENTER_ALIGNMENT);
+
+        card.add(Box.createVerticalGlue());
+        card.add(icone);
+        card.add(Box.createVerticalStrut(6));
+        card.add(lblSenha);
+        card.add(Box.createVerticalStrut(8));
+        card.add(campoSenha);
+        card.add(Box.createVerticalStrut(4));
+        card.add(lblErro);
+        card.add(Box.createVerticalGlue());
+
+        card.addMouseListener(new MouseAdapter() {
+            @Override public void mouseEntered(MouseEvent e) {
+                card.setBackground(new Color(28, 18, 10));
+                card.setBorder(BorderFactory.createCompoundBorder(
+                        new LineBorder(new Color(80, 55, 20), 1),
+                        BorderFactory.createEmptyBorder(14, 12, 14, 12)
+                ));
+            }
+            @Override public void mouseExited(MouseEvent e) {
+                card.setBackground(new Color(18, 12, 8));
+                card.setBorder(BorderFactory.createCompoundBorder(
+                        new LineBorder(new Color(50, 35, 15), 1),
+                        BorderFactory.createEmptyBorder(14, 12, 14, 12)
+                ));
+            }
+            @Override public void mouseClicked(MouseEvent e) {
+                if (!campoSenha.isVisible()) {
+                    campoSenha.setVisible(true);
+                    lblSenha.setText("Digite a senha:");
+                    card.revalidate();
+                    campoSenha.requestFocusInWindow();
+                }
+            }
+        });
+
+        campoSenha.addActionListener(e -> {
+            String senha = new String(campoSenha.getPassword());
+            campoSenha.setText("");
+
+            Adm adm = Adm.tentarCriar(senha);
+            if (adm != null) {
+                dialogo.dispose();
+                dispose();
+                new TelaPrincipal(adm);
+            } else {
+                lblErro.setText("❌ Senha incorreta");
+                Timer timer = new Timer(2000, ev -> lblErro.setText(" "));
+                timer.setRepeats(false);
+                timer.start();
+                campoSenha.setVisible(false);
+                lblSenha.setText("Acesso restrito");
+                card.revalidate();
+            }
+        });
+
+        return card;
+    }
+
+    // ── Card de classe normal ─────────────────────────────────────────────
     private JPanel criarCardClasse(ClasseInfo info, JDialog dialogo) {
         JPanel card = new JPanel();
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
@@ -191,7 +264,6 @@ public class MenuPrincipal extends JFrame {
         card.add(desc);
         card.add(Box.createVerticalGlue());
 
-        // Hover
         card.addMouseListener(new MouseAdapter() {
             @Override public void mouseEntered(MouseEvent e) {
                 card.setBackground(new Color(40, 26, 16));
@@ -247,7 +319,7 @@ public class MenuPrincipal extends JFrame {
         JOptionPane.showMessageDialog(this, msg, titulo, JOptionPane.WARNING_MESSAGE);
     }
 
-    // ── Classe interna de dados ────────────────────────────────────────────
+    // ── Classe interna de dados ───────────────────────────────────────────
     private static class ClasseInfo {
         final String nome;
         final String icone;
@@ -257,11 +329,11 @@ public class MenuPrincipal extends JFrame {
 
         ClasseInfo(String nome, String icone, String descricao, Color cor,
                    java.util.function.Supplier<Personagem> fabricar) {
-            this.nome     = nome;
-            this.icone    = icone;
+            this.nome      = nome;
+            this.icone     = icone;
             this.descricao = descricao;
-            this.cor      = cor;
-            this.fabricar = fabricar;
+            this.cor       = cor;
+            this.fabricar  = fabricar;
         }
     }
 }

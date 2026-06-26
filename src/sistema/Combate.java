@@ -3,6 +3,7 @@ package sistema;
 import inimigos.BossFinal;
 import inimigos.Inimigo;
 import itens.Item;
+import personagens.Adm;
 import personagens.Personagem;
 import save.SaveManager;
 
@@ -16,13 +17,11 @@ public class Combate {
         this.sc = sc;
     }
 
-    // Limpa o terminal
     private static void limparTela() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    // Leitura segura de inteiro
     private int lerInt() {
         while (true) {
             try {
@@ -36,7 +35,7 @@ public class Combate {
         }
     }
 
-    // Barra de HP com cor dinâmica: verde > amarelo > vermelho
+    // Barra normal com cor dinâmica
     public static String criarBarra(int atual, int maximo) {
         int tamanho = 20;
         int preenchido = (maximo > 0) ? (atual * tamanho) / maximo : 0;
@@ -58,6 +57,11 @@ public class Combate {
         barra.append("]");
 
         return cor + barra + "\u001B[0m";
+    }
+
+    // Barra infinita para o Adm (roxa + símbolo ∞)
+    private static String criarBarraInfinita() {
+        return "\u001B[35m[████████████████████]\u001B[0m ∞";
     }
 
     public boolean iniciar(Personagem jogador, Inimigo inimigo) {
@@ -90,12 +94,19 @@ public class Combate {
         System.out.println("\n════════════════════════════");
 
         System.out.println("👤 " + jogador.getNome());
-        System.out.printf("  HP   %s %d/%d%n",
-                criarBarra(jogador.getVida(), jogador.getVidaMax()),
-                jogador.getVida(), jogador.getVidaMax());
-        System.out.printf("  Mana %s %d/%d%n",
-                criarBarra(jogador.getMana(), jogador.getManaMax()),
-                jogador.getMana(), jogador.getManaMax());
+
+        if (jogador instanceof Adm) {
+            // Adm: barras infinitas em roxo
+            System.out.println("  HP   " + criarBarraInfinita());
+            System.out.println("  Mana " + criarBarraInfinita());
+        } else {
+            System.out.printf("  HP   %s %d/%d%n",
+                    criarBarra(jogador.getVida(), jogador.getVidaMax()),
+                    jogador.getVida(), jogador.getVidaMax());
+            System.out.printf("  Mana %s %d/%d%n",
+                    criarBarra(jogador.getMana(), jogador.getManaMax()),
+                    jogador.getMana(), jogador.getManaMax());
+        }
 
         System.out.println();
 
@@ -107,7 +118,6 @@ public class Combate {
         System.out.println("════════════════════════════");
     }
 
-    // Retorna true se o jogador fugiu
     private boolean turnoJogador(Personagem jogador, Inimigo inimigo) {
         System.out.println("\n⚔️  SEU TURNO:");
         System.out.println("  1 - Atacar");
@@ -119,19 +129,11 @@ public class Combate {
         int opcao = lerInt();
 
         switch (opcao) {
-            case 1:
-                jogador.atacar(inimigo);
-                break;
-            case 2:
-                jogador.usarHab(inimigo);
-                break;
-            case 3:
-                abrirInventario(jogador);
-                break;
-            case 4:
-                return true; // fugiu
-            default:
-                System.out.println("Opção inválida. Turno perdido!");
+            case 1: jogador.atacar(inimigo);    break;
+            case 2: jogador.usarHab(inimigo);   break;
+            case 3: abrirInventario(jogador);   break;
+            case 4: return true;
+            default: System.out.println("Opção inválida. Turno perdido!");
         }
 
         return false;
@@ -213,11 +215,9 @@ public class Combate {
         System.out.print("Escolha um item: ");
 
         int escolha = lerInt() - 1;
-
         if (escolha == -1) return;
 
         Item item = jogador.getInventario().getItem(escolha);
-
         if (item != null) {
             item.usar(jogador);
             jogador.getInventario().removerItem(escolha);
