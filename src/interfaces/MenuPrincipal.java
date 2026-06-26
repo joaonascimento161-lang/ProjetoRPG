@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import personagens.*;
 import personagens.Adm;
+import personagens.Deus;
+import sistema.GameData;
 import save.SaveManager;
 
 public class MenuPrincipal extends JFrame {
@@ -111,7 +113,7 @@ public class MenuPrincipal extends JFrame {
         header.add(textos, BorderLayout.WEST);
         fundo.add(header, BorderLayout.NORTH);
 
-        JPanel grid = new JPanel(new GridLayout(2, 4, 12, 12));
+        JPanel grid = new JPanel(new GridLayout(3, 3, 12, 12));
         grid.setBackground(new Color(15, 10, 6));
         grid.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -129,11 +131,108 @@ public class MenuPrincipal extends JFrame {
             grid.add(criarCardClasse(c, dialogo));
         }
 
+        grid.add(criarCardDeus(dialogo));
         grid.add(criarCardAdm(dialogo));
 
         fundo.add(grid, BorderLayout.CENTER);
         dialogo.setContentPane(fundo);
         dialogo.setVisible(true);
+    }
+
+    // ── Card Deus (bloqueado até vencer o boss final) ─────────────────────
+    private JPanel criarCardDeus(JDialog dialogo) {
+        boolean desbloqueada = GameData.isDeusDesbloqueado();
+
+        JPanel card = new JPanel();
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setCursor(new Cursor(desbloqueada ? Cursor.HAND_CURSOR : Cursor.DEFAULT_CURSOR));
+
+        if (desbloqueada) {
+            // Card dourado — classe disponível
+            Color cor = new Color(180, 140, 20);
+            card.setBackground(new Color(28, 22, 5));
+            card.setBorder(BorderFactory.createCompoundBorder(
+                    new LineBorder(cor.darker(), 1),
+                    BorderFactory.createEmptyBorder(14, 12, 14, 12)
+            ));
+
+            JLabel icone = new JLabel("✨");
+            icone.setFont(new Font("Serif", Font.PLAIN, 28));
+            icone.setAlignmentX(CENTER_ALIGNMENT);
+
+            JLabel nome = new JLabel("Deus");
+            nome.setFont(new Font("Serif", Font.BOLD, 14));
+            nome.setForeground(new Color(240, 210, 80));
+            nome.setAlignmentX(CENTER_ALIGNMENT);
+
+            JLabel desc = new JLabel("<html><center>Poder divino e habilidades únicas</center></html>");
+            desc.setFont(new Font("SansSerif", Font.PLAIN, 11));
+            desc.setForeground(new Color(190, 165, 80));
+            desc.setAlignmentX(CENTER_ALIGNMENT);
+
+            card.add(Box.createVerticalGlue());
+            card.add(icone);
+            card.add(Box.createVerticalStrut(6));
+            card.add(nome);
+            card.add(Box.createVerticalStrut(4));
+            card.add(desc);
+            card.add(Box.createVerticalGlue());
+
+            card.addMouseListener(new MouseAdapter() {
+                @Override public void mouseEntered(MouseEvent e) {
+                    card.setBackground(new Color(40, 32, 8));
+                    card.setBorder(BorderFactory.createCompoundBorder(
+                            new LineBorder(cor, 1),
+                            BorderFactory.createEmptyBorder(14, 12, 14, 12)
+                    ));
+                }
+                @Override public void mouseExited(MouseEvent e) {
+                    card.setBackground(new Color(28, 22, 5));
+                    card.setBorder(BorderFactory.createCompoundBorder(
+                            new LineBorder(cor.darker(), 1),
+                            BorderFactory.createEmptyBorder(14, 12, 14, 12)
+                    ));
+                }
+                @Override public void mouseClicked(MouseEvent e) {
+                    dialogo.dispose();
+                    dispose();
+                    new TelaPrincipal(new Deus());
+                }
+            });
+
+        } else {
+            // Card bloqueado — escuro, sem interação
+            card.setBackground(new Color(18, 15, 5));
+            card.setBorder(BorderFactory.createCompoundBorder(
+                    new LineBorder(new Color(55, 45, 10), 1),
+                    BorderFactory.createEmptyBorder(14, 12, 14, 12)
+            ));
+
+            JLabel icone = new JLabel("⭐");
+            icone.setFont(new Font("Serif", Font.PLAIN, 26));
+            icone.setForeground(new Color(70, 60, 15));
+            icone.setAlignmentX(CENTER_ALIGNMENT);
+
+            JLabel lblNome = new JLabel("???");
+            lblNome.setFont(new Font("Serif", Font.BOLD, 14));
+            lblNome.setForeground(new Color(80, 65, 20));
+            lblNome.setAlignmentX(CENTER_ALIGNMENT);
+
+            JLabel lblDica = new JLabel("<html><center>Derrote o Boss Final para desbloquear</center></html>");
+            lblDica.setFont(new Font("SansSerif", Font.ITALIC, 10));
+            lblDica.setForeground(new Color(70, 58, 18));
+            lblDica.setAlignmentX(CENTER_ALIGNMENT);
+
+            card.add(Box.createVerticalGlue());
+            card.add(icone);
+            card.add(Box.createVerticalStrut(6));
+            card.add(lblNome);
+            card.add(Box.createVerticalStrut(4));
+            card.add(lblDica);
+            card.add(Box.createVerticalGlue());
+        }
+
+        return card;
     }
 
     // ── Card ADM com campo de senha ───────────────────────────────────────
