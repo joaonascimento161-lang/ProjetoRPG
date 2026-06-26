@@ -36,6 +36,6 @@ public class PedroNeves extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Livro Sagrado", 35); // drop garantido 📖
+        return new Armadura("Livro Sagrado", 35);
     }
 }

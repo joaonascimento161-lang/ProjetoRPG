@@ -254,7 +254,7 @@ public class MainTerminal {
         System.out.print("Escolha um item: ");
         int escolha = lerInt() - 1;
 
-        if (escolha == -1) return; // cancelou
+        if (escolha == -1) return;
 
         Item item = jogador.getInventario().getItem(escolha);
 

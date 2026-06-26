@@ -35,6 +35,6 @@ public class ReiGoblin extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Armadura do Rei Goblin", 35); // drop garantido 👑
+        return new Armadura("Armadura do Rei Goblin", 35);
     }
 }

@@ -9,8 +9,6 @@ public class ItemFactory {
             case "Poção de Vida": return new PocaoVida();
             case "Poção de Mana": return new PocaoMana();
             default:
-                // Delega armas e armaduras para o EquipamentoFactory
-                // evita duplicação e garante valores consistentes
                 Item arma = EquipamentoFactory.criarArma(nome);
                 if (arma != null) return arma;
 

@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class EquipamentoFactory {
 
-    // LinkedHashMap mantém a ordem de inserção (útil para listar na loja)
     private static final Map<String, Arma> ARMAS = new LinkedHashMap<>();
     private static final Map<String, Armadura> ARMADURAS = new LinkedHashMap<>();
 

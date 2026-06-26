@@ -14,7 +14,6 @@ public class Arma extends Equipamento {
     @Override
     public void usar(Personagem jogador) {
         jogador.equiparArma(this);
-        // mensagem já é exibida dentro de equiparArma()
     }
 
     public int getBonusDano() {

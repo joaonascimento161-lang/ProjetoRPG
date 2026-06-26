@@ -7,9 +7,9 @@ import personagens.Personagem;
 
 public class Orc extends Inimigo {
 
-    private static final int VIDA_ALVO_CRITICA = 30; // ataca forte quando jogador está baixo
+    private static final int VIDA_ALVO_CRITICA = 30;
     private static final int DANO_HAB          = 30;
-    private static final int CHANCE_DROP       = 20; // %
+    private static final int CHANCE_DROP       = 20;
 
     private Random random = new Random();
 

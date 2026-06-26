@@ -7,26 +7,27 @@ import java.awt.*;
 
 public class TelaStatus extends JFrame {
 
-    private static final Color COR_FUNDO_CARD  = new Color(28, 18, 12, 220);
-    private static final Color COR_BORDA       = new Color(110, 70, 25);
-    private static final Color COR_TITULO      = new Color(244, 228, 188);
-    private static final Color COR_LABEL       = new Color(180, 150, 100);
-    private static final Color COR_VALOR       = new Color(220, 205, 175);
-    private static final Color COR_OURO        = new Color(218, 165, 32);
-    private static final Color COR_VIDA        = new Color(160, 40, 40);
-    private static final Color COR_MANA        = new Color(40, 80, 160);
-    private static final Font  FONTE_TITULO    = new Font("Serif", Font.BOLD, 20);
-    private static final Font  FONTE_SECAO     = new Font("Serif", Font.BOLD, 13);
-    private static final Font  FONTE_LABEL     = new Font("Georgia", Font.BOLD, 13);
-    private static final Font  FONTE_VALOR     = new Font("Georgia", Font.PLAIN, 13);
+    private static final Color COR_FUNDO_CARD = new Color(20, 12, 6, 170);   // escuro mas transparente
+    private static final Color COR_TITULO     = new Color(255, 245, 210);    // branco quente
+    private static final Color COR_SECAO      = new Color(255, 210, 80);     // dourado vivo
+    private static final Color COR_LABEL      = new Color(220, 200, 160);    // bege claro
+    private static final Color COR_VALOR      = new Color(255, 250, 230);    // quase branco
+    private static final Color COR_OURO       = new Color(255, 200, 40);
+    private static final Color COR_BORDA      = new Color(160, 100, 30);
+    private static final Color COR_VIDA       = new Color(180, 40, 40);
+    private static final Color COR_MANA       = new Color(40, 100, 200);
+    private static final Font  FONTE_TITULO   = new Font("Serif", Font.BOLD, 20);
+    private static final Font  FONTE_SECAO    = new Font("Serif", Font.BOLD, 13);
+    private static final Font  FONTE_LABEL    = new Font("Georgia", Font.BOLD, 13);
+    private static final Font  FONTE_VALOR    = new Font("Georgia", Font.PLAIN, 13);
 
     public TelaStatus(Personagem jogador) {
         setTitle("Status — " + jogador.getNome());
-        setSize(560, 460);
+        setSize(680, 520);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        PainelComFundo fundo = new PainelComFundo("src/image/FundoStatus.jpg");
+        PainelComFundo fundo = new PainelComFundo("src/image/madeira.jpg");
         fundo.setLayout(new BorderLayout(0, 12));
         fundo.setBorder(BorderFactory.createEmptyBorder(18, 20, 18, 20));
 
@@ -38,13 +39,12 @@ public class TelaStatus extends JFrame {
         setVisible(true);
     }
 
-    // ── Cabeçalho ─────────────────────────────────────────────────────────
     private JPanel criarHeader(Personagem jogador) {
         JPanel header = new JPanel(new BorderLayout());
-        header.setBackground(new Color(28, 18, 10, 210));
+        header.setBackground(COR_FUNDO_CARD);
         header.setBorder(BorderFactory.createCompoundBorder(
                 new LineBorder(COR_BORDA, 1),
-                BorderFactory.createEmptyBorder(14, 18, 14, 18)
+                BorderFactory.createEmptyBorder(12, 18, 12, 18)
         ));
 
         JLabel titulo = new JLabel("📊  STATUS DO PERSONAGEM");
@@ -66,14 +66,11 @@ public class TelaStatus extends JFrame {
         return header;
     }
 
-    // ── Corpo: duas colunas ────────────────────────────────────────────────
     private JPanel criarCorpo(Personagem jogador) {
         JPanel corpo = new JPanel(new GridLayout(1, 2, 14, 0));
         corpo.setOpaque(false);
-
         corpo.add(criarCardAtributos(jogador));
         corpo.add(criarCardEquipamentos(jogador));
-
         return corpo;
     }
 
@@ -92,22 +89,20 @@ public class TelaStatus extends JFrame {
         adicionarLinha(card, "XP",        String.valueOf(jogador.getXp()));
         adicionarLinha(card, "Dano base", String.valueOf(jogador.getDano()));
 
+        JPanel linhaOuro = new JPanel(new BorderLayout());
+        linhaOuro.setOpaque(false);
+        linhaOuro.setMaximumSize(new Dimension(Integer.MAX_VALUE, 26));
         JLabel lblOuro = new JLabel("Ouro");
         lblOuro.setFont(FONTE_LABEL);
         lblOuro.setForeground(COR_LABEL);
         JLabel valOuro = new JLabel(jogador.getOuro() + " 💰");
         valOuro.setFont(new Font("Georgia", Font.BOLD, 13));
         valOuro.setForeground(COR_OURO);
-
-        JPanel linhaOuro = new JPanel(new BorderLayout());
-        linhaOuro.setOpaque(false);
-        linhaOuro.setMaximumSize(new Dimension(Integer.MAX_VALUE, 26));
         linhaOuro.add(lblOuro, BorderLayout.WEST);
         linhaOuro.add(valOuro, BorderLayout.EAST);
         card.add(linhaOuro);
         card.add(Box.createVerticalStrut(16));
 
-        // Barras de vida e mana
         adicionarSecao(card, "❤  VITALIDADE");
         card.add(criarBarraLabel("Vida", jogador.getVida(), jogador.getVidaMax(), COR_VIDA));
         card.add(Box.createVerticalStrut(8));
@@ -128,28 +123,25 @@ public class TelaStatus extends JFrame {
 
         adicionarSecao(card, "🛡  EQUIPAMENTOS");
 
-        String nomeArma = (jogador.getArmaEquipada() != null)
-                ? jogador.getArmaEquipada().getNome() : "Nenhuma";
-        String nomeArmadura = (jogador.getArmaduraEquipada() != null)
-                ? jogador.getArmaduraEquipada().getNome() : "Nenhuma";
+        String nomeArma     = (jogador.getArmaEquipada()     != null) ? jogador.getArmaEquipada().getNome()     : "Nenhuma";
+        String nomeArmadura = (jogador.getArmaduraEquipada() != null) ? jogador.getArmaduraEquipada().getNome() : "Nenhuma";
 
-        adicionarEquipamento(card, "⚔  Arma equipada", nomeArma,
-                jogador.getArmaEquipada() != null);
-        adicionarEquipamento(card, "🛡  Armadura equipada", nomeArmadura,
-                jogador.getArmaduraEquipada() != null);
+        adicionarEquipamento(card, "⚔  Arma equipada",     nomeArma,     jogador.getArmaEquipada()     != null);
+        adicionarEquipamento(card, "🛡  Armadura equipada", nomeArmadura, jogador.getArmaduraEquipada() != null);
 
         card.add(Box.createVerticalStrut(16));
         adicionarSecao(card, "📜  RESUMO");
 
         JTextArea resumo = new JTextArea(resumoPersonagem(jogador));
+        resumo.setAlignmentX(CENTER_ALIGNMENT);
         resumo.setEditable(false);
         resumo.setLineWrap(true);
         resumo.setWrapStyleWord(true);
         resumo.setFont(new Font("Georgia", Font.ITALIC, 12));
-        resumo.setForeground(new Color(160, 135, 100));
-        resumo.setBackground(new Color(20, 13, 8, 180));
+        resumo.setForeground(COR_VALOR);
+        resumo.setBackground(new Color(15, 10, 5, 150));
         resumo.setBorder(BorderFactory.createCompoundBorder(
-                new LineBorder(new Color(70, 50, 20), 1),
+                new LineBorder(COR_BORDA, 1),
                 BorderFactory.createEmptyBorder(8, 10, 8, 10)
         ));
         resumo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
@@ -169,7 +161,7 @@ public class TelaStatus extends JFrame {
         btn.setFocusPainted(false);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setBorder(BorderFactory.createCompoundBorder(
-                new LineBorder(new Color(120, 80, 30), 1),
+                new LineBorder(COR_BORDA, 1),
                 BorderFactory.createEmptyBorder(8, 28, 8, 28)
         ));
         btn.addActionListener(e -> dispose());
@@ -177,16 +169,15 @@ public class TelaStatus extends JFrame {
         return p;
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────
     private void adicionarSecao(JPanel painel, String texto) {
         JLabel label = new JLabel(texto);
         label.setFont(FONTE_SECAO);
-        label.setForeground(new Color(200, 160, 80));
+        label.setForeground(COR_SECAO);
         label.setMaximumSize(new Dimension(Integer.MAX_VALUE, 22));
         painel.add(label);
 
         JSeparator sep = new JSeparator();
-        sep.setForeground(new Color(90, 60, 25));
+        sep.setForeground(COR_BORDA);
         sep.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
         painel.add(sep);
         painel.add(Box.createVerticalStrut(8));
@@ -214,9 +205,9 @@ public class TelaStatus extends JFrame {
     private void adicionarEquipamento(JPanel painel, String label, String valor, boolean equipado) {
         JPanel bloco = new JPanel();
         bloco.setLayout(new BoxLayout(bloco, BoxLayout.Y_AXIS));
-        bloco.setBackground(equipado ? new Color(35, 25, 12, 180) : new Color(22, 15, 8, 120));
+        bloco.setBackground(new Color(15, 10, 5, 140));
         bloco.setBorder(BorderFactory.createCompoundBorder(
-                new LineBorder(equipado ? new Color(100, 75, 25) : new Color(55, 40, 18), 1),
+                new LineBorder(equipado ? COR_BORDA : new Color(100, 70, 25), 1),
                 BorderFactory.createEmptyBorder(8, 10, 8, 10)
         ));
         bloco.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
@@ -224,10 +215,12 @@ public class TelaStatus extends JFrame {
         JLabel lblLabel = new JLabel(label);
         lblLabel.setFont(new Font("Georgia", Font.BOLD, 11));
         lblLabel.setForeground(COR_LABEL);
+        lblLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         JLabel lblValor = new JLabel(valor);
         lblValor.setFont(new Font("Georgia", Font.PLAIN, 13));
-        lblValor.setForeground(equipado ? COR_TITULO : new Color(100, 80, 50));
+        lblValor.setForeground(equipado ? COR_TITULO : new Color(180, 150, 100));
+        lblValor.setAlignmentX(CENTER_ALIGNMENT);
 
         bloco.add(lblLabel);
         bloco.add(Box.createVerticalStrut(3));
@@ -252,7 +245,7 @@ public class TelaStatus extends JFrame {
         barra.setStringPainted(true);
         barra.setFont(new Font("SansSerif", Font.BOLD, 11));
         barra.setForeground(cor);
-        barra.setBackground(new Color(210, 190, 160));
+        barra.setBackground(new Color(40, 25, 10));
 
         p.add(lbl, BorderLayout.NORTH);
         p.add(barra, BorderLayout.CENTER);
@@ -260,11 +253,9 @@ public class TelaStatus extends JFrame {
     }
 
     private String resumoPersonagem(Personagem jogador) {
-        int pctVida = (jogador.getVidaMax() > 0)
-                ? (jogador.getVida() * 100 / jogador.getVidaMax()) : 0;
-
-        if (pctVida > 75) return jogador.getNome() + " está em ótima forma, pronto para batalha.";
-        if (pctVida > 40) return jogador.getNome() + " tem ferimentos leves. Considere usar uma poção antes do próximo combate.";
-        return "⚠  " + jogador.getNome() + " está em estado crítico! Use poções ou descanse antes de combater.";
+        int pct = (jogador.getVidaMax() > 0) ? (jogador.getVida() * 100 / jogador.getVidaMax()) : 0;
+        if (pct > 75) return jogador.getNome() + " está em ótima forma, pronto para batalha.";
+        if (pct > 40) return jogador.getNome() + " tem ferimentos leves. Use uma poção antes do próximo combate.";
+        return "⚠  " + jogador.getNome() + " está em estado crítico! Use poções antes de combater.";
     }
 }

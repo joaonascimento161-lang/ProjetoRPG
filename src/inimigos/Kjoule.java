@@ -35,6 +35,6 @@ public class Kjoule extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Arma("Cabo Óptico", 300); // drop garantido ⚡
+        return new Arma("Cabo Óptico", 300);
     }
 }

@@ -26,7 +26,7 @@ public class TelaLoja extends JFrame {
 
     public TelaLoja(Personagem jogador) {
         setTitle("Loja");
-        setSize(560, 500);
+        setSize(680, 580);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -150,7 +150,7 @@ public class TelaLoja extends JFrame {
         return card;
     }
 
-    // ── Feedback visual inline (sem JOptionPane) ──────────────────────────
+    // ── Feedback visual inline ──────────────────────────
     private void mostrarFeedback(JPanel card, String msg, Color cor) {
         JLabel feedback = new JLabel(msg);
         feedback.setFont(new Font("Serif", Font.BOLD, 12));

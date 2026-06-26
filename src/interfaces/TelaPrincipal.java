@@ -75,12 +75,12 @@ public class TelaPrincipal extends JFrame {
         JProgressBar barraVida = isAdm
                 ? criarBarraInfinita(new Color(200, 50, 50))
                 : criarBarra(jogador.getVida(), jogador.getVidaMax(), COR_VIDA,
-                "HP: " + jogador.getVida() + " / " + jogador.getVidaMax());
+                "❤  " + jogador.getVida() + " / " + jogador.getVidaMax());
 
         JProgressBar barraMana = isAdm
                 ? criarBarraInfinita(new Color(150, 0, 200))
                 : criarBarra(jogador.getMana(), jogador.getManaMax(), COR_MANA,
-                "MP: " + jogador.getMana() + " / " + jogador.getManaMax());
+                "✦  " + jogador.getMana() + " / " + jogador.getManaMax());
 
         JLabel lblOuro = new JLabel("💰  " + jogador.getOuro() + " ouro");
         lblOuro.setFont(new Font("Serif", Font.BOLD, 15));
@@ -100,9 +100,12 @@ public class TelaPrincipal extends JFrame {
     }
 
     private JPanel criarPainelAreas() {
-        JPanel painel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        JPanel painel = new JPanel(new GridLayout(2, 4, 8, 8));
         painel.setBackground(new Color(30, 20, 15, 180));
-        painel.setBorder(new LineBorder(new Color(100, 55, 20), 1));
+        painel.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(100, 55, 20), 1),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+        ));
 
         List<AreaCaca> areas = List.of(
                 new AreaCaca("🌲 Floresta",     1,  new Color(34, 139, 34),   Color.WHITE,     () -> new Goblin(),     "src/image/FundoFloresta.jpg"),
@@ -111,7 +114,7 @@ public class TelaPrincipal extends JFrame {
                 new AreaCaca("🌋 Vulcão",       10, new Color(205, 0, 0),     Color.WHITE,     () -> new Phoenix(),    "src/image/FundoVulcao.jpg"),
                 new AreaCaca("🏔 Alpes Suíços", 15, new Color(70, 130, 180),  Color.WHITE,     () -> new PedroNeves(), "src/image/FundoAlpes.jpg"),
                 new AreaCaca("🕴 Mansão Mafia", 20, new Color(102, 51, 0),    Color.WHITE,     () -> new GodFather(),  "src/image/FundoMafia.jpg"),
-                new AreaCaca("⚡ Mar Elétrico", 35, new Color(180, 160, 0),   Color.DARK_GRAY, () -> new Kjoule(),     "src/image/Gemini_Generated_Image_w0uvyow0uvyow0uv.png")
+                new AreaCaca("⚡ Mar Elétrico", 35, new Color(180, 160, 0),   Color.DARK_GRAY, () -> new Kjoule(),     "src/image/FundoKjoule.png")
         );
 
         for (AreaCaca area : areas) {

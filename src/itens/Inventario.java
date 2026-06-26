@@ -45,7 +45,6 @@ public class Inventario {
     public boolean estaVazio()  { return itens.isEmpty(); }
     public int tamanho()        { return itens.size(); }
 
-    // Retorna lista imutável — evita modificação externa acidental
     public List<Item> getItens() {
         return Collections.unmodifiableList(itens);
     }

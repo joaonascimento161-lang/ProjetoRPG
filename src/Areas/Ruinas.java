@@ -5,7 +5,7 @@ import inimigos.*;
 
 public class Ruinas extends Area {
 
-    private static final int CHANCE_ESQUELETO_GIGANTE = 15; // %
+    private static final int CHANCE_ESQUELETO_GIGANTE = 15;
 
     private Random random = new Random();
 

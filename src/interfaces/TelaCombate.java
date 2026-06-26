@@ -98,46 +98,35 @@ public class TelaCombate extends JFrame {
         lblNome.setForeground(COR_TEXTO_TITULO);
         lblNome.setAlignmentX(CENTER_ALIGNMENT);
 
-        // Barra de vida
-        JProgressBar bVida = (isJogador && entidade instanceof Adm)
+        boolean isAdm = isJogador && entidade instanceof Adm;
+
+        // Barra de vida com símbolo ❤ no texto
+        JProgressBar bVida = isAdm
                 ? criarBarraInfinita(new Color(200, 50, 50))
                 : criarBarra(vida, vidaMax, isJogador ? COR_VIDA : COR_VIDA_INIMIGO);
-        bVida.setString((isJogador && entidade instanceof Adm) ? null : "HP  " + vida + " / " + vidaMax);
-
-        // Label de vida com valor grande
-        JLabel lblVida = new JLabel("❤  " + vida + " / " + vidaMax);
-        lblVida.setFont(new Font("Serif", Font.PLAIN, 12));
-        lblVida.setForeground(COR_TEXTO_SECUNDARIO);
-        lblVida.setAlignmentX(CENTER_ALIGNMENT);
+        if (!isAdm)
+            bVida.setString("❤  " + vida + " / " + vidaMax);
 
         card.add(lblNome);
         card.add(Box.createVerticalStrut(8));
         card.add(bVida);
-        card.add(Box.createVerticalStrut(3));
-        card.add(lblVida);
 
         if (isJogador) {
-            JProgressBar bMana = (entidade instanceof Adm)
+            JProgressBar bMana = isAdm
                     ? criarBarraInfinita(new Color(150, 0, 200))
                     : criarBarra(mana, manaMax, COR_MANA);
-            bMana.setString((entidade instanceof Adm) ? null : "MP  " + mana + " / " + manaMax);
-
-            JLabel lblMana = new JLabel("✦  " + mana + " / " + manaMax);
-            lblMana.setFont(new Font("Serif", Font.PLAIN, 12));
-            lblMana.setForeground(COR_TEXTO_SECUNDARIO);
-            lblMana.setAlignmentX(CENTER_ALIGNMENT);
+            if (!isAdm)
+                bMana.setString("✦  " + mana + " / " + manaMax);
 
             card.add(Box.createVerticalStrut(6));
             card.add(bMana);
-            card.add(Box.createVerticalStrut(3));
-            card.add(lblMana);
 
             barraVidaJogador = bVida;
             barraMana        = bMana;
-            lblVidaJogador   = lblVida;
+            lblVidaJogador   = null;
         } else {
             barraVidaInimigo = bVida;
-            lblVidaInimigo   = lblVida;
+            lblVidaInimigo   = null;
         }
 
         return card;
@@ -318,20 +307,19 @@ public class TelaCombate extends JFrame {
 
     // ── Lógica ────────────────────────────────────────────────────────────
     private void atualizarBarras(Personagem jogador, Inimigo inimigo) {
-        barraVidaJogador.setValue(jogador.getVida());
-        barraVidaJogador.setString("HP  " + jogador.getVida() + " / " + jogador.getVidaMax());
-        lblVidaJogador.setText("❤  " + jogador.getVida() + " / " + jogador.getVidaMax());
+        boolean isAdm = jogador instanceof Adm;
 
-        barraMana.setValue(jogador.getMana());
-        barraMana.setString("MP  " + jogador.getMana() + " / " + jogador.getManaMax());
+        if (!isAdm) {
+            barraVidaJogador.setValue(jogador.getVida());
+            barraVidaJogador.setString("❤  " + jogador.getVida() + " / " + jogador.getVidaMax());
+            barraMana.setValue(jogador.getMana());
+            barraMana.setString("✦  " + jogador.getMana() + " / " + jogador.getManaMax());
+            double pct = (double) jogador.getVida() / jogador.getVidaMax();
+            barraVidaJogador.setForeground(pct < 0.25 ? new Color(220, 50, 50) : COR_VIDA);
+        }
 
         barraVidaInimigo.setValue(inimigo.getVida());
-        barraVidaInimigo.setString("HP  " + inimigo.getVida() + " / " + inimigo.getVidaMax());
-        lblVidaInimigo.setText("❤  " + inimigo.getVida() + " / " + inimigo.getVidaMax());
-
-        // Barra de vida vermelha quando crítico (< 25%)
-        double pctJogador = (double) jogador.getVida() / jogador.getVidaMax();
-        barraVidaJogador.setForeground(pctJogador < 0.25 ? new Color(220, 50, 50) : COR_VIDA);
+        barraVidaInimigo.setString("❤  " + inimigo.getVida() + " / " + inimigo.getVidaMax());
     }
 
     private void verificarFimDeCombate(Personagem jogador, Inimigo inimigo) {

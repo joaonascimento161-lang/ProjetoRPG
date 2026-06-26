@@ -2,44 +2,35 @@ package interfaces;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class PainelComFundo extends JPanel {
 
     private Image imagem;
 
     public PainelComFundo(String caminhoImagem) {
+        String caminho = caminhoImagem
+                .replace("src/", "")
+                .replace("\\", "/");
 
-        imagem = new ImageIcon(caminhoImagem).getImage();
+        if (!caminho.startsWith("/")) {
+            caminho = "/" + caminho;
+        }
+
+        URL url = getClass().getResource(caminho);
+
+        if (url != null) {
+            imagem = new ImageIcon(url).getImage();
+        } else {
+            imagem = new ImageIcon(caminhoImagem).getImage();
+        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-
         super.paintComponent(g);
-
-        g.drawImage(
-            imagem,
-            0,
-            0,
-            getWidth(),
-            getHeight(),
-            this
-        );
-
-        g.setColor(
-            new Color(
-                0,
-                0,
-                0,
-                0
-            )
-        );
-
-        g.fillRect(
-            0,
-            0,
-            getWidth(),
-            getHeight()
-        );
+        if (imagem != null) {
+            g.drawImage(imagem, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 }

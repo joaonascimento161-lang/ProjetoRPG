@@ -5,7 +5,7 @@ import inimigos.*;
 
 public class Floresta extends Area {
 
-    private static final int CHANCE_REI_GOBLIN = 15; // %
+    private static final int CHANCE_REI_GOBLIN = 15;
 
     private Random random = new Random();
 

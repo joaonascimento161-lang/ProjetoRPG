@@ -6,9 +6,9 @@ import itens.*;
 
 public class MagoSombrio extends Inimigo {
 
-    private static final int CHANCE_HAB  = 70; // %
+    private static final int CHANCE_HAB  = 70;
     private static final int DANO_HAB    = 35;
-    private static final int CHANCE_DROP = 10; // %
+    private static final int CHANCE_DROP = 10;
 
     private Random random = new Random();
 

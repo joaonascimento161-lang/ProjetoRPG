@@ -13,6 +13,5 @@ public class PocaoVida extends Item {
     @Override
     public void usar(Personagem jogador) {
         jogador.curar(CURA);
-        // mensagem já é exibida dentro de curar()
     }
 }

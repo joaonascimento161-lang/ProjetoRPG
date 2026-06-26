@@ -22,8 +22,7 @@ public class Esqueleto extends Inimigo {
         System.out.println("🦴 Golpe Ósseo! Dano: " + DANO_HAB
                 + " | HP do jogador: " + alvo.getVida() + "/" + alvo.getVidaMax());
 
-        // TODO: implementar efeito real de sangramento
-        // ex: causar X de dano por turno pelos próximos N turnos
+        // TODO: implementar efeito de sangramento
         System.out.println("🩸 Sangramento aplicado!");
     }
 

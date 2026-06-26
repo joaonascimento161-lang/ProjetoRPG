@@ -6,9 +6,9 @@ import itens.*;
 
 public class Goblin extends Inimigo {
 
-    private static final int CHANCE_HAB      = 20; // % de usar habilidade
+    private static final int CHANCE_HAB      = 20;
     private static final int DANO_HAB        = 15;
-    private static final int CHANCE_DROP     = 20; // %
+    private static final int CHANCE_DROP     = 20;
 
     private Random random = new Random();
 

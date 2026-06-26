@@ -34,6 +34,6 @@ public class MagoSupremo extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Armadura Suprema", 35); // drop garantido!
+        return new Armadura("Armadura Suprema", 35);
     }
 }

@@ -60,6 +60,6 @@ public class BossFinal extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Arma("Matadora de Dragões", 75); // drop garantido!
+        return new Arma("Matadora de Dragões", 75);
     }
 }

@@ -34,6 +34,6 @@ public class GodFather extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Arma("Pistolão da Máfia", 250); // drop garantido 🔫
+        return new Arma("Pistolão da Máfia", 250);
     }
 }
