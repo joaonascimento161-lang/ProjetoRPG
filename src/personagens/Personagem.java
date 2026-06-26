@@ -92,7 +92,14 @@ public abstract class Personagem {
     }
 
     public void adicionarXP(int valor) {
-        xp += valor;
+        this.xp += valor;
+        int xpNecessario =  this.nivel * 100;
+
+        while (this.xp >= xpNecessario){
+            this.xp -= xpNecessario;
+            subirNivel();
+            xpNecessario = this.nivel * 100;
+        }
     }
 
     public void carregarNivel(int nivel) {

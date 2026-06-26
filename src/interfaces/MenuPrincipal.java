@@ -31,7 +31,7 @@ public class MenuPrincipal extends JFrame {
         PainelComFundo painel = new PainelComFundo("src/image/madeira.jpg");
         painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
 
-        JLabel logo = carregarLogo("src/image/image.png", 400, 250);
+        JLabel logo = carregarLogo("resources/image/Logo.png", 400, 250);
         logo.setAlignmentX(CENTER_ALIGNMENT);
 
         JButton btnNovo      = criarBotao("⚔  NOVO JOGO", COR_BTN_FUNDO);
