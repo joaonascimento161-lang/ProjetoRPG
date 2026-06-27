@@ -6,14 +6,14 @@ import itens.*;
 
 public class MagoSombrio extends Inimigo {
 
-    private static final int CHANCE_HAB  = 70;
-    private static final int DANO_HAB    = 35;
-    private static final int CHANCE_DROP = 10;
+    private static final int CHANCE_HAB  = 60;
+    private static final int DANO_HAB    = 36;
+    private static final int CHANCE_DROP = 15;
 
     private Random random = new Random();
 
     public MagoSombrio() {
-        super("Mago Sombrio", 100, 10, 120, 70);
+        super("Mago Sombrio", 220, 26, 165, 110);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class MagoSombrio extends Inimigo {
     @Override
     public Item gerarDrop() {
         if (random.nextInt(100) < CHANCE_DROP) {
-            return new Armadura("Armadura Encantada", 25);
+            return new Armadura("Manto Sombrio", 22);
         }
         return null;
     }

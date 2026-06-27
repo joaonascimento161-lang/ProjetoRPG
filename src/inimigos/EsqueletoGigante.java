@@ -8,10 +8,11 @@ public class EsqueletoGigante extends Inimigo {
 
     private static final int VIDA_FURIA   = 50;
     private static final int BONUS_FURIA  = 5;
-    private static final int DANO_HAB     = 30;
+    private static final int DANO_HAB     = 28;
 
     public EsqueletoGigante() {
-        super("Esqueleto Gigante", 175, 22, 215, 110);
+        // Inimigo raro das Ruínas — mais forte que o Esqueleto comum
+        super("Esqueleto Gigante", 165, 22, 115, 75);
     }
 
     @Override
@@ -35,6 +36,6 @@ public class EsqueletoGigante extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Arma("Machado Ósseo", 35);
+        return new Arma("Machado Ósseo", 28);
     }
 }

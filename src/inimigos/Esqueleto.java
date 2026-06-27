@@ -6,14 +6,15 @@ import itens.*;
 
 public class Esqueleto extends Inimigo {
 
-    private static final int CHANCE_HAB  = 40; // %
-    private static final int DANO_HAB    = 20;
-    private static final int CHANCE_DROP = 10; // %
+    private static final int CHANCE_HAB  = 40;
+    private static final int DANO_HAB    = 26;
+    private static final int CHANCE_DROP = 15;
 
     private Random random = new Random();
 
     public Esqueleto() {
-        super("Esqueleto", 90, 12, 80, 30);
+        // Inimigo comum das Ruínas — nível 5-7
+        super("Esqueleto", 140, 18, 85, 45);
     }
 
     @Override
@@ -21,8 +22,6 @@ public class Esqueleto extends Inimigo {
         alvo.receberDano(DANO_HAB);
         System.out.println("🦴 Golpe Ósseo! Dano: " + DANO_HAB
                 + " | HP do jogador: " + alvo.getVida() + "/" + alvo.getVidaMax());
-
-        // TODO: implementar efeito de sangramento
         System.out.println("🩸 Sangramento aplicado!");
     }
 

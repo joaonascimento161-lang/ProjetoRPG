@@ -8,6 +8,7 @@ import java.util.List;
 import personagens.Personagem;
 import personagens.Adm;
 import inimigos.*;
+import Areas.*;
 import save.SaveManager;
 
 public class TelaPrincipal extends JFrame {
@@ -108,13 +109,13 @@ public class TelaPrincipal extends JFrame {
         ));
 
         List<AreaCaca> areas = List.of(
-                new AreaCaca("🌲 Floresta",     1,  new Color(34, 139, 34),   Color.WHITE,     () -> new Goblin(),     "src/image/FundoFloresta.jpg"),
-                new AreaCaca("🏚 Ruínas",       3,  new Color(210, 105, 30),  Color.WHITE,     () -> new Esqueleto(),  "src/image/FundoRuinas.jpg"),
-                new AreaCaca("⛰ Caverna",       5,  new Color(105, 105, 105), Color.WHITE,     () -> new Orc(),        "src/image/FundoCaverna.jpg"),
-                new AreaCaca("🌋 Vulcão",       10, new Color(205, 0, 0),     Color.WHITE,     () -> new Phoenix(),    "src/image/FundoVulcao.jpg"),
-                new AreaCaca("🏔 Alpes Suíços", 15, new Color(70, 130, 180),  Color.WHITE,     () -> new PedroNeves(), "src/image/FundoAlpes.jpg"),
-                new AreaCaca("🕴 Mansão Mafia", 20, new Color(102, 51, 0),    Color.WHITE,     () -> new GodFather(),  "src/image/FundoMafia.jpg"),
-                new AreaCaca("⚡ Mar Elétrico", 35, new Color(180, 160, 0),   Color.DARK_GRAY, () -> new Kjoule(),     "src/image/FundoKjoule.png")
+                new AreaCaca("🌲 Floresta",     1,  new Color(34, 139, 34),   Color.WHITE,     () -> new Floresta().generateEnemie(),     "src/image/FundoFloresta.jpg"),
+                new AreaCaca("🏚 Ruínas",       3,  new Color(210, 105, 30),  Color.WHITE,     () -> new Ruinas().generateEnemie(),       "src/image/FundoRuinas.jpg"),
+                new AreaCaca("⛰ Caverna",       5,  new Color(105, 105, 105), Color.WHITE,     () -> new CasteloSombrio().generateEnemie(), "src/image/FundoCaverna.jpg"),
+                new AreaCaca("🌋 Vulcão",       10, new Color(205, 0, 0),     Color.WHITE,     () -> new Vulcao().generateEnemie(),       "src/image/FundoVulcao.jpg"),
+                new AreaCaca("🏔 Alpes Suíços", 15, new Color(70, 130, 180),  Color.WHITE,     () -> new AlpesSuicos().generateEnemie(),  "src/image/FundoAlpes.jpg"),
+                new AreaCaca("🕴 Mansão Mafia", 20, new Color(102, 51, 0),    Color.WHITE,     () -> new MansaoMafia().generateEnemie(),  "src/image/FundoMafia.jpg"),
+                new AreaCaca("⚡ Mar Elétrico", 35, new Color(180, 160, 0),   Color.DARK_GRAY, () -> new MarEletrico().generateEnemie(),  "src/image/Gemini_Generated_Image_w0uvyow0uvyow0uv.png")
         );
 
         for (AreaCaca area : areas) {

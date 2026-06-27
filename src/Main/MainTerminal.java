@@ -13,16 +13,35 @@ import sistema.*;
 public class MainTerminal {
 
     private static Scanner sc = new Scanner(System.in);
-    private static Area areas[] = {new Floresta(), new Caverna(), new Ruinas(), new CasteloSombrio(), new CovilDragao()};
-    private static final int[] NIVEIS_MINIMOS = {1, 3, 5, 8, 10};
+    private static Area areas[] = {
+            new Floresta(),
+            new Caverna(),
+            new Ruinas(),
+            new CasteloSombrio(),
+            new CovilDragao(),
+            new Vulcao(),
+            new AlpesSuicos(),
+            new MansaoMafia(),
+            new MarEletrico()
+    };
+    private static final int[] NIVEIS_MINIMOS = {1, 2, 3, 5, 8, 10, 15, 20, 35};
+    private static final String[] NOMES_AREAS = {
+            "Floresta",
+            "Caverna",
+            "Ruínas",
+            "Castelo Sombrio",
+            "Covil do Dragão",
+            "🌋 Vulcão",
+            "🏔 Alpes Suíços",
+            "🕴 Mansão Mafia",
+            "⚡ Mar Elétrico"
+    };
 
-    // Limpa o terminal de verdade
     private static void limparTela() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    // Leitura segura de inteiro (evita crash com entrada inválida)
     private static int lerInt() {
         while (true) {
             try {
@@ -53,17 +72,10 @@ public class MainTerminal {
             opcao = lerInt();
 
             switch (opcao) {
-                case 1:
-                    novoJogo();
-                    break;
-                case 2:
-                    continuarJogo();
-                    break;
-                case 3:
-                    System.out.println("Até a próxima! 👋");
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
+                case 1: novoJogo();     break;
+                case 2: continuarJogo(); break;
+                case 3: System.out.println("Até a próxima! 👋"); break;
+                default: System.out.println("Opção inválida.");
             }
         } while (opcao != 3);
 
@@ -82,9 +94,7 @@ public class MainTerminal {
             System.out.println("Nenhum save encontrado.");
             return;
         }
-
         Personagem jogador = SaveManager.carregar();
-
         if (jogador != null) {
             System.out.println("✅ Save carregado! Bem-vindo de volta, " + jogador.getNome() + "!");
             menuAreas(jogador);
@@ -93,7 +103,6 @@ public class MainTerminal {
 
     private static Personagem escolherClasse() {
         limparTela();
-
         System.out.println("\n⚔️  Escolha sua classe:");
         System.out.println("1 - Guerreiro");
         System.out.println("2 - Mago");
@@ -142,7 +151,7 @@ public class MainTerminal {
         if (console != null) {
             char[] senhaChar = console.readPassword("🔑 Senha: ");
             senha = new String(senhaChar);
-            java.util.Arrays.fill(senhaChar, ' '); // limpa da memória após uso
+            java.util.Arrays.fill(senhaChar, ' ');
         } else {
             System.out.print("🔑 Senha: ");
             senha = sc.nextLine();
@@ -172,52 +181,43 @@ public class MainTerminal {
     }
 
     private static void menuAreas(Personagem jogador) {
-        String[] nomesAreas = {"Floresta", "Caverna", "Ruínas", "Castelo Sombrio", "Covil do Dragão"};
-
         while (jogador.estaVivo()) {
             limparTela();
-
             System.out.println("\n🗺️  ----- ÁREAS -----");
 
             for (int i = 0; i < areas.length; i++) {
                 if (jogador.getNivel() >= NIVEIS_MINIMOS[i]) {
-                    System.out.println((i + 1) + " - " + nomesAreas[i]);
+                    System.out.println((i + 1) + " - " + NOMES_AREAS[i]);
                 } else {
                     System.out.println((i + 1) + " - 🔒 Bloqueado (Nível " + NIVEIS_MINIMOS[i] + ")");
                 }
             }
 
-            System.out.println("\n6 - 🏪 Loja");
-            System.out.println("7 - 📊 Status");
-            System.out.println("8 - 🎒 Inventário");
+            System.out.println("\n" + (areas.length + 1) + " - 🏪 Loja");
+            System.out.println((areas.length + 2) + " - 📊 Status");
+            System.out.println((areas.length + 3) + " - 🎒 Inventário");
             System.out.println("0 - 💾 Salvar e Sair");
             System.out.print("Escolha: ");
 
             int escolha = lerInt();
             limparTela();
 
-            switch (escolha) {
-                case 0:
-                    SaveManager.salvar(jogador, GameData.isDeusDesbloqueado());
-                    System.out.println("✅ Jogo salvo!");
-                    return;
-                case 6:
-                    new Loja().abrir(jogador, sc);
-                    break;
-                case 7:
-                    jogador.mostrarStatus();
-                    System.out.println("\nPressione Enter para continuar...");
-                    sc.nextLine();
-                    break;
-                case 8:
-                    abrirInventario(jogador);
-                    break;
-                default:
-                    if (escolha >= 1 && escolha <= areas.length) {
-                        iniciarArea(jogador, areas[escolha - 1]);
-                    } else {
-                        System.out.println("Área inválida.");
-                    }
+            if (escolha == 0) {
+                SaveManager.salvar(jogador, GameData.isDeusDesbloqueado());
+                System.out.println("✅ Jogo salvo!");
+                return;
+            } else if (escolha == areas.length + 1) {
+                new Loja().abrir(jogador, sc);
+            } else if (escolha == areas.length + 2) {
+                jogador.mostrarStatus();
+                System.out.println("\nPressione Enter para continuar...");
+                sc.nextLine();
+            } else if (escolha == areas.length + 3) {
+                abrirInventario(jogador);
+            } else if (escolha >= 1 && escolha <= areas.length) {
+                iniciarArea(jogador, areas[escolha - 1]);
+            } else {
+                System.out.println("Área inválida.");
             }
         }
 
@@ -257,7 +257,6 @@ public class MainTerminal {
         if (escolha == -1) return;
 
         Item item = jogador.getInventario().getItem(escolha);
-
         if (item != null) {
             item.usar(jogador);
             jogador.getInventario().removerItem(escolha);

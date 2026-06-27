@@ -5,12 +5,14 @@ import personagens.Personagem;
 
 public class GodFather extends Inimigo {
 
-    private static final int VIDA_MAX    = 6767;
-    private static final int BONUS_FURIA = 5;
-    private static final int DANO_HAB    = 100;
+    private static final int VIDA_MAX    = 800;
+    private static final int VIDA_FURIA  = 200;
+    private static final int BONUS_FURIA = 8;
+    private static final int DANO_HAB    = 45;
 
     public GodFather() {
-        super("Mafia", VIDA_MAX, 80, 1500, 800);
+        // Easter egg nível 20+ — mais difícil que PedroNeves (nível 15+)
+        super("The GodFather", VIDA_MAX, 35, 1500, 750);
     }
 
     @Override
@@ -22,18 +24,23 @@ public class GodFather extends Inimigo {
 
     @Override
     public void realizarTurno(Personagem jogador) {
-        if (vida < VIDA_MAX) {
+        if (vida < VIDA_FURIA) {
             int danoFurioso = dano + BONUS_FURIA;
             jogador.receberDano(danoFurioso);
             System.out.println("😤 A Máfia ficou pistola! Dano: " + danoFurioso
                     + " | HP do jogador: " + jogador.getVida() + "/" + jogador.getVidaMax());
         } else {
-            atacar(jogador);
+            // Alterna entre ataque normal e habilidade
+            if (Math.random() < 0.5) {
+                usarHab(jogador);
+            } else {
+                atacar(jogador);
+            }
         }
     }
 
     @Override
     public Item gerarDrop() {
-        return new Arma("Pistolão da Máfia", 250);
+        return new Arma("Pistolão da Máfia", 55);
     }
 }

@@ -6,12 +6,12 @@ import personagens.Personagem;
 
 public class ReiGoblin extends Inimigo {
 
-    private static final int VIDA_FURIA  = 50;
-    private static final int BONUS_FURIA = 5;
-    private static final int DANO_HAB    = 25;
+    private static final int VIDA_FURIA  = 30;
+    private static final int BONUS_FURIA = 3;
+    private static final int DANO_HAB    = 10;
 
     public ReiGoblin() {
-        super("Rei Goblin", 120, 18, 150, 80);
+        super("Rei Goblin", 75, 8, 75, 35);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class ReiGoblin extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Armadura do Rei Goblin", 35);
+        return new Armadura("Coroa do Rei Goblin", 8);
     }
 }

@@ -5,12 +5,12 @@ import itens.*;
 
 public class MagoSupremo extends Inimigo {
 
-    private static final int VIDA_FURIA  = 50;
-    private static final int BONUS_FURIA = 5;
-    private static final int DANO_HAB    = 40;
+    private static final int VIDA_FURIA  = 60;
+    private static final int BONUS_FURIA = 6;
+    private static final int DANO_HAB    = 38;
 
     public MagoSupremo() {
-        super("Mago Supremo", 200, 29, 250, 150);
+        super("Mago Supremo", 255, 30, 200, 145);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class MagoSupremo extends Inimigo {
         if (vida < VIDA_FURIA) {
             int danoFurioso = dano + BONUS_FURIA;
             jogador.receberDano(danoFurioso);
-            System.out.println("💥 Mago Supremo ativou seu Feitiço Supremo! Dano: " + danoFurioso
+            System.out.println("💥 Mago Supremo ativou Feitiço Supremo! Dano: " + danoFurioso
                     + " | HP do jogador: " + jogador.getVida() + "/" + jogador.getVidaMax());
         } else {
             atacar(jogador);
@@ -34,6 +34,6 @@ public class MagoSupremo extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Armadura Suprema", 35);
+        return new Armadura("Manto Supremo", 30);
     }
 }
