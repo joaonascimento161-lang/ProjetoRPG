@@ -111,7 +111,9 @@ public class TelaPrincipal extends JFrame {
         List<AreaCaca> areas = List.of(
                 new AreaCaca("🌲 Floresta",     1,  new Color(34, 139, 34),   Color.WHITE,     () -> new Floresta().generateEnemie(),     "src/image/FundoFloresta.jpg"),
                 new AreaCaca("🏚 Ruínas",       3,  new Color(210, 105, 30),  Color.WHITE,     () -> new Ruinas().generateEnemie(),       "src/image/FundoRuinas.jpg"),
-                new AreaCaca("⛰ Caverna",       5,  new Color(105, 105, 105), Color.WHITE,     () -> new CasteloSombrio().generateEnemie(), "src/image/FundoCaverna.jpg"),
+                new AreaCaca("⛰ Caverna",       5,  new Color(105, 105, 105), Color.WHITE,     () -> new Caverna().generateEnemie(), "src/image/FundoCaverna.jpg"),
+                new AreaCaca("🏰 Castelo Sombrio", 8, new Color(72, 61, 139),   Color.WHITE,     () -> new CasteloSombrio().generateEnemie(), "src/image/FundoCastelo.jpg"),
+                new AreaCaca("🐉 Covil do Dragão", 10, new Color(139, 0, 0),     Color.WHITE,     () -> new CovilDragao().generateEnemie(),   "src/image/FundoCovil.jpg"),
                 new AreaCaca("🌋 Vulcão",       10, new Color(205, 0, 0),     Color.WHITE,     () -> new Vulcao().generateEnemie(),       "src/image/FundoVulcao.jpg"),
                 new AreaCaca("🏔 Alpes Suíços", 15, new Color(70, 130, 180),  Color.WHITE,     () -> new AlpesSuicos().generateEnemie(),  "src/image/FundoAlpes.jpg"),
                 new AreaCaca("🕴 Mansão Mafia", 20, new Color(102, 51, 0),    Color.WHITE,     () -> new MansaoMafia().generateEnemie(),  "src/image/FundoMafia.jpg"),

@@ -26,11 +26,11 @@ public class MainTerminal {
     };
     private static final int[] NIVEIS_MINIMOS = {1, 2, 3, 5, 8, 10, 15, 20, 35};
     private static final String[] NOMES_AREAS = {
-            "Floresta",
-            "Caverna",
-            "Ruínas",
-            "Castelo Sombrio",
-            "Covil do Dragão",
+            "🌲Floresta",
+            "⛰ Caverna",
+            "🪨Ruínas",
+            "🏰 Castelo Sombrio",
+            "🐉 Covil do Dragão",
             "🌋 Vulcão",
             "🏔 Alpes Suíços",
             "🕴 Mansão Mafia",

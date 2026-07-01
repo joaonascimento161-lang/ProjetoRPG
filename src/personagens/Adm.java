@@ -1,7 +1,5 @@
 package personagens;
 
-import personagens.Personagem;
-
 public class Adm extends Personagem {
 
     private static final String SENHA = "minhasenha";

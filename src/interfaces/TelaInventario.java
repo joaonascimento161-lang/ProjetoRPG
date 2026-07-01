@@ -11,8 +11,6 @@ import java.awt.event.*;
 
 public class TelaInventario extends JFrame {
 
-    private static final Color COR_FUNDO       = new Color(28, 18, 12);
-    private static final Color COR_CARD        = new Color(40, 26, 16, 220);
     private static final Color COR_BORDA       = new Color(100, 65, 30);
     private static final Color COR_TITULO      = new Color(244, 228, 188);
     private static final Color COR_SECUNDARIO  = new Color(170, 145, 110);

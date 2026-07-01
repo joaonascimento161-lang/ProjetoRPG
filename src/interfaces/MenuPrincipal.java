@@ -12,13 +12,11 @@ import save.SaveManager;
 
 public class MenuPrincipal extends JFrame {
 
-    private static final Color COR_FUNDO_PAINEL = new Color(20, 12, 8, 220);
     private static final Color COR_BORDA        = new Color(120, 70, 20);
     private static final Color COR_TITULO       = new Color(244, 228, 188);
     private static final Color COR_SUBTITULO    = new Color(180, 150, 100);
     private static final Color COR_BTN_FUNDO    = new Color(100, 55, 20);
     private static final Color COR_BTN_SAIR     = new Color(100, 20, 20);
-    private static final Font  FONTE_TITULO     = new Font("Serif", Font.BOLD, 20);
     private static final Font  FONTE_BOTAO      = new Font("Serif", Font.BOLD, 16);
 
     public MenuPrincipal() {
@@ -28,7 +26,7 @@ public class MenuPrincipal extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
-        PainelComFundo painel = new PainelComFundo("src/image/madeira.jpg");
+        PainelComFundo painel = new PainelComFundo("resources/Image/madeira.jpg");
         painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
 
         JLabel logo = carregarLogo("resources/image/Logo.png", 400, 250);
