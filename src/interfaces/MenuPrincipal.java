@@ -43,7 +43,7 @@ public class MenuPrincipal extends JFrame {
         painelBotoes.add(btnContinuar);
         painelBotoes.add(btnSair);
 
-        JLabel versao = new JLabel("Versão 1.0  •  João Victor F. do Nascimento");
+        JLabel versao = new JLabel("Versão 3.0  •  João Victor F. do Nascimento");
         versao.setFont(new Font("SansSerif", Font.PLAIN, 12));
         versao.setForeground(new Color(140, 120, 90));
         versao.setAlignmentX(CENTER_ALIGNMENT);
