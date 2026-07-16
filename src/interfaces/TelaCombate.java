@@ -40,7 +40,7 @@ public class TelaCombate extends JFrame {
         setTitle("⚔ Combate — " + inimigo.getNome());
         setSize(720, 620);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ConfirmacaoSaida.protegerFechamento(this);
         setResizable(false);
 
         PainelComFundo painelPrincipal = new PainelComFundo(caminhoFundo);

@@ -23,7 +23,7 @@ public class MenuPrincipal extends JFrame {
         setTitle("Projeto RPG");
         setSize(1000, 700);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ConfirmacaoSaida.protegerFechamento(this);
         setResizable(false);
 
         PainelComFundo painel = new PainelComFundo("resources/Image/madeira.jpg");
@@ -72,7 +72,11 @@ public class MenuPrincipal extends JFrame {
             }
         });
 
-        btnSair.addActionListener(e -> System.exit(0));
+        btnSair.addActionListener(e -> {
+            if (ConfirmacaoSaida.confirmar(this)) {
+                System.exit(0);
+            }
+        });
 
         setVisible(true);
     }

@@ -11,6 +11,11 @@ import save.SaveManager;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Tela de Game Over — exibida em tela cheia quando o jogador é derrotado.
+ * Mostra um resumo da run (nível, ouro, missão) e oferece opções para
+ * tentar novamente (carregando o último save), voltar ao menu ou sair.
+ */
 public class TelaGameOver extends JFrame {
 
     private static final Color COR_FUNDO_TOPO    = new Color(10, 4, 4);
@@ -32,7 +37,7 @@ public class TelaGameOver extends JFrame {
         setTitle("Game Over");
         setSize(1000, 700);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ConfirmacaoSaida.protegerFechamento(this);
         setResizable(false);
 
         painelFundo = new PainelFundoDramatico();
@@ -155,7 +160,11 @@ public class TelaGameOver extends JFrame {
             new MenuPrincipal();
         });
 
-        btnSair.addActionListener(e -> System.exit(0));
+        btnSair.addActionListener(e -> {
+            if (ConfirmacaoSaida.confirmar(this)) {
+                System.exit(0);
+            }
+        });
 
         painel.add(btnTentarNovamente);
         painel.add(btnMenu);

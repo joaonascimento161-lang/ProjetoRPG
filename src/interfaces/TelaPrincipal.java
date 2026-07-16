@@ -31,7 +31,7 @@ public class TelaPrincipal extends JFrame {
         setTitle("Projeto RPG — " + jogador.getNome());
         setSize(600, 550);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ConfirmacaoSaida.protegerFechamento(this);
         setResizable(false);
         inicializarComponentes();
         setVisible(true);
