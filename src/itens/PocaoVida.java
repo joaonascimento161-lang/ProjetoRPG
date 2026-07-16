@@ -1,5 +1,6 @@
 package itens;
 
+import audio.SomManager;
 import personagens.Personagem;
 
 public class PocaoVida extends Item {
@@ -13,5 +14,6 @@ public class PocaoVida extends Item {
     @Override
     public void usar(Personagem jogador) {
         jogador.curar(CURA);
+        SomManager.somCura();
     }
 }

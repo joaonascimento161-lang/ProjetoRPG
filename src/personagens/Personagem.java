@@ -1,7 +1,9 @@
 package personagens;
 
+import audio.SomManager;
 import itens.*;
 import sistema.Combate;
+import sistema.ConquistaManager;
 import sistema.Missao;
 
 public abstract class Personagem {
@@ -70,6 +72,9 @@ public abstract class Personagem {
         vidaMax += 10;
         vida = vidaMax;
         dano += 2;
+
+        SomManager.somLevelUp();
+        ConquistaManager.registrarNivel(nivel);
 
         System.out.println("\n╔══════════════════════════════╗");
         System.out.println("║        ⬆️  LEVEL UP!          ║");

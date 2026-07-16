@@ -1,5 +1,6 @@
 package itens;
 
+import audio.SomManager;
 import personagens.Personagem;
 
 public class PocaoMana extends Item {
@@ -15,5 +16,6 @@ public class PocaoMana extends Item {
         jogador.ganharMana(MANA_RESTAURADA);
         System.out.println("💧 Poção de Mana usada! +" + MANA_RESTAURADA
                 + " de mana (" + jogador.getMana() + "/" + jogador.getManaMax() + ")");
+        SomManager.somCura();
     }
 }

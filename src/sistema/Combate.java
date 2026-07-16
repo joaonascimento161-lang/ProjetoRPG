@@ -1,5 +1,6 @@
 package sistema;
 
+import audio.SomManager;
 import inimigos.BossFinal;
 import inimigos.Inimigo;
 import itens.Item;
@@ -129,11 +130,11 @@ public class Combate {
         int opcao = lerInt();
 
         switch (opcao) {
-            case 1: jogador.atacar(inimigo);    break;
-            case 2: jogador.usarHab(inimigo);   break;
+            case 1: jogador.atacar(inimigo);    SomManager.somAtaque();     break;
+            case 2: jogador.usarHab(inimigo);   SomManager.somHabilidade(); break;
             case 3: abrirInventario(jogador);   break;
             case 4: return true;
-            default: System.out.println("Opção inválida. Turno perdido!");
+            default: System.out.println("Opção inválida. Turno perdido!"); SomManager.somErro();
         }
 
         return false;
@@ -154,10 +155,16 @@ public class Combate {
         if (jogador.estaVivo()) {
             System.out.println("🏆 VITÓRIA!");
             System.out.println("Você derrotou " + inimigo.getNome() + "!");
+            SomManager.somVitoria();
+
+            boolean vidaCritica = jogador.getVida() <= jogador.getVidaMax() * 0.10;
 
             XPSystem.ganharXP(jogador, inimigo.getRecompensaXP());
             jogador.adicionarOuro(inimigo.getRecompensaOuro());
             System.out.println("💰 +" + inimigo.getRecompensaOuro() + " ouro");
+
+            ConquistaManager.registrarVitoria(inimigo.getNome(), vidaCritica);
+            ConquistaManager.registrarOuro(jogador.getOuro());
 
             resolverMissao(jogador, inimigo);
             resolverDrop(jogador, inimigo);
@@ -175,6 +182,7 @@ public class Combate {
 
         System.out.println("💀 DERROTA!");
         System.out.println("Você foi derrotado por " + inimigo.getNome() + ".");
+        SomManager.somDerrota();
         System.out.println("\nPressione Enter para continuar...");
         sc.nextLine();
         return false;
@@ -190,6 +198,7 @@ public class Combate {
             XPSystem.ganharXP(jogador, jogador.getMissaoAtual().getRecompensaXP());
             jogador.adicionarOuro(jogador.getMissaoAtual().getRecompensaOuro());
             System.out.println("💰 +" + jogador.getMissaoAtual().getRecompensaOuro() + " ouro (missão)");
+            ConquistaManager.registrarMissaoCumprida();
             jogador.aceitarMissao(null);
         }
     }

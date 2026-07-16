@@ -34,6 +34,6 @@ public class MagoSupremo extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Manto Supremo", 30);
+        return EquipamentoFactory.criarArmadura("Manto Supremo");
     }
 }

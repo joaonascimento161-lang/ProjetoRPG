@@ -37,7 +37,7 @@ public class Esqueleto extends Inimigo {
     @Override
     public Item gerarDrop() {
         if (random.nextInt(100) < CHANCE_DROP) {
-            return new Arma("Espada de Osso", 20);
+            return EquipamentoFactory.criarArma("Espada de Osso");
         }
         return null;
     }

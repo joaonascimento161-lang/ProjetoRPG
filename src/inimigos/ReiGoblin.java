@@ -1,6 +1,7 @@
 package inimigos;
 
 import itens.Armadura;
+import itens.EquipamentoFactory;
 import itens.Item;
 import personagens.Personagem;
 
@@ -35,6 +36,6 @@ public class ReiGoblin extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Coroa do Rei Goblin", 8);
+        return EquipamentoFactory.criarArmadura("Coroa do Rei Goblin");
     }
 }

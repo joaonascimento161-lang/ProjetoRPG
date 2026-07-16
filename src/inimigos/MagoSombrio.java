@@ -35,7 +35,7 @@ public class MagoSombrio extends Inimigo {
     @Override
     public Item gerarDrop() {
         if (random.nextInt(100) < CHANCE_DROP) {
-            return new Armadura("Manto Sombrio", 22);
+            return EquipamentoFactory.criarArmadura("Manto Sombrio");
         }
         return null;
     }

@@ -44,6 +44,6 @@ public class Kjoule extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Arma("Cabo Óptico", 75);
+        return EquipamentoFactory.criarArma("Cabo Óptico");
     }
 }

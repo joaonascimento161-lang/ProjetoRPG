@@ -37,7 +37,11 @@ public class Inventario {
             return;
         }
         for (int i = 0; i < itens.size(); i++) {
-            System.out.println("  " + (i + 1) + " - " + itens.get(i).getNome());
+            Item item = itens.get(i);
+            String exibicao = (item instanceof Equipamento)
+                    ? ((Equipamento) item).getNomeFormatado()
+                    : item.getNome();
+            System.out.println("  " + (i + 1) + " - " + exibicao);
         }
         System.out.println("----------------------");
     }

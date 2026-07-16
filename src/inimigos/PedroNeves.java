@@ -1,6 +1,7 @@
 package inimigos;
 
 import itens.Armadura;
+import itens.EquipamentoFactory;
 import itens.Item;
 import personagens.Personagem;
 import java.util.Random;
@@ -45,6 +46,6 @@ public class PedroNeves extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Livro Sagrado", 55);
+        return EquipamentoFactory.criarArmadura("Livro Sagrado");
     }
 }

@@ -1,5 +1,7 @@
 package sistema;
 
+import audio.SomManager;
+
 public class GameData {
 
     private static boolean deusDesbloqueado = false;
@@ -16,6 +18,7 @@ public class GameData {
         if (deusDesbloqueado) return;
 
         deusDesbloqueado = true;
+        SomManager.somConquista();
 
         System.out.println("\n╔══════════════════════════════════╗");
         System.out.println("║  ✨ CLASSE DEUS DESBLOQUEADA! ✨  ║");

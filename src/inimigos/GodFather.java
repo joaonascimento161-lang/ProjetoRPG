@@ -41,6 +41,6 @@ public class GodFather extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Arma("Pistolão da Máfia", 55);
+        return EquipamentoFactory.criarArma("Pistolão da Máfia");
     }
 }

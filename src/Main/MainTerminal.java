@@ -9,6 +9,7 @@ import Areas.Area;
 import itens.*;
 import save.*;
 import sistema.*;
+import audio.SomManager;
 
 public class MainTerminal {
 
@@ -58,6 +59,8 @@ public class MainTerminal {
     public static void iniciar() {
         int opcao;
 
+        ConquistaManager.carregar();
+
         do {
             limparTela();
             System.out.println("╔════════════╗");
@@ -84,8 +87,10 @@ public class MainTerminal {
 
     private static void novoJogo() {
         Personagem jogador = escolherClasse();
+        ConquistaManager.registrarNivel(jogador.getNivel());
         menuAreas(jogador);
         SaveManager.salvar(jogador, GameData.isDeusDesbloqueado());
+        ConquistaManager.salvar();
         System.out.println("✅ Jogo salvo com sucesso!");
     }
 
@@ -97,6 +102,8 @@ public class MainTerminal {
         Personagem jogador = SaveManager.carregar();
         if (jogador != null) {
             System.out.println("✅ Save carregado! Bem-vindo de volta, " + jogador.getNome() + "!");
+            ConquistaManager.registrarNivel(jogador.getNivel());
+            ConquistaManager.registrarOuro(jogador.getOuro());
             menuAreas(jogador);
         }
     }
@@ -196,6 +203,8 @@ public class MainTerminal {
             System.out.println("\n" + (areas.length + 1) + " - 🏪 Loja");
             System.out.println((areas.length + 2) + " - 📊 Status");
             System.out.println((areas.length + 3) + " - 🎒 Inventário");
+            System.out.println((areas.length + 4) + " - 🏆 Conquistas");
+            System.out.println((areas.length + 5) + " - " + (SomManager.isAtivo() ? "🔊 Som: LIGADO" : "🔇 Som: DESLIGADO") + " (alternar)");
             System.out.println("0 - 💾 Salvar e Sair");
             System.out.print("Escolha: ");
 
@@ -204,6 +213,7 @@ public class MainTerminal {
 
             if (escolha == 0) {
                 SaveManager.salvar(jogador, GameData.isDeusDesbloqueado());
+                ConquistaManager.salvar();
                 System.out.println("✅ Jogo salvo!");
                 return;
             } else if (escolha == areas.length + 1) {
@@ -214,10 +224,23 @@ public class MainTerminal {
                 sc.nextLine();
             } else if (escolha == areas.length + 3) {
                 abrirInventario(jogador);
+            } else if (escolha == areas.length + 4) {
+                ConquistaManager.mostrarConquistas();
+                System.out.println("\nPressione Enter para continuar...");
+                sc.nextLine();
+            } else if (escolha == areas.length + 5) {
+                SomManager.alternar();
+                System.out.println(SomManager.isAtivo() ? "🔊 Som ligado!" : "🔇 Som desligado!");
+                System.out.println("\nPressione Enter para continuar...");
+                sc.nextLine();
             } else if (escolha >= 1 && escolha <= areas.length) {
                 iniciarArea(jogador, areas[escolha - 1]);
+                if (jogador.getNivel() >= NIVEIS_MINIMOS[areas.length - 1]) {
+                    ConquistaManager.registrarTodasAreasDesbloqueadas();
+                }
             } else {
                 System.out.println("Área inválida.");
+                SomManager.somErro();
             }
         }
 

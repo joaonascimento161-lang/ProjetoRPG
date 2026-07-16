@@ -49,6 +49,6 @@ public class Phoenix extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Armadura("Pena do Fernando", 65);
+        return EquipamentoFactory.criarArmadura("Pena do Fernando");
     }
 }

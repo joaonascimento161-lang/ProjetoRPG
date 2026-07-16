@@ -35,7 +35,7 @@ public class Goblin extends Inimigo {
     @Override
     public Item gerarDrop() {
         if (random.nextInt(100) < CHANCE_DROP) {
-            return new Arma("Espada Enferrujada", 5);
+            return EquipamentoFactory.criarArma("Espada Enferrujada");
         }
         return null;
     }

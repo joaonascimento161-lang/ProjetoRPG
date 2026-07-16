@@ -5,7 +5,6 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
 public final class ConfirmacaoSaida {
 
     private ConfirmacaoSaida() { }

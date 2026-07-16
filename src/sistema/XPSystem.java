@@ -1,5 +1,6 @@
 package sistema;
 
+import audio.SomManager;
 import personagens.Personagem;
 
 public class XPSystem {
@@ -25,10 +26,13 @@ public class XPSystem {
             System.out.println("║   ⬆️  LEVEL UP!           ║");
             System.out.printf( "║   Nível %d → %d!%n", nivel, jogador.getNivel());
             System.out.println("╚══════════════════════════╝");
+            SomManager.somLevelUp();
 
             nivel = jogador.getNivel();
             xpNecessario = nivel * 100;
             xp = jogador.getXp();
+
+            ConquistaManager.registrarNivel(nivel);
         }
     }
 

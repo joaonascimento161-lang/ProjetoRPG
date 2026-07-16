@@ -1,6 +1,7 @@
 package inimigos;
 
 import itens.Arma;
+import itens.EquipamentoFactory;
 import itens.Item;
 import personagens.Personagem;
 
@@ -36,6 +37,6 @@ public class EsqueletoGigante extends Inimigo {
 
     @Override
     public Item gerarDrop() {
-        return new Arma("Machado Ósseo", 28);
+        return EquipamentoFactory.criarArma("Machado Ósseo");
     }
 }
