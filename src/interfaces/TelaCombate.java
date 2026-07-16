@@ -332,16 +332,16 @@ public class TelaCombate extends JFrame {
                 jogador.getInventario().adicionarItem(drop);
             }
 
-            mostrarTelaResultado(true, jogador, inimigo, drop);
+            mostrarTelaVitoria(jogador, inimigo, drop);
 
         } else if (!jogador.estaVivo()) {
-            mostrarTelaResultado(false, jogador, inimigo, null);
+            dispose();
+            new TelaGameOver(jogador, inimigo);
         }
     }
 
-    // ── Tela de resultado customizada (substitui JOptionPane) ──────────────
-    private void mostrarTelaResultado(boolean vitoria, Personagem jogador,
-                                      Inimigo inimigo, Item drop) {
+    // ── Tela de resultado de vitória (substitui JOptionPane) ────────────────
+    private void mostrarTelaVitoria(Personagem jogador, Inimigo inimigo, Item drop) {
         JDialog dialogo = new JDialog(this, true);
         dialogo.setUndecorated(true);
         dialogo.setSize(380, 260);
@@ -351,14 +351,14 @@ public class TelaCombate extends JFrame {
         painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
         painel.setBackground(new Color(20, 12, 8));
         painel.setBorder(BorderFactory.createCompoundBorder(
-                new LineBorder(vitoria ? new Color(180, 140, 30) : new Color(140, 30, 30), 2),
+                new LineBorder(new Color(180, 140, 30), 2),
                 BorderFactory.createEmptyBorder(28, 32, 24, 32)
         ));
 
         // Título
-        JLabel titulo = new JLabel(vitoria ? "⚔  VITÓRIA!" : "☠  DERROTA");
+        JLabel titulo = new JLabel("⚔  VITÓRIA!");
         titulo.setFont(new Font("Serif", Font.BOLD, 28));
-        titulo.setForeground(vitoria ? new Color(240, 200, 60) : new Color(220, 80, 80));
+        titulo.setForeground(new Color(240, 200, 60));
         titulo.setAlignmentX(CENTER_ALIGNMENT);
 
         // Separador
@@ -371,26 +371,18 @@ public class TelaCombate extends JFrame {
         painel.add(sep);
         painel.add(Box.createVerticalStrut(14));
 
-        if (vitoria) {
-            adicionarLinhaResultado(painel, "XP ganho",   "+" + inimigo.getRecompensaXP(),  new Color(100, 220, 120));
-            adicionarLinhaResultado(painel, "Ouro ganho", "+" + inimigo.getRecompensaOuro(), new Color(220, 190, 60));
-            if (drop != null) {
-                adicionarLinhaResultado(painel, "Item obtido", drop.getNome(), new Color(160, 120, 240));
-            }
-        } else {
-            JLabel msg = new JLabel("Você foi derrotado em batalha...");
-            msg.setFont(new Font("Serif", Font.ITALIC, 14));
-            msg.setForeground(COR_TEXTO_SECUNDARIO);
-            msg.setAlignmentX(CENTER_ALIGNMENT);
-            painel.add(msg);
+        adicionarLinhaResultado(painel, "XP ganho",   "+" + inimigo.getRecompensaXP(),  new Color(100, 220, 120));
+        adicionarLinhaResultado(painel, "Ouro ganho", "+" + inimigo.getRecompensaOuro(), new Color(220, 190, 60));
+        if (drop != null) {
+            adicionarLinhaResultado(painel, "Item obtido", drop.getNome(), new Color(160, 120, 240));
         }
 
         painel.add(Box.createVerticalStrut(20));
 
         // Botão de continuar
-        JButton btnContinuar = new JButton(vitoria ? "Continuar" : "Voltar ao Menu");
+        JButton btnContinuar = new JButton("Continuar");
         btnContinuar.setFont(FONTE_BOTAO);
-        btnContinuar.setBackground(vitoria ? new Color(80, 60, 20) : new Color(80, 20, 20));
+        btnContinuar.setBackground(new Color(80, 60, 20));
         btnContinuar.setForeground(COR_TEXTO_TITULO);
         btnContinuar.setFocusPainted(false);
         btnContinuar.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -399,11 +391,7 @@ public class TelaCombate extends JFrame {
         btnContinuar.addActionListener(e -> {
             dialogo.dispose();
             dispose();
-            if (vitoria) {
-                new TelaPrincipal(jogador);
-            } else {
-                new MenuPrincipal();
-            }
+            new TelaPrincipal(jogador);
         });
 
         painel.add(btnContinuar);
