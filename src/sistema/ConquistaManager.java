@@ -8,11 +8,6 @@ import java.io.*;
 import java.util.EnumSet;
 import java.util.Set;
 
-/**
- * Controla o progresso de conquistas do jogador. É um progresso "global"
- * (persistido em arquivo próprio, separado do save do personagem), assim
- * como {@link GameData}, valendo para todas as partidas jogadas.
- */
 public class ConquistaManager {
 
     private static final String ARQUIVO = "conquistas.txt";
@@ -22,8 +17,6 @@ public class ConquistaManager {
     private static int totalInimigosDerrotados = 0;
     private static int maiorOuroAcumulado = 0;
     private static int maiorNivelAlcancado = 1;
-
-    // -------- registro de eventos (chamados pelo resto do jogo) --------
 
     public static void registrarVitoria(String nomeInimigo, boolean vidaCriticaAoFinal) {
         totalInimigosDerrotados++;
@@ -69,8 +62,6 @@ public class ConquistaManager {
         desbloquear(ConquistaTipo.MISSAO_CUMPRIDA);
     }
 
-    // -------- núcleo --------
-
     private static void desbloquear(ConquistaTipo tipo) {
         if (desbloqueadas.contains(tipo)) return;
         desbloqueadas.add(tipo);
@@ -109,8 +100,6 @@ public class ConquistaManager {
         System.out.println("╚══════════════════════════════════════════╝");
     }
 
-    // -------- persistência --------
-
     public static void salvar() {
         try (FileWriter writer = new FileWriter(ARQUIVO)) {
             StringBuilder sb = new StringBuilder();
@@ -122,7 +111,6 @@ public class ConquistaManager {
             writer.write("MaiorOuroAcumulado = " + maiorOuroAcumulado + "\n");
             writer.write("MaiorNivelAlcancado = " + maiorNivelAlcancado + "\n");
         } catch (IOException e) {
-            // Falha silenciosa: conquistas não são essenciais ao progresso do save principal.
         }
     }
 
@@ -139,7 +127,6 @@ public class ConquistaManager {
                         try {
                             desbloqueadas.add(ConquistaTipo.valueOf(partes[i].trim()));
                         } catch (IllegalArgumentException ignored) {
-                            // conquista removida/renomeada em versão antiga do save; ignora
                         }
                     }
                 } else if (linha.startsWith("TotalInimigosDerrotados = ")) {
@@ -151,7 +138,6 @@ public class ConquistaManager {
                 }
             }
         } catch (IOException e) {
-            // Sem conquistas salvas ainda.
         }
     }
 

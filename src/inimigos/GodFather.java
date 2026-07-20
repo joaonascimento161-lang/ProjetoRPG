@@ -11,7 +11,6 @@ public class GodFather extends Inimigo {
     private static final int DANO_HAB    = 45;
 
     public GodFather() {
-        // Easter egg nível 20+ — mais difícil que PedroNeves (nível 15+)
         super("The GodFather", VIDA_MAX, 35, 1500, 750);
     }
 
@@ -30,7 +29,6 @@ public class GodFather extends Inimigo {
             System.out.println("😤 A Máfia ficou pistola! Dano: " + danoFurioso
                     + " | HP do jogador: " + jogador.getVida() + "/" + jogador.getVidaMax());
         } else {
-            // Alterna entre ataque normal e habilidade
             if (Math.random() < 0.5) {
                 usarHab(jogador);
             } else {

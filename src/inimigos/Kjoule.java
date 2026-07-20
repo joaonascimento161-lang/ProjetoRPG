@@ -15,7 +15,6 @@ public class Kjoule extends Inimigo {
     private Random random = new Random();
 
     public Kjoule() {
-        // Easter egg nível 35+ — o mais difícil do jogo fora do boss
         super("KJoule", VIDA_MAX, 42, 2000, 1200);
     }
 

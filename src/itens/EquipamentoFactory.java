@@ -64,13 +64,12 @@ public class EquipamentoFactory {
         return Collections.unmodifiableMap(ARMADURAS);
     }
 
-    /** Calcula um preço de venda "justo" baseado na raridade e no bônus do equipamento. */
     public static int calcularPreco(Equipamento equipamento, int precoBase) {
         double bonus = (equipamento instanceof Arma)
                 ? ((Arma) equipamento).getBonusDano()
                 : ((Armadura) equipamento).getBonusVida();
 
         double preco = (precoBase + bonus * 2.5) * equipamento.getRaridade().getMultiplicadorPreco();
-        return (int) (Math.round(preco / 5.0) * 5); // arredonda para múltiplo de 5
+        return (int) (Math.round(preco / 5.0) * 5);
     }
 }

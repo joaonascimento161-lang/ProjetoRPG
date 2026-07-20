@@ -42,7 +42,6 @@ public class TelaLoja extends JFrame {
         setVisible(true);
     }
 
-    // ── Cabeçalho ─────────────────────────────────────────────────────────
     private JPanel criarHeader(Personagem jogador) {
         JPanel header = new JPanel(new BorderLayout());
         header.setBackground(new Color(28, 18, 10, 210));
@@ -64,7 +63,6 @@ public class TelaLoja extends JFrame {
         return header;
     }
 
-    // ── Grid de produtos ──────────────────────────────────────────────────
     private JPanel criarGridItens(Personagem jogador) {
         JPanel grid = new JPanel(new GridLayout(2, 2, 12, 12));
         grid.setOpaque(false);
@@ -150,7 +148,6 @@ public class TelaLoja extends JFrame {
         return card;
     }
 
-    // ── Feedback visual inline ──────────────────────────
     private void mostrarFeedback(JPanel card, String msg, Color cor) {
         JLabel feedback = new JLabel(msg);
         feedback.setFont(new Font("Serif", Font.BOLD, 12));
@@ -161,7 +158,6 @@ public class TelaLoja extends JFrame {
         card.revalidate();
         card.repaint();
 
-        // Remove a mensagem após 2 segundos
         Timer timer = new Timer(2000, ev -> {
             card.remove(feedback);
             card.revalidate();
@@ -190,7 +186,6 @@ public class TelaLoja extends JFrame {
         return p;
     }
 
-    // ── Classe interna ────────────────────────────────────────────────────
     private static class ProdutoLoja {
         final String nome, icone, descricao;
         final int preco;

@@ -12,7 +12,6 @@ public class EsqueletoGigante extends Inimigo {
     private static final int DANO_HAB     = 28;
 
     public EsqueletoGigante() {
-        // Inimigo raro das Ruínas — mais forte que o Esqueleto comum
         super("Esqueleto Gigante", 165, 22, 115, 75);
     }
 

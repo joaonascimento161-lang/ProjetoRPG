@@ -86,21 +86,18 @@ public class SaveManager {
             jogador.setVida(vida);
             jogador.setMana(mana);
 
-            // Equipa arma usando ItemFactory
             if (!arma.equals("Nenhuma")) {
                 Item armaObj = ItemFactory.criar(arma);
                 if (armaObj instanceof Arma) jogador.equiparArma((Arma) armaObj);
                 else System.out.println("⚠️ Arma desconhecida no save: " + arma);
             }
 
-            // Equipa armadura usando ItemFactory
             if (!armadura.equals("Nenhuma")) {
                 Item armaduraObj = ItemFactory.criar(armadura);
                 if (armaduraObj instanceof Armadura) jogador.equiparArmadura((Armadura) armaduraObj);
                 else System.out.println("⚠️ Armadura desconhecida no save: " + armadura);
             }
 
-            // Restaura inventário usando ItemFactory
             for (String nomeItem : inventario) {
                 Item item = ItemFactory.criar(nomeItem);
                 if (item != null) jogador.getInventario().adicionarItem(item);

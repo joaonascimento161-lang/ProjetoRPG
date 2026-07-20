@@ -36,7 +36,6 @@ public class Combate {
         }
     }
 
-    // Barra normal com cor dinâmica
     public static String criarBarra(int atual, int maximo) {
         int tamanho = 20;
         int preenchido = (maximo > 0) ? (atual * tamanho) / maximo : 0;
@@ -60,7 +59,6 @@ public class Combate {
         return cor + barra + "\u001B[0m";
     }
 
-    // Barra infinita para o Adm (roxa + símbolo ∞)
     private static String criarBarraInfinita() {
         return "\u001B[35m[████████████████████]\u001B[0m ∞";
     }
@@ -97,7 +95,6 @@ public class Combate {
         System.out.println("👤 " + jogador.getNome());
 
         if (jogador instanceof Adm) {
-            // Adm: barras infinitas em roxo
             System.out.println("  HP   " + criarBarraInfinita());
             System.out.println("  Mana " + criarBarraInfinita());
         } else {

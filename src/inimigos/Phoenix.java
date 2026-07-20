@@ -15,7 +15,6 @@ public class Phoenix extends Inimigo {
     private Random random = new Random();
 
     public Phoenix() {
-        // Boss secreto nível 12-13 — mais difícil que o Dragão Ancestral
         super("Fernando a Phoenix", VIDA_MAX, 48, 1000, 550);
     }
 
@@ -29,7 +28,6 @@ public class Phoenix extends Inimigo {
     @Override
     public void realizarTurno(Personagem jogador) {
         if (vida < VIDA_FURIA) {
-            // Fase de fúria: ataca duas vezes
             int danoFurioso = dano + BONUS_FURIA;
             jogador.receberDano(danoFurioso);
             System.out.println("🔥 Fernando a Phoenix entrou em FÚRIA! Dano: " + danoFurioso

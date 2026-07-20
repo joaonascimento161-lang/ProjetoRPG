@@ -17,7 +17,6 @@ public class PedroNeves extends Inimigo {
     private Random random = new Random();
 
     public PedroNeves() {
-        // Easter egg nível 15+ — mais difícil que o Phoenix (nível 10+)
         super("Pedro das Neves", VIDA_MAX, 42, 1200, 620);
     }
 

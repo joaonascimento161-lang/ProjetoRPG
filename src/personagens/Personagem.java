@@ -62,8 +62,6 @@ public abstract class Personagem {
 
     public abstract void usarHab(Personagem alvo);
 
-    // -------- PROGRESSÃO --------
-
     public void subirNivel() {
         nivel++;
         int vidaAntes = vidaMax;
@@ -114,8 +112,6 @@ public abstract class Personagem {
         vida = vidaMax;
     }
 
-    // -------- EQUIPAMENTOS --------
-
     public void equiparArma(Arma arma) {
         if (armaEquipada != null) dano -= armaEquipada.getBonusDano();
         armaEquipada = arma;
@@ -130,8 +126,6 @@ public abstract class Personagem {
         System.out.println("🛡️  " + armadura.getNome() + " equipada! (+" + armadura.getBonusVida() + " vida)");
     }
 
-    // -------- OURO --------
-
     public boolean gastarOuro(int valor) {
         if (ouro >= valor) { ouro -= valor; return true; }
         return false;
@@ -139,14 +133,10 @@ public abstract class Personagem {
 
     public void adicionarOuro(int valor) { ouro += valor; }
 
-    // -------- MISSÃO --------
-
     public void aceitarMissao(Missao missao) {
         missaoAtual = missao;
         if (missao != null) System.out.println("📋 Nova missão aceita: " + missao.getNome());
     }
-
-    // -------- STATUS --------
 
     public void mostrarStatus() {
         System.out.println("\n╔══════════════════════════════════╗");
@@ -168,8 +158,6 @@ public abstract class Personagem {
         }
         System.out.println("╚══════════════════════════════════╝");
     }
-
-    // -------- GETTERS / SETTERS --------
 
     public String getNome()               { return nome; }
     public int getVida()                  { return vida; }

@@ -12,8 +12,6 @@ public class SomManager {
     public static void setAtivo(boolean valor) { ativo = valor; }
     public static void alternar() { ativo = !ativo; }
 
-    // -------- efeitos prontos --------
-
     public static void somAtaque()     { tocarAssincrono(new int[]{220}, new int[]{70}, 0.25); }
     public static void somHabilidade() { tocarAssincrono(new int[]{440, 660}, new int[]{80, 120}, 0.25); }
     public static void somCura()       { tocarAssincrono(new int[]{523, 659, 784}, new int[]{70, 70, 120}, 0.2); }

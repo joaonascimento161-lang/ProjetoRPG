@@ -14,12 +14,6 @@ import itens.PocaoMana;
 import itens.PocaoVida;
 import personagens.Personagem;
 
-/**
- * Loja avançada: vende consumíveis e todos os equipamentos cadastrados na
- * EquipamentoFactory (incluindo os raros/épicos/lendários), com preço
- * calculado dinamicamente pela raridade, além de permitir vender itens do
- * inventário por ouro.
- */
 public class Loja {
 
     private static final int PRECO_POCAO_VIDA = 20;
@@ -87,8 +81,6 @@ public class Loja {
         } while (opcao != 0);
     }
 
-    // -------- USAVEIS --------
-
     private void menuUsaveis(Personagem jogador) {
         int opcao;
         do {
@@ -112,8 +104,6 @@ public class Loja {
             }
         } while (opcao != 0);
     }
-
-    // -------- ARMAS --------
 
     private void menuArmas(Personagem jogador) {
         List<Arma> armas = new ArrayList<>(EquipamentoFactory.listarArmas().values());
@@ -148,8 +138,6 @@ public class Loja {
         } while (opcao != 0);
     }
 
-    // -------- ARMADURAS --------
-
     private void menuArmaduras(Personagem jogador) {
         List<Armadura> armaduras = new ArrayList<>(EquipamentoFactory.listarArmaduras().values());
         int opcao;
@@ -182,8 +170,6 @@ public class Loja {
             }
         } while (opcao != 0);
     }
-
-    // -------- VENDER --------
 
     private void menuVender(Personagem jogador) {
         limparTela();
@@ -240,8 +226,6 @@ public class Loja {
         return 5;
     }
 
-    // -------- utilitarios de compra --------
-
     private void comprarItem(Personagem jogador, Item item, int preco, String nomeItem) {
         if (jogador.gastarOuro(preco)) {
             jogador.getInventario().adicionarItem(item);
@@ -265,7 +249,6 @@ public class Loja {
         }
     }
 
-    // Cria uma nova instancia independente do item de catalogo (evita compartilhar a mesma referencia entre compras)
     private Arma novaArma(Arma modelo) {
         return new Arma(modelo.getNome(), modelo.getBonusDano(), modelo.getRaridade());
     }

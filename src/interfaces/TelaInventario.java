@@ -40,7 +40,6 @@ public class TelaInventario extends JFrame {
         setVisible(true);
     }
 
-    // ── Cabeçalho ─────────────────────────────────────────────────────────
     private JPanel criarHeader(Personagem jogador) {
         JPanel header = new JPanel(new BorderLayout());
         header.setBackground(new Color(30, 20, 12, 200));
@@ -62,12 +61,10 @@ public class TelaInventario extends JFrame {
         return header;
     }
 
-    // ── Painel central: lista + descrição ─────────────────────────────────
     private JPanel criarPainelCentral(Personagem jogador) {
         JPanel painel = new JPanel(new BorderLayout(10, 0));
         painel.setOpaque(false);
 
-        // Lista de itens
         DefaultListModel<String> modelo = new DefaultListModel<>();
         for (int i = 0; i < jogador.getInventario().tamanho(); i++) {
             Item item = jogador.getInventario().getItem(i);
@@ -89,7 +86,6 @@ public class TelaInventario extends JFrame {
         scroll.getViewport().setOpaque(false);
         scroll.setPreferredSize(new Dimension(300, 0));
 
-        // Painel direito: descrição + botões
         JPanel direito = new JPanel(new BorderLayout(0, 10));
         direito.setOpaque(false);
 
@@ -113,7 +109,6 @@ public class TelaInventario extends JFrame {
             }
         });
 
-        // Botões
         JPanel botoes = new JPanel(new GridLayout(3, 1, 0, 8));
         botoes.setOpaque(false);
 
@@ -131,7 +126,6 @@ public class TelaInventario extends JFrame {
         painel.add(scroll, BorderLayout.CENTER);
         painel.add(direito, BorderLayout.EAST);
 
-        // ── Listeners ──
         btnUsar.addActionListener(e -> {
             int idx = lista.getSelectedIndex();
             if (idx == -1) { aviso("Selecione um item."); return; }
@@ -179,7 +173,6 @@ public class TelaInventario extends JFrame {
         return p;
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────
     private String iconeItem(Item item) {
         if (item instanceof Arma)     return "⚔";
         if (item instanceof Armadura) return "🛡";

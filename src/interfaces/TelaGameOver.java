@@ -11,11 +11,6 @@ import save.SaveManager;
 import java.awt.*;
 import java.awt.event.*;
 
-/**
- * Tela de Game Over — exibida em tela cheia quando o jogador é derrotado.
- * Mostra um resumo da run (nível, ouro, missão) e oferece opções para
- * tentar novamente (carregando o último save), voltar ao menu ou sair.
- */
 public class TelaGameOver extends JFrame {
 
     private static final Color COR_FUNDO_TOPO    = new Color(10, 4, 4);
@@ -47,7 +42,6 @@ public class TelaGameOver extends JFrame {
         conteudo.setOpaque(false);
         conteudo.setLayout(new BoxLayout(conteudo, BoxLayout.Y_AXIS));
 
-        // ── Título ──
         JLabel caveira = new JLabel("☠");
         caveira.setFont(new Font("Serif", Font.PLAIN, 46));
         caveira.setForeground(COR_TITULO);
@@ -70,11 +64,9 @@ public class TelaGameOver extends JFrame {
         conteudo.add(subtitulo);
         conteudo.add(Box.createVerticalStrut(34));
 
-        // ── Painel de estatísticas ──
         conteudo.add(criarPainelStats(jogador));
         conteudo.add(Box.createVerticalStrut(38));
 
-        // ── Botões ──
         conteudo.add(criarPainelBotoes(jogador));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -86,7 +78,6 @@ public class TelaGameOver extends JFrame {
         iniciarFadeIn();
     }
 
-    // ── Painel central com estatísticas da partida ─────────────────────────
     private JPanel criarPainelStats(Personagem jogador) {
         JPanel painel = new JPanel();
         painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
@@ -131,7 +122,6 @@ public class TelaGameOver extends JFrame {
         painel.add(linha);
     }
 
-    // ── Botões de ação ──────────────────────────────────────────────────────
     private JPanel criarPainelBotoes(Personagem jogador) {
         JPanel painel = new JPanel(new FlowLayout(FlowLayout.CENTER, 16, 0));
         painel.setOpaque(false);
@@ -196,7 +186,6 @@ public class TelaGameOver extends JFrame {
         return btn;
     }
 
-    // ── Efeito de fade-in dramático ao abrir a tela ────────────────────────
     private void iniciarFadeIn() {
         painelFundo.setAlphaEscurecimento(1f);
         Timer timer = new Timer(30, null);
@@ -214,7 +203,6 @@ public class TelaGameOver extends JFrame {
         timer.start();
     }
 
-    // ── Painel de fundo: gradiente vinho/preto com vinheta ─────────────────
     private static class PainelFundoDramatico extends JPanel {
         private float alphaEscurecimento = 0f;
 
@@ -235,7 +223,6 @@ public class TelaGameOver extends JFrame {
             g2.setPaint(fundo);
             g2.fillRect(0, 0, w, h);
 
-            // Vinheta radial escura nas bordas
             RadialGradientPaint vinheta = new RadialGradientPaint(
                     new Point(w / 2, h / 2), Math.max(w, h) * 0.7f,
                     new float[]{0f, 1f},

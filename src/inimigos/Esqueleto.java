@@ -13,7 +13,6 @@ public class Esqueleto extends Inimigo {
     private Random random = new Random();
 
     public Esqueleto() {
-        // Inimigo comum das Ruínas — nível 5-7
         super("Esqueleto", 140, 18, 85, 45);
     }
 

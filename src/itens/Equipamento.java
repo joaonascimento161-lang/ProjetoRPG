@@ -19,7 +19,6 @@ public abstract class Equipamento extends Item {
         return raridade;
     }
 
-    /** Nome do item já formatado com cor/símbolo de raridade, pronto para exibição. */
     public String getNomeFormatado() {
         return raridade.formatar(nome);
     }

@@ -1,10 +1,5 @@
 package itens;
 
-/**
- * Representa o nível de raridade de um equipamento.
- * Cada raridade possui uma cor ANSI (para o terminal), um símbolo
- * e um multiplicador de preço usado pela loja.
- */
 public enum Raridade {
 
     COMUM     ("Comum",      "\u001B[37m", "⚪", 1.0),
@@ -32,12 +27,10 @@ public enum Raridade {
 
     private static final String RESET = "\u001B[0m";
 
-    /** Retorna o nome colorido pronto para impressão no terminal. */
     public String formatar(String texto) {
         return cor + simbolo + " " + texto + " (" + nome + ")" + RESET;
     }
 
-    /** Retorna apenas o nome colorido da raridade, sem o item. */
     public String tag() {
         return cor + simbolo + " " + nome + RESET;
     }

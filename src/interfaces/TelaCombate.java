@@ -12,7 +12,6 @@ import java.awt.event.*;
 
 public class TelaCombate extends JFrame {
 
-    // ── Paleta centralizada ────────────────────────────────────────────────
     private static final Color COR_FUNDO_PAINEL   = new Color(20, 12, 8, 210);
     private static final Color COR_BORDA          = new Color(120, 70, 20);
     private static final Color COR_TEXTO_TITULO   = new Color(244, 228, 188);
@@ -28,7 +27,6 @@ public class TelaCombate extends JFrame {
     private static final Font  FONTE_HISTORICO    = new Font("Monospaced", Font.PLAIN, 13);
     private static final Font  FONTE_BOTAO        = new Font("Serif", Font.BOLD, 14);
 
-    // ── Componentes que precisam ser atualizados ───────────────────────────
     private JProgressBar barraVidaJogador;
     private JProgressBar barraMana;
     private JProgressBar barraVidaInimigo;
@@ -55,7 +53,6 @@ public class TelaCombate extends JFrame {
         setVisible(true);
     }
 
-    // ── HUD: jogador (esquerda) | VS | inimigo (direita) ──────────────────
     private JPanel criarHud(Personagem jogador, Inimigo inimigo) {
         JPanel hud = new JPanel(new GridLayout(1, 3, 12, 0));
         hud.setOpaque(false);
@@ -100,7 +97,6 @@ public class TelaCombate extends JFrame {
 
         boolean isAdm = isJogador && entidade instanceof Adm;
 
-        // Barra de vida com símbolo ❤ no texto
         JProgressBar bVida = isAdm
                 ? criarBarraInfinita(new Color(200, 50, 50))
                 : criarBarra(vida, vidaMax, isJogador ? COR_VIDA : COR_VIDA_INIMIGO);
@@ -142,7 +138,6 @@ public class TelaCombate extends JFrame {
         return p;
     }
 
-    // ── Histórico ──────────────────────────────────────────────────────────
     private JScrollPane criarHistorico() {
         historico = new JTextArea() {
             @Override protected void paintComponent(Graphics g) {
@@ -172,7 +167,6 @@ public class TelaCombate extends JFrame {
         return scroll;
     }
 
-    // ── Painel de botões ───────────────────────────────────────────────────
     private JPanel criarControles(Personagem jogador, Inimigo inimigo) {
         JPanel painel = new JPanel(new GridLayout(1, 3, 12, 0));
         painel.setOpaque(false);
@@ -185,7 +179,6 @@ public class TelaCombate extends JFrame {
         painel.add(btnHabilidade);
         painel.add(btnInventario);
 
-        // ── Atacar ──
         btnAtacar.addActionListener(e -> {
             jogador.atacar(inimigo);
             log("⚔  " + jogador.getNome() + " atacou " + inimigo.getNome() + "!");
@@ -199,7 +192,6 @@ public class TelaCombate extends JFrame {
             verificarFimDeCombate(jogador, inimigo);
         });
 
-        // ── Habilidade ──
         btnHabilidade.addActionListener(e -> {
             if (jogador.getMana() <= 0) {
                 log("✖  Mana insuficiente!");
@@ -217,7 +209,6 @@ public class TelaCombate extends JFrame {
             verificarFimDeCombate(jogador, inimigo);
         });
 
-        // ── Inventário ──
         btnInventario.addActionListener(e -> {
             if (jogador.getInventario().estaVazio()) {
                 log("✖  Inventário vazio!");
@@ -250,7 +241,6 @@ public class TelaCombate extends JFrame {
         return painel;
     }
 
-    // ── Helpers visuais ────────────────────────────────────────────────────
     private JProgressBar criarBarra(int valor, int max, Color cor) {
         JProgressBar barra = new JProgressBar(0, max);
         barra.setValue(valor);
@@ -292,7 +282,6 @@ public class TelaCombate extends JFrame {
                 BorderFactory.createEmptyBorder(12, 10, 12, 10)
         ));
 
-        // Hover effect
         btn.addMouseListener(new MouseAdapter() {
             @Override public void mouseEntered(MouseEvent e) {
                 btn.setBackground(corFundo.brighter());
@@ -305,7 +294,6 @@ public class TelaCombate extends JFrame {
         return btn;
     }
 
-    // ── Lógica ────────────────────────────────────────────────────────────
     private void atualizarBarras(Personagem jogador, Inimigo inimigo) {
         boolean isAdm = jogador instanceof Adm;
 
@@ -340,7 +328,6 @@ public class TelaCombate extends JFrame {
         }
     }
 
-    // ── Tela de resultado de vitória (substitui JOptionPane) ────────────────
     private void mostrarTelaVitoria(Personagem jogador, Inimigo inimigo, Item drop) {
         JDialog dialogo = new JDialog(this, true);
         dialogo.setUndecorated(true);
@@ -355,13 +342,11 @@ public class TelaCombate extends JFrame {
                 BorderFactory.createEmptyBorder(28, 32, 24, 32)
         ));
 
-        // Título
         JLabel titulo = new JLabel("⚔  VITÓRIA!");
         titulo.setFont(new Font("Serif", Font.BOLD, 28));
         titulo.setForeground(new Color(240, 200, 60));
         titulo.setAlignmentX(CENTER_ALIGNMENT);
 
-        // Separador
         JSeparator sep = new JSeparator();
         sep.setForeground(COR_BORDA);
         sep.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
@@ -379,7 +364,6 @@ public class TelaCombate extends JFrame {
 
         painel.add(Box.createVerticalStrut(20));
 
-        // Botão de continuar
         JButton btnContinuar = new JButton("Continuar");
         btnContinuar.setFont(FONTE_BOTAO);
         btnContinuar.setBackground(new Color(80, 60, 20));

@@ -81,7 +81,6 @@ public class MenuPrincipal extends JFrame {
         setVisible(true);
     }
 
-    // ── Seleção de classe ─────────────────────────────────────────────────
     private void abrirSelecaoDeClasse() {
         JDialog dialogo = new JDialog(this, "Escolha sua Classe", true);
         dialogo.setSize(820, 520);
@@ -141,7 +140,6 @@ public class MenuPrincipal extends JFrame {
         dialogo.setVisible(true);
     }
 
-    // ── Card Deus (bloqueado até vencer o boss final) ─────────────────────
     private JPanel criarCardDeus(JDialog dialogo) {
         boolean desbloqueada = GameData.isDeusDesbloqueado();
 
@@ -237,7 +235,6 @@ public class MenuPrincipal extends JFrame {
         return card;
     }
 
-    // ── Card ADM com campo de senha ───────────────────────────────────────
     private JPanel criarCardAdm(JDialog dialogo) {
         JPanel card = new JPanel();
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
@@ -332,7 +329,6 @@ public class MenuPrincipal extends JFrame {
         return card;
     }
 
-    // ── Card de classe normal ─────────────────────────────────────────────
     private JPanel criarCardClasse(ClasseInfo info, JDialog dialogo) {
         JPanel card = new JPanel();
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
@@ -390,7 +386,6 @@ public class MenuPrincipal extends JFrame {
         return card;
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────
     private JButton criarBotao(String texto, Color cor) {
         JButton btn = new JButton(texto);
         btn.setFont(FONTE_BOTAO);
@@ -420,7 +415,6 @@ public class MenuPrincipal extends JFrame {
         JOptionPane.showMessageDialog(this, msg, titulo, JOptionPane.WARNING_MESSAGE);
     }
 
-    // ── Classe interna de dados ───────────────────────────────────────────
     private static class ClasseInfo {
         final String nome;
         final String icone;
